@@ -2,12 +2,12 @@
 
 ## Current state (updated each session)
 
-**Phase: 1 → 2 (Phase 1 scope gate PASSED 2026-10-20/21; R5 freshness pass DONE; chapter authoring may begin).**
-The survey corpus is complete through five research rounds (R1–R5): 53 cases
-(C01–C53), 22 documented transitions (T01–T22), and 12 failure post-mortems
-(F01–F12), all register-first with exact source URLs. The readable master survey
-lives at `corpus/SURVEY.md`; R5 findings live in the register and analysis
-(fold into the survey at authoring time if needed).
+**Phase: 1 → 2 (Phase 1 scope gate PASSED 2026-10-20/21; R5 freshness pass DONE; R6
+verification pass DONE; chapter authoring may begin).** The survey corpus is complete
+through six research rounds (R1–R6): 66 cases (C01–C66), 30 documented transitions
+(T01–T30), and 12 failure post-mortems (F01–F12), all register-first with exact source
+URLs. The readable master survey lives at `corpus/SURVEY.md`; R5/R6 findings live in the
+register and analysis (fold into the survey at authoring time if needed).
 
 **Scope approval (user gate, session 1):** the 4-part / 23-chapter structure
 (10 family chapters with 2–4 compared cases each, 6 transition chapters, 4
@@ -17,7 +17,11 @@ technical depth (access patterns, operational detail, failure mechanics) over
 executive framing; decision guidance addresses the engineer who runs the system.
 
 **Next unit:** author Chapter 1 (Relational: three ways to stay relational —
-C01, C02, C03, +C47, C37), one working session, ALWAYS-SYNC.
+C01, C02, C03, +C47, C37), one working session, ALWAYS-SYNC. R6 enriched the
+Ch. 1 bench: C61 OpenAI and C56 Zerodha are first-party counter-weights to
+"you must shard" (reads scale by replicas and mastery, writes are the honest
+limit — W5); C55 Notion and C54 Figma are the modern sharding-in-place faces
+for Ch. 13.
 
 ---
 
@@ -64,7 +68,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 ## Chapter map
 
 **Part I — The families: one engine each, several cases each (Ch. 1–10)**
-- Ch. 1 Relational: three ways to stay relational — C01, C02, C03
+- Ch. 1 Relational: three ways to stay relational — C01, C02, C03 (+ C61 OpenAI, C56 Zerodha counter-weights, R6)
 - Ch. 2 Document: three reasons, one aggregate — C06, C07, C08 (+ C44/C45 returns preview)
 - Ch. 3 Key-value: one pattern, three scales — C11, C12, C13
 - Ch. 4 Wide-column: three fleets and the JVM cure — C14, C15, C16
@@ -72,16 +76,16 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 - Ch. 6 Graph: three jobs — C20, C21, C22
 - Ch. 7 Time-series: the family both giants built — C23, C24 (+ F09 counter-case)
 - Ch. 8 NewSQL: three triggers, one destination — C25, C26, C27, C28
-- Ch. 9 In-memory: memcached plus your ops wrapper — C29, C30, C31
+- Ch. 9 In-memory: memcached plus your ops wrapper — C29, C30, C31 (+ C57/C60 Aerospike at Indian scale, on-prem, R6)
 - Ch. 10 Vector: where the index lives — C32, C33, C34, C35
 
 **Part II — The transitions (Ch. 11–16)**
-- Ch. 11 The transition matrix: how to read it — T01–T20 survey
+- Ch. 11 The transition matrix: how to read it — T01–T30 survey
 - Ch. 12 Relational exits — T01, T02 (+ C15, C36 history)
-- Ch. 13 Scale-out relational done right — C01, C04, C05, C26-precursor (P4–P7)
-- Ch. 14 The NewSQL absorptions — T03, T04, C27, C28
+- Ch. 13 Scale-out relational done right — C01, C04, C05, C26-precursor (P4–P7) (+ C54 Figma, C55 Notion, R6)
+- Ch. 14 The NewSQL absorptions — T03, T04, C27, C28 (+ T25 Zomato reverse flow, R6)
 - Ch. 15 The engine-swap twins — T07, T08, T16 (P12)
-- Ch. 16 Returns and round trips — T10, T13, T19, T20 (+ T11 Uber)
+- Ch. 16 Returns and round trips — T10, T13, T19, T20 (+ T11 Uber; + T23–T27 R6 flows: Yelp standardization, Deliveroo/Zomato/Freecharge outflows, Bhoos return)
 
 **Part III — The failures (Ch. 17–20)**
 - Ch. 17 Backup failures: the class that kills — F02, F04, F05, F06 (FC1)
@@ -109,6 +113,7 @@ Status: no chapter authored yet. All 23 chapters planned (specs in `manuscript/B
 |---|---|---|---|---|
 | 1 | 2026-10-20/21 | Bootstrap + Phase 1 gate | DONE | Survey R1–R4 complete; register C/T/F built; P-index P1–P20; 23-chapter map; Knowledge topics created; root staging pruned once → masters kept in Knowledge topic, then pushed to repo; scope APPROVED (4 parts / 23 chapters), audience = working engineers/architects |
 | 2 | 2026-10-21 | R5 freshness pass (user-directed) | DONE | 6 new cases (C48–C53), 2 new transitions (T21–T22); W2 refined, W3 substantially resolved, W4 added; honest negatives D6/D7; Ch. 1 inputs verified current; records pushed (ALWAYS-SYNC) |
+| 3 | 2026-10-21 | R6 verification pass (user-directed: compare a third-party report's case list against the corpus; register the misses) | DONE | 13 new cases (C54–C66), 8 new transitions (T23–T30), T19 extended (Voucherify); D8 (Razorpay/Swiggy negatives), W5 (OpenAI write-scaling); Zerodha's three CH stories verified first-party via z-connect; records pushed (ALWAYS-SYNC) |
 
 ## Standing to-do
 

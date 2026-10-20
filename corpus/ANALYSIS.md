@@ -50,3 +50,20 @@ team skill (C05, C37, C02, C03).
 | P18 (distribute-the-app) fails-when | C53: FIRST-PARTY fails-when evidence — SQLite-per-customer attempted for Fizzy, "globally replicated SQLite" edge cases, switched to MySQL before launch. P18's per-object ceiling, now documented from a team that tried it |
 | FC3 (unprofiled layer) ops cousin | C52: Tinybird's 5-year CH ops lessons — memory budgets and external sorts are the settings that bite at petabyte scale (Ch. 5 operations sidebar) |
 | Ch. 1 caveat | C02: Nick Craver has moved to Microsoft Azure; his 2013/2016 accounts remain the canonical first-party record (cite with dates, as ever) |
+
+## R6 additions (session 3, user-directed verification pass)
+
+| Pattern | New firing evidence (R6) |
+|---|---|
+| P4 (natural tenant key) | C55 Notion: workspace ID as shard key — all of a workspace's blocks co-located; the P4 face list gains its Postgres-at-product-scale member |
+| P6 (vertical before horizontal) | C54 Figma: vertical partitioning into a dozen DBs was the explicit 2020–22 stepping stone before 9-month horizontal sharding — second first-party face after C01 |
+| P13/P7 (fixed-shard debt, planned away) | C55 Notion: 480 logical shards chosen for divisibility (32→40→48 host jumps possible), which made the later re-shard 32→96 a PgBouncer redirect with slow verified cutover instead of a second migration. The rare case of P13 debt designed out in advance |
+| P19 (migration playbook) | C54 Figma: shadow-planning / "shadow application readiness" on live traffic = the playbook's diff/predict step, tool-automated. C55 Notion: dark reads with diffing, AND migration vs. verification logic implemented by different people — first-party evidence that verification independence is a real step, not paranoia |
+| P8 (team size is an input) | C62 Yelp: the honest mirror of F11 — Yelp moved a product DB to org-standard MySQL because the team lacked deep Postgres expertise and said so plainly; Uber's same-direction move aged badly because it conflated engine mechanics with ops inexperience. F11's control case |
+| P2 (workload-match) | C58 Zomato: ledger/payout workload with bursty peaks → pay-per-use KV; TiDB's over-provisioning was the cost of the wrong shape. C63 Deliveroo: after-commit Kafka semantics rebuilt on DynamoDB Streams — semantic translation is again the residual cost (cf. C46 savepoints) |
+| P2/P16 (columnar on immutable/log data) | Three independent first-party confirmations of the T05/T06 family: T28 Uber (one CH node ingests ~300K logs/s, ~10× an ES node) + Zerodha (28B lines/13 TB ELK → 30B lines/2.5 TB CH); T29 Zerodha Timescale→CH (~1 TB → ~120 GB); T30 Zerodha back-office PG→CH (20 TB → 4 TB, "1000×" in many scenarios) |
+| P3-adjacent (single-node mastery) | C56 Zerodha: Stack Overflow's kin at Indian-fintech scale — ~trillion-row DB served from single-node self-hosted Postgres plus an ephemeral-table result cache (7M tables/day, DungBeetle). Ch. 1 counter-weight alongside C02 |
+| Ch. 1 counter-example | C61 OpenAI: 800M users, one primary + ~50 read replicas; reads scale by replication, not sharding; the write bottleneck is the honest limit (W5). The strongest modern "you may not need to shard yet" datapoint; teach alongside C02 and C56 in Ch. 1 |
+| P16 caution + Ch. 9 breadth | C57 PhonePe + C60 Flipkart: the in-memory family gains two hyperscale Indian cases, both self-run on-prem (Aerospike) — rare non-cloud counterpoints to the managed-everything narrative. Both sit on Aerospike properties (VP); PhonePe's fraud-model post is the first-party anchor |
+| Direction findings (Ch. 11 matrix) | T25 (Zomato TiDB→DynamoDB) and T27 (Bhoos DynamoDB→PG) show neither distributed SQL nor managed KV is a terminal state — both reverse flows now first-party. T26 vs C57: Freecharge chose managed while PhonePe chose self-run in the same workload class — one decision, two answers (Ch. 21 ops-burden driver). T19's "quiet return" gains Voucherify (mid-size, zero downtime, ~30% cheaper) |
+
