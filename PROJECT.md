@@ -2,11 +2,12 @@
 
 ## Current state (updated each session)
 
-**Phase: 1 → 2 (Phase 1 scope gate PASSED 2026-10-20/21; chapter authoring may begin).**
-The survey corpus is complete through four research rounds (R1–R4): 47 cases
-(C01–C47), 20 documented transitions (T01–T20), and 12 failure post-mortems
+**Phase: 1 → 2 (Phase 1 scope gate PASSED 2026-10-20/21; R5 freshness pass DONE; chapter authoring may begin).**
+The survey corpus is complete through five research rounds (R1–R5): 53 cases
+(C01–C53), 22 documented transitions (T01–T22), and 12 failure post-mortems
 (F01–F12), all register-first with exact source URLs. The readable master survey
-lives at `corpus/SURVEY.md`.
+lives at `corpus/SURVEY.md`; R5 findings live in the register and analysis
+(fold into the survey at authoring time if needed).
 
 **Scope approval (user gate, session 1):** the 4-part / 23-chapter structure
 (10 family chapters with 2–4 compared cases each, 6 transition chapters, 4
@@ -107,6 +108,7 @@ Status: no chapter authored yet. All 23 chapters planned (specs in `manuscript/B
 | # | Date (IST) | Unit | Status | Notes |
 |---|---|---|---|---|
 | 1 | 2026-10-20/21 | Bootstrap + Phase 1 gate | DONE | Survey R1–R4 complete; register C/T/F built; P-index P1–P20; 23-chapter map; Knowledge topics created; root staging pruned once → masters kept in Knowledge topic, then pushed to repo; scope APPROVED (4 parts / 23 chapters), audience = working engineers/architects |
+| 2 | 2026-10-21 | R5 freshness pass (user-directed) | DONE | 6 new cases (C48–C53), 2 new transitions (T21–T22); W2 refined, W3 substantially resolved, W4 added; honest negatives D6/D7; Ch. 1 inputs verified current; records pushed (ALWAYS-SYNC) |
 
 ## Standing to-do
 

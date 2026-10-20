@@ -8,6 +8,7 @@
 | R2 | 2026-10-20 | Family flagship use cases (wide-column, columnar, in-memory, time-series, graph, vector, document, NewSQL) | Filled C14–C35; Cloudflare ClickHouse, Bloomberg, ICIJ/Zurich/ShopBot, Uber M3, Netflix Atlas, DoorDash CRDB, EVCache/FB Memcache/Twemcache, turbopuffer/Voyager, eBay Mongo |
 | R3 | 2026-10-20 | Remaining transition-matrix gaps | Document→relational returns (slice, Infisical — first-party but small/mid-size); vector unwind both directions (Confident AI vs Pinecone counter-blog); Twitter Twemcache as third in-memory case |
 | R4 | 2026-10-20 | Consolidation | Full report assembled as the survey master (`SURVEY.md`); family-by-family comparisons with 2–3 cases each; transition matrix ~20 rows; failure synthesis; ~100-row source notes table |
+| R5 | 2026-10-21 | User-directed freshness pass before authoring: watch-list refresh (W1–W3), thin-chapter strengthening, Ch. 1 pre-verification | 6 new cases (C48–C53: Uber Docstore, Netflix CRDB portfolio, 37signals S3 exit, Netflix Cassandra current-state, Tinybird CH ops, 37signals Fizzy SQLite-per-customer abandoned); 2 new transitions (T21 Langfuse→CH, T22 Schemaless→Docstore); W2 refined (TiDB confirmed in production Oct 2026 + migration-mechanics post); W3 substantially resolved for Netflix + Uber; Ch. 1 inputs verified current (no newer GitHub DB posts; Craver caveat logged). Honest negatives: no first-party graph case beyond ICIJ/Zurich/ShopBot (D6); no first-party document-family case beyond Stripe/LinkedIn found (D7); no first-person 100M+ vector migration in either direction (W1 stays open) |
 
 ## Deferral ledger (do not re-search blindly; check these first)
 
@@ -18,14 +19,17 @@
 | D3 | Big-tech document→relational return | First-party returns exist only from small/mid teams (slice, Infisical); big-tech reversal undocumented — likely survivor gap, not absence |
 | D4 | Coinbase time-series case | Searched, miss — nothing registerable found |
 | D5 | Foursquare venue-db Mongo→Postgres claim | Only weakly sourced (Quora); do NOT claim without a better source. (The PG→Mongo direction IS sourced: HN, engineering lead) |
+| D6 | First-party production graph case beyond ICIJ/Zurich/ShopBot | R5 sweep found only vendor/marketing material; re-check later — graph companies rarely blog first-party |
+| D7 | First-party document-family production case beyond Stripe/LinkedIn | R5 sweep found only how-to content and Reddit; eBay remains the strongest (VP); re-check later |
 
 ## Watch-list
 
 | ID | Item | Trigger to re-check |
 |---|---|---|
-| W1 | pgvector convergence vs dedicated vector stores | Any large-scale (100M+ vectors) first-party migration published in either direction |
-| W2 | Pinterest TiDB long-term outcome | Largest public "regret the build, buy the product" datapoint; outcome not yet written |
-| W3 | Post-migration drift (Netflix stack today, Twitter post-2022, Uber's current Schemaless status) | Current-state claims stop at cited dates; re-verify if a chapter needs present tense |
+| W1 | pgvector convergence vs dedicated vector stores | Still OPEN after R5: no first-person 100M+ migration either direction. Third-party consensus (PR-level, unverified): pgvector competitive below ~10–50M vectors; pgvectorscale claims to extend the range (Mar 2026, vendor). Re-check on any large-scale first-party migration |
+| W2 | Pinterest TiDB long-term outcome | REFINED R5: TiDB confirmed in production use (Oct 2026, InfoQ: petabyte CDC pipelines from MySQL, TiDB, KVStore); zero-downtime HBase→TiDB migration mechanics published. Long-term regret/verdict still pending — keep watching |
+| W3 | Post-migration drift (Netflix, Twitter, Uber) | SUBSTANTIALLY RESOLVED R5: Netflix — Cassandra powers Member/Billing/Recommendations/Subscriptions as of May 2026, with KV/TS/Graph abstractions + CRDB in the portfolio (C51, C49); Uber — Schemaless evolved into Docstore, in production (C48). Remaining: Twitter/X post-2022 state (no first-party account found) |
+| W4 | Netflix KV abstraction + Docstore trajectories | NEW R5: Netflix's abstraction layer over multiple DBs and Uber's Docstore are both live builds to watch — do they converge into products (P15 test)? |
 
 ## Standing notes
 

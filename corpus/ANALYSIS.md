@@ -38,3 +38,15 @@ Failure classes (Part III spine):
 availability/blast radius (C10, C15, C04, C01), ops burden (C36, C38, C26, C40),
 cost at scale (C41, C39, C46, C28), correctness requirements (C27, C28, C36, F10-adjacent),
 team skill (C05, C37, C02, C03).
+
+## R5 additions (session 2)
+
+| Pattern | New firing evidence (R5) |
+|---|---|
+| P10 (consistency bought back) | C48: Uber found Cassandra's eventual consistency "impeding developer productivity" → Docstore with strict serializability at partition level — the same consistency-buyback as Twitter's Manhattan retrofit, at Uber |
+| P14 (abstraction escape hatch) | C51: Netflix builds KV, Time-Series and Graph data abstractions over Cassandra + a Key-Value Data Abstraction Layer across multiple online DBs; C53: 37signals' Active Record Tenanted gem abstracts tenant routing |
+| P15 (build what converges) | C48: Docstore is Uber re-running the internal build (Schemaless → general-purpose transactional DB) — watch W4 for whether it converges; C49: Netflix *buys* (operates CRDB as a service) rather than builds — the 2023 answer to the same requirement Manhattan was built for in 2012 |
+| P16 + P19 + P20 | C50: 37signals moved 5 PB / ~5B objects off S3 with zero downtime — custom copy-and-reconciliation tooling (budget for verification, not just the move), intentional move order, and the verification anxiety of the irreversible delete |
+| P18 (distribute-the-app) fails-when | C53: FIRST-PARTY fails-when evidence — SQLite-per-customer attempted for Fizzy, "globally replicated SQLite" edge cases, switched to MySQL before launch. P18's per-object ceiling, now documented from a team that tried it |
+| FC3 (unprofiled layer) ops cousin | C52: Tinybird's 5-year CH ops lessons — memory budgets and external sorts are the settings that bite at petabyte scale (Ch. 5 operations sidebar) |
+| Ch. 1 caveat | C02: Nick Craver has moved to Microsoft Azure; his 2013/2016 accounts remain the canonical first-party record (cite with dates, as ever) |
