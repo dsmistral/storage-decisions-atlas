@@ -10,8 +10,44 @@ Decisions Atlas book project. If this repo and anything else disagree, the repo 
 A source-backed, case-study-driven book about how real companies chose, implemented,
 transitioned between — and failed with — their data stores. Every claim traces to a
 cited source; every hindsight judgement is explicitly labelled as an assessment.
-The corpus covers ten database families, ~20 documented inter-family transitions,
-and 12 failure post-mortems, with multiple compared cases per topic.
+The corpus covers ten database families: 66 documented cases (C01–C66), 30
+documented inter-family transitions (T01–T30), and 12 failure post-mortems
+(F01–F12), with multiple compared cases per topic.
+
+## Status (updated 2026-10-21)
+
+**PAUSED at user request after the R6 verification pass (session 3).** The author
+will resume after finishing another book project (the Everyday-Chemistry Atlas).
+**Next unit on resume: Chapter 1** — "Relational: three ways to stay relational"
+(C01, C02, C03, +C47, C37; R6 counter-weights C61 OpenAI, C56 Zerodha; cautionary
+twin C37 Uber). Pending at resume: fold the R6 cases (C54–C66, T23–T30) into the
+`corpus/SURVEY.md` dossiers at authoring time.
+
+## Cold resume protocol (fresh chat, this repo alone)
+
+This repo is deliberately self-sufficient: all durable state lives in `PROJECT.md`
+and `corpus/` — no external chat history is needed to continue.
+
+1. Read this file, then `PROJECT.md` (current state, P-index, chapter map, session
+   log, protocol), then `corpus/STATE.md` (rounds R1–R6, deferrals D1–D8,
+   watch-lists W1–W5), then `corpus/CONVENTIONS`-adjacent rules in
+   `CONVENTIONS.md`.
+2. Rebuild local mirrors **before** any editing:
+   - Fetch every file with `get_file_contents` and mirror it byte-identically
+     into the local Knowledge topic `repo/` folder (the platform may prune
+     root-level staging; durable masters are the repo and that mirror).
+   - If the platform lost the Knowledge topics entirely, recreate them from this
+     repo: the book topic from `PROJECT.md`, the survey topic from
+     `corpus/STATE.md`. Conflicts always resolve in favor of the repo.
+3. Mark a session-log row IN PROGRESS in `PROJECT.md`, complete the unit, then
+   ALWAYS-SYNC: push records in the same session and byte-verify (repo file
+   sizes vs local byte counts, e.g. `wc -c`).
+4. Register-first discipline: never register cases from memory; copy exact URLs
+   from `corpus/REGISTER.md` / `corpus/SURVEY.md`; evidence levels FP/VP/PR/SR;
+   vendor-hosted accounts are VP; hindsight is labelled "Verdict (assessment)".
+5. Tooling: GitHub App connector (`push_files`, `get_file_contents`), owner
+   `dsmistral`, repo `storage-decisions-atlas`, branch `main`. The App cannot
+   create repositories (this one was created manually by the user).
 
 ## Repo map and reading order (cold start)
 

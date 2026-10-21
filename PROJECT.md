@@ -23,6 +23,12 @@ Ch. 1 bench: C61 OpenAI and C56 Zerodha are first-party counter-weights to
 limit — W5); C55 Notion and C54 Figma are the modern sharding-in-place faces
 for Ch. 13.
 
+**Pause status (2026-10-21):** PAUSED at user request after R6 (session 3);
+the author resumes after finishing another book project. This repo is
+self-sufficient for a cold resume from GitHub alone — see the Cold resume
+protocol in `README.md`. On resume: (1) fold R6 cases into `corpus/SURVEY.md`
+dossiers, (2) author Chapter 1.
+
 ---
 
 ## Master Pattern Index (P-index)
@@ -119,7 +125,8 @@ Status: no chapter authored yet. All 23 chapters planned (specs in `manuscript/B
 
 1. ~~Push bootstrap to GitHub repo~~ (done, session 1).
 2. ~~Phase 1 scope gate~~ (PASSED, session 1).
-3. Author Ch. 1 (first unit session).
+3. Author Ch. 1 (first unit session — currently paused; resume per README cold-resume protocol).
+4. Fold R6 cases (C54–C66, T23–T30) into `corpus/SURVEY.md` dossiers at authoring time.
 
 ## Quality checklist (per chapter)
 
