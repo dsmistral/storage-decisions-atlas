@@ -2,8 +2,8 @@
 
 **Governing idea.** The graph family earns its keep on one kind of question:
 the multi-hop query, "everyone connected to X within two steps, with
-weights", which relational engines answer with recursive joins that collapse
-at depth. This chapter's three cases all bought the same engine (Neo4j) and
+weights" (the survey's characterization), which relational engines answer
+with recursive joins that collapse at depth. This chapter's three cases all bought the same engine (Neo4j) and
 all asked that question, but they form a maturity ladder of jobs: the graph as
 an exploration surface for humans, the graph as an acceleration layer for
 domain experts, and the graph as inference context for machine learning.
@@ -11,8 +11,9 @@ Reading them side by side answers a question the vendor material never asks:
 what stays constant as a graph installation grows up, and what gets harder?
 
 **Cases in this chapter:** C20 (ICIJ Panama Papers: Neo4j + Linkurious,
-first-party/press), C21 (Zurich Insurance claims fraud, vendor-published),
-C22 (eBay ShopBot knowledge graph, vendor-published).
+FP/VP: the speaker is first-party, the channel is the vendor's), C21 (Zurich
+Insurance claims fraud, vendor-published), C22 (eBay ShopBot knowledge graph,
+vendor-published).
 Register IDs resolve in Appendix A; every source URL is copied from
 `corpus/REGISTER.md`.
 
@@ -34,8 +35,9 @@ They differ in who the user is (hundreds of journalists, fraud
 investigators, a research team behind a shopping assistant), in how central
 the graph is to the product (the whole product, an internal tool, an
 inference component), and in how much of the workload is human exploration
-versus machine inference. The chapter's grading follows the evidence: rich
-first-party/press accounts exist for the first case; the other two are
+versus machine inference. The chapter's grading follows the evidence: a rich
+first-party account exists for the first case (though the corpus carries it
+on the vendor's channel, so its grade is FP/VP); the other two are
 vendor-published and the chapter holds them to that standard.
 
 ## 2. The cases, each against its time
@@ -85,12 +87,12 @@ domain experts, dozens of times a day, at the moment the decision happens.
 
 ### The inference component: eBay ShopBot (C22)
 
-eBay's ShopBot was the shopping assistant the New Product Development group
-built "as a virtual shopping assistant" driven by a graph database, and the
-team behind it is explicit that the graph's job is inference context: it is
-"all about the synergy between graphs and machine learning", with the team
-using natural language understanding feeding entities resolved against the
-knowledge graph ([C22: Neo4j interview with Ajinkya Kale,
+eBay's ShopBot was the shopping assistant driven by a graph database, and
+the interview's own framing is the cleanest statement of the job: "Ajinkya
+and his team use Natural Language Understanding to bake machine learning
+into the graph database that drives eBay's virtual shopping assistant, eBay
+ShopBot"; for the team's lead it is "all about the synergy between graphs
+and machine learning" ([C22: Neo4j interview with Ajinkya Kale,
 eBay](https://neo4j.com/blog/knowledge-graph/machine-learning-on-graphs-ajinkya-kale-senior-applied-researcher-ebay/), VP).
 In the maturity ladder this is the hard end: the graph is consumed by
 programs, its schema encodes product entities and their relations, and its
@@ -101,10 +103,10 @@ chapter reads it as a direction record, not an operations study.
 
 ## 3. What happened (sourced outcomes, with evidence levels)
 
-- **ICIJ (C20, FP/press).** 11.5 million leak files mined through Neo4j +
+- **ICIJ (C20, FP/VP).** 11.5 million leak files mined through Neo4j +
   Linkurious by a 200-journalist network in over 65 countries; the toolchain
-  (Tika, Solr, Neo4j, Linkurious) was documented in the ICIJ's own interview,
-  and the consortium later opened parts of the graph data publicly ([C20:
+  (Tika, Solr, Neo4j, Linkurious) was documented in the ICIJ's own interview
+  ([C20:
   Neo4j interview](https://neo4j.com/blog/cypher-and-gql/icij-neo4j-unravel-panama-papers/); [C20: Computer Weekly](https://www.computerweekly.com/news/450280758/Panama-Papers-revealed-by-graph-database-visualisation-software)).
 - **Zurich (C21, VP).** 6,100 employees answering ~1 million calls and
   processing 500,000 claims a year; Neo4j added as the context layer for
@@ -144,8 +146,8 @@ carries.
 - **ICIJ (C20):** exemplary, and the corpus is lucky to have a first-party
   voice behind it. The lesson generalizes past journalism: when the data's
   value is relationships between documents, a graph plus a purpose-built
-  visualization is the correct machine, and the vendor's claims about it
-  ("magic") were earned by the workflow, not the marketing.
+  visualization is the correct machine, and Cabra's own verdict ("magic")
+  was earned by the workflow it served, not by marketing.
 - **Zurich (C21):** believable and well-shaped, but vendor-carried. The
   direction (graph context beside a rules engine) is the standard production
   shape for fraud work and the case's logic holds; the absence of any
