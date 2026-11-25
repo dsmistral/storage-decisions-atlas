@@ -220,8 +220,8 @@ the team executed and what it protected them from.
 
 *Hint:* the two moves failed or succeeded independently by design.
 
-*Worked answer (assessment):* P2, workload-match the migration (Cloudflare's
-T05/T06 pair is the face). Splitting the two moves meant each could be sized,
+*Worked answer (assessment):* P2, workload-match the migration (the chapter's
+Cloudflare instance; the register's recorded face is C46). Splitting the two moves meant each could be sized,
 tested, and rolled back against its own access pattern; a single flagship
 migration would have coupled the engine choice for both workloads and made
 one bad fit escape into both.
