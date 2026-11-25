@@ -15,8 +15,8 @@ dependency that one of the three cases was already pushing toward a cure.
 
 **Cases in this chapter:** C17 (Cloudflare: HTTP analytics and the log-pipeline
 move, T05 and T06 together, first-party), C18 (Bloomberg: the fan-out case,
-vendor-published), C19 (CERN LHCb: metadata for 10 billion events, press)
-register IDs resolve in Appendix A; every source URL is copied from
+vendor-published), C19 (CERN LHCb: metadata for 10 billion events, press).
+Register IDs resolve in Appendix A; every source URL is copied from
 `corpus/REGISTER.md`. The chapter also opens failure post-mortem F08 as the
 FC3 teaser: a migration that went right and still regressed, years later, in
 the layer nobody profiles.
