@@ -95,7 +95,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 
 **Part II — The transitions (Ch. 11–16)**
 - Ch. 11 The transition matrix: how to read it — T01–T30 survey
-- Ch. 12 Relational exits — T01, T02 (+ C15, C36 history)
+- Ch. 12 Relational exits — T01, T02 (+ C15, C36, C46 history; BOOK-PLAN spec inputs)
 - Ch. 13 Scale-out relational done right — C01, C04, C05, C26-precursor (P4–P7) (+ C54 Figma, C55 Notion, R6)
 - Ch. 14 The NewSQL absorptions — T03, T04, C27, C28 (+ T25 Zomato reverse flow, R6)
 - Ch. 15 The engine-swap twins — T07, T08, T16 (P12)
@@ -133,6 +133,7 @@ Status: Ch. 2 REVIEWED session 7; Ch. 3 AUTHORED session 8; Chs. 4–23 planned 
 | 6 | 2026-11-25 | Ch. 2: Document — three reasons, one aggregate | DONE | Chapter master `manuscript/ch02-document.md` (~18.6 KB): C06/C07/C08 as three reasons + C09 Espresso build-dwell (P15), fit-test table, T10/T19 exits preview (P2), graded exercises + ◆; battery: 10/10 register IDs, 3/3 pattern IDs, 9/9 exact URLs in register, 11/11 figure/quote targets in corpus, markers ✓; live probes: eBay quote, Stripe 99.999, Espresso claims, Sailthru 40 TB/120 nodes verbatim ✓; Mixmax page fetch thin (register-corroborated); Voucherify ~30% figure is the author cross-post's claim: citation extended (URL from register C65), marked self-reported. Next: Phase 3 review of Ch. 2, then Ch. 3 |
 | 7 | 2026-11-25 | Phase 3 adversarial review of Ch. 2 | DONE | Fresh reviewer battery re-run green (all register IDs valid, 3/3 pattern IDs, all URLs in register, no placeholders/em-dashes). Four objections resolved: O3 wording "Three companies" corrected to "Teams" (four organizations in three reasons); O7 absolute "never open-sourced or productized" softened to "stayed internal, no release or productization on record as of the 2012 post"; O11 aggregate-survival inference in T10 marked as reviewer assessment; O12 "Chapter 9 in reverse" pin replaced with the ops-burden driver (Ch. 21). Three edit-tool slips during fixing caught and repaired before push. Chapter status: REVIEWED |
 | 8 | 2026-11-25 | Ch. 3: Key-value — one pattern, three scales | DONE | Chapter master `manuscript/ch03-key-value.md` (~15.5 KB): C10 Dynamo SOSP 2007 as design origin, C11 Amazon Financial Ledger (giant scale), C12 Duolingo (product scale), C13 Mixmax (small scale); P1/P2/P16 (+C36 uniqueness preview, C46 held for Ch. 12); graded exercises + ◆ diagnostic. Battery green: 6/6 register IDs, 4/4 pattern IDs defined, 5/5 exact URLs in register, markers each =1, zero em-dash, zero placeholders. Live probes: Dynamo PDF phrases ("inefficiencies and limit scale"), AWS Oracle-exit (120 TB, 40%, 70%, Financial Ledger), Duolingo TTL/60 lessons ✓. Quote fix: "too simplistic for any application" converted to sourced paraphrase; no fetch of the SOSP PDF survives past ~5 pages (extraction cap) and the phrase does not occur in the fetched portion, so no verbatim attribution is kept. Next: Phase 3 review of Ch. 3, then Ch. 4 |
+| 9 | 2026-11-25 | Phase 3 adversarial review of Ch. 3 | IN PROGRESS | Two-expert review of `manuscript/ch03-key-value.md`, fresh machine battery + live-source probes; findings and receipts at close |
 
 ## Standing to-do
 
