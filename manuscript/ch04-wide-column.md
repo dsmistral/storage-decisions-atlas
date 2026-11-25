@@ -153,9 +153,11 @@ Manhattan arc lives in Chapter 12.
 - **Instagram (C16, PR).** Rocksandra engine swap shipped behind the same
   Cassandra surface; the experiment fed the pluggable-engine direction
   ([C16: The New Stack](https://thenewstack.io/instagram-supercharges-cassandra-pluggable-rocksdb-storage-engine/)).
-- **Discord (C38, FP).** Trillions of messages moved Cassandra→ScyllaDB in a
-  staged migration with messages migrated last; 177 nodes to 72; the bespoke
-  migrator went from three months to nine days
+- **Discord (C38, FP).** Trillions of messages moved Cassandra→ScyllaDB under
+  a stated requirement of "no downtime" ("we need to migrate trillions of
+  messages with no downtime") carried out by a staged migration with messages
+  migrated last; 177 nodes to 72; the bespoke migrator went from three months
+  to nine days
   ([C38: Discord blog](https://discord.com/blog/how-discord-stores-trillions-of-messages); [C38: InfoQ](https://www.infoq.com/news/2023/06/discord-cassandra-scylladb/)).
 
 ## 4. The comparison: the cure ladder
