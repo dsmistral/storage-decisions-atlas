@@ -80,7 +80,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 **Part I — The families: one engine each, several cases each (Ch. 1–10)**
 - Ch. 1 Relational: three ways to stay relational — C01, C02, C03 (+ C61 OpenAI, C56 Zerodha counter-weights, R6)
 - Ch. 2 Document: three reasons, one aggregate — C06, C07, C08, C09 (BOOK-PLAN spec inputs; incl. T10/T19 preview: P2, P15)
-- Ch. 3 Key-value: one pattern, three scales — C11, C12, C13
+- Ch. 3 Key-value: one pattern, three scales — C10, C11, C12, C13 (BOOK-PLAN spec inputs; C10 is the design origin): P1, P2, P16
 - Ch. 4 Wide-column: three fleets and the JVM cure — C14, C15, C16
 - Ch. 5 Columnar: fan-in and fan-out — C17, C18, C19
 - Ch. 6 Graph: three jobs — C20, C21, C22
@@ -130,6 +130,7 @@ Status: Ch. 2 REVIEWED session 7 (Phase 3 passed, 4 objections resolved); Chs. 2
 | 7 | 2026-11-25 | Phase 3 adversarial review of Ch. 2 | DONE | Fresh reviewer battery re-run green (all register IDs valid, 3/3 pattern IDs, all URLs in register, no placeholders/em-dashes). Four objections resolved: O3 wording "Three companies" corrected to "Teams" (four organizations in three reasons); O7 absolute "never open-sourced or productized" softened to "stayed internal, no release or productization on record as of the 2012 post"; O11 aggregate-survival inference in T10 marked as reviewer assessment; O12 "Chapter 9 in reverse" pin replaced with the ops-burden driver (Ch. 21). Three edit-tool slips during fixing caught and repaired before push. Chapter status: REVIEWED |
 
 ## Standing to-do
+| 8 | 2026-11-25 | Ch. 3: Key-value — one pattern, three scales | IN PROGRESS | Authoring manuscript/ch03-key-value.md: C10 (design origin) + C11/C12/C13 at giant/product/small scale; P1, P2, P16; battery + live probes at close |
 
 1. ~~Push bootstrap to GitHub repo~~ (done, session 1).
 2. ~~Phase 1 scope gate~~ (PASSED, session 1).
