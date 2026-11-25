@@ -144,8 +144,8 @@ Two afterlives matter for this chapter. First, "PG doesn't scale" became
 industry folklore it did not earn; every later relational decision in this book
 had to be made against that background hum. Second, Uber's own arc continued:
 Schemaless evolved into Docstore, "a general-purpose transactional database"
-with strict serializability at the partition level (C48, T22; [C37: Schemaless→Docstore](https://www.uber.com/in/en/blog/schemaless-sql-database/), FP): 
-which is to say Uber eventually rebuilt SQL characteristics on top of its
+with strict serializability at the partition level (C48, T22; [C37: Schemaless→Docstore](https://www.uber.com/in/en/blog/schemaless-sql-database/), FP):
+which is to say, Uber eventually rebuilt SQL characteristics on top of its
 sharded escape. The family's strongest critic eventually wrote the strongest
 argument for the family.
 
