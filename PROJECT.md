@@ -26,12 +26,13 @@ planning gap logged (to-do 5).
 manuscript master `manuscript/ch02-document.md` ("Document: three reasons, one
 aggregate"; C06, C07, C08, C09 + T10/T19 preview; patterns P2/P15). Review
 passed session 7 with 4 objections resolved (receipts in row 7).
-**Chapter 3 AUTHORED (session 8, 2026-11-25):** manuscript master
+**Chapter 3 AUTHORED + REVIEWED (sessions 8-9, 2026-11-25):** manuscript master
 `manuscript/ch03-key-value.md` ("Key-value: one pattern, three scales"; C10
 design origin, C11, C12, C13 at giant/product/small scale; patterns P1/P2/P16).
-**Next unit: Phase 3 adversarial review of Ch. 3**, then Ch. 4 (Wide-column:
-three fleets and the JVM cure; C14, C15, C16, + C38 Discord, C36 Twitter;
-patterns P3/P9/P12).
+Review passed session 9 with 4 objections fixed (receipts in row 9).
+**Next unit: Ch. 4 (Wide-column: three fleets and the JVM cure)**, inputs C14,
+C15, C16 (+ C38 Discord, C36 Twitter), patterns P3/P9/P12, then its Phase 3
+review.
 
 **Pause status:** the 2026-10-21 pause was lifted at resume (2026-11-25), session
 4 opened per the repo Cold resume protocol (mirror verified vs repo, HEAD 287f6b3).
@@ -117,7 +118,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 - B. Methodology and the evidence ladder
 - C. Open questions, deferrals, and watch-lists
 
-Status: Ch. 2 REVIEWED session 7; Ch. 3 AUTHORED session 8; Chs. 4–23 planned (specs in `manuscript/BOOK-PLAN.md`).
+Status: Ch. 3 REVIEWED session 9 (Chs. 1-3 done: 3 authored, 3 reviewed); Chs. 4–23 planned (specs in `manuscript/BOOK-PLAN.md`).
 
 ---
 
@@ -133,7 +134,7 @@ Status: Ch. 2 REVIEWED session 7; Ch. 3 AUTHORED session 8; Chs. 4–23 planned 
 | 6 | 2026-11-25 | Ch. 2: Document — three reasons, one aggregate | DONE | Chapter master `manuscript/ch02-document.md` (~18.6 KB): C06/C07/C08 as three reasons + C09 Espresso build-dwell (P15), fit-test table, T10/T19 exits preview (P2), graded exercises + ◆; battery: 10/10 register IDs, 3/3 pattern IDs, 9/9 exact URLs in register, 11/11 figure/quote targets in corpus, markers ✓; live probes: eBay quote, Stripe 99.999, Espresso claims, Sailthru 40 TB/120 nodes verbatim ✓; Mixmax page fetch thin (register-corroborated); Voucherify ~30% figure is the author cross-post's claim: citation extended (URL from register C65), marked self-reported. Next: Phase 3 review of Ch. 2, then Ch. 3 |
 | 7 | 2026-11-25 | Phase 3 adversarial review of Ch. 2 | DONE | Fresh reviewer battery re-run green (all register IDs valid, 3/3 pattern IDs, all URLs in register, no placeholders/em-dashes). Four objections resolved: O3 wording "Three companies" corrected to "Teams" (four organizations in three reasons); O7 absolute "never open-sourced or productized" softened to "stayed internal, no release or productization on record as of the 2012 post"; O11 aggregate-survival inference in T10 marked as reviewer assessment; O12 "Chapter 9 in reverse" pin replaced with the ops-burden driver (Ch. 21). Three edit-tool slips during fixing caught and repaired before push. Chapter status: REVIEWED |
 | 8 | 2026-11-25 | Ch. 3: Key-value — one pattern, three scales | DONE | Chapter master `manuscript/ch03-key-value.md` (~15.5 KB): C10 Dynamo SOSP 2007 as design origin, C11 Amazon Financial Ledger (giant scale), C12 Duolingo (product scale), C13 Mixmax (small scale); P1/P2/P16 (+C36 uniqueness preview, C46 held for Ch. 12); graded exercises + ◆ diagnostic. Battery green: 6/6 register IDs, 4/4 pattern IDs defined, 5/5 exact URLs in register, markers each =1, zero em-dash, zero placeholders. Live probes: Dynamo PDF phrases ("inefficiencies and limit scale"), AWS Oracle-exit (120 TB, 40%, 70%, Financial Ledger), Duolingo TTL/60 lessons ✓. Quote fix: "too simplistic for any application" converted to sourced paraphrase; no fetch of the SOSP PDF survives past ~5 pages (extraction cap) and the phrase does not occur in the fetched portion, so no verbatim attribution is kept. Next: Phase 3 review of Ch. 3, then Ch. 4 |
-| 9 | 2026-11-25 | Phase 3 adversarial review of Ch. 3 | IN PROGRESS | Two-expert review of `manuscript/ch03-key-value.md`, fresh machine battery + live-source probes; findings and receipts at close |
+| 9 | 2026-11-25 | Phase 3 adversarial review of Ch. 3 | DONE | Two-expert review + fresh machine battery green (6/6 register IDs, 4/4 pattern IDs defined, 5/5 exact URLs in register, 9/9 corpus quote/figure targets; live probe: the C36 quote "one email address may get attached to two accounts" verified verbatim on the Manhattan strong-consistency post; Duolingo "31 billion" = register's "31B", corroborated; markers each =1, zero em-dash/placeholders). Four objections fixed: O1 reflow artifact (stranded "the" before the cart sentence) reflowed; O2 "ancestor of Cassandra, DynamoDB, and most eventually consistent stores" trimmed to the register-supported "ancestor of Cassandra and DynamoDB"; O3 "P3-adjacent under the project's reading" misread P3 (Mixmax used the managed primitive as a destination at small scale, where P3's volume caution does not bind) reworded; O4 "the intake lives in the transition chapters" pinned to Chapter 12 (BOOK-PLAN C-home). Chapter map Ch. 12 line matched to BOOK-PLAN (C46 added). One edit-tool slip at session open (stray placeholder written into PROJECT.md) caught and reverted byte-identically before push. Chapter status: REVIEWED |
 
 ## Standing to-do
 
