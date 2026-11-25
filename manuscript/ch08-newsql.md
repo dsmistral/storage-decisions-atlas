@@ -195,8 +195,7 @@ destination had to be built, and both builds later converged into products
 (the register's P15 convergence shape, read from the seller's side); by 2022
 and 2023 DoorDash and Pinterest simply bought it, and their migration
 stories are measured in cutover attempts and reversion tools, not years of
-few
-years of engineering. That is the destination's proof: the same move that
+engineering. That is the destination's proof: the same move that
 once took Google's partnership with the Spanner team became, within a
 decade, a procurement decision with a feature flag. (A sourcing note: the
 convergence claim is register-recorded only for OceanBase, external
