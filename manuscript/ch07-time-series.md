@@ -49,17 +49,19 @@ and sometimes cease to work" as the dimensionality and usage of metrics
 increase ([C23: Uber, the billion data point challenge](https://www.uber.com/us/en/blog/billion-data-point-challenge/), FP).
 The stakes it reports are whole-company: its engine handles around 2,500
 queries per second, about 8.5 billion data points per second, and roughly 35
-Gbps (same source). The register records a reported ~6.6 billion active
-series for the platform in the press carry (register C23, press).
+Gbps (same source). The register's press carry states the platform
+"now houses over 6.6 billion time series" (register C23, press,
+[Packt](https://www.packtpub.com/en-in/learning/tech-news/uber-open-sources-its-large-scale-metrics-platform-m3-for-prometheus)).
 
 The design choice the register highlights is economics, not heroics:
 downsampling happens at collection time, via the coordinator's retention and
 rollup rules ([C23: Uber, M3: Uber's Open Source, Large-scale Metrics
 Platform for Prometheus](https://www.uber.com/us/en/blog/m3/), FP). The
-platform was built in-house and open-sourced, in full (T17's characterization:
-both giants built, both open-sourced, both then had to rebuild the query and
-alert layer that sat on top, which is where M3 grew a DAG query engine; the
-full comparison is Chapter 22's material).
+platform was built in-house and open-sourced, in full (the survey's
+characterization of register T17: both giants built, both open-sourced,
+both then rebuilt the query and alert layer that sat on top, which is where
+M3 grew a DAG query engine; the giants' full comparison is §4 below, and
+the migration-playbook treatment is Chapter 22's material).
 
 ### Netflix builds Atlas (C24, T17)
 
@@ -79,9 +81,10 @@ figure is verbatim in the indexed excerpt: "we can easily see Atlas sustain
 greater than 1.2 billion time series").
 
 The second mountain arrived on schedule, as T17 records: alerting. Years
-later Netflix's alerting system "fell behind", with critical application
-health alerts "reach[ing] engineers 45 minutes late", after the number of
-configured alerts "increased dramatically, by 5 times"; the fix was a
+later the team was paged because the Metrics Alerting System was "falling
+behind": "critical application health alerts reached engineers 45 minutes
+late", after the number of configured alerts had recently "increased
+dramatically, by 5 times"; the fix was a
 streaming-evaluation architecture ([C24: Netflix TechBlog, improved alerting
 with Atlas streaming eval](https://netflixtechblog.com/improved-alerting-with-atlas-streaming-eval-e691c60dc61e), FP;
 live page now serves a stub, quotes verified through indexed excerpts).
@@ -245,6 +248,7 @@ All from the register; URLs copied exactly.
 
 - C23 Uber, the billion data point challenge (Uber Engineering, FP): https://www.uber.com/us/en/blog/billion-data-point-challenge/
 - C23 Uber, M3: Uber's Open Source, Large-scale Metrics Platform for Prometheus (Uber Engineering, FP): https://www.uber.com/us/en/blog/m3/
+- C23 Packt, Uber open sources its large scale metrics platform, M3 for Prometheus (press carry, PR): https://www.packtpub.com/en-in/learning/tech-news/uber-open-sources-its-large-scale-metrics-platform-m3-for-prometheus
 - C24 Netflix Atlas docs, overview (Netflix, FP): https://netflix.github.io/atlas-docs/overview/
 - C24 Netflix, Introducing Atlas: Netflix's Primary Telemetry Platform (Netflix TechBlog, FP): http://techblog.netflix.com/2014/12/introducing-atlas-netflixs-primary.html
 - C24 Netflix, Improved Alerting with Atlas Streaming Eval (Netflix TechBlog, FP): https://netflixtechblog.com/improved-alerting-with-atlas-streaming-eval-e691c60dc61e
