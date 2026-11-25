@@ -50,9 +50,9 @@ the honest list of what columnar asks in return for its scans.
 ### The fan-in case: Cloudflare (C17)
 
 Cloudflare's HTTP analytics pipeline ingests logs from its global edge
-network; the pre-ClickHouse pipeline scaled out PostgreSQL via CitusDB, with a
-log forwarder feeding Kafka at "6M logs per second" in the later
-configuration ([C17: Cloudflare HTTP analytics](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/), FP).
+network; the pre-ClickHouse pipeline scaled out PostgreSQL via CitusDB, with
+its Kafka tier ingesting Cap'n Proto logs at "6M logs per second" ([C17:
+Cloudflare HTTP analytics](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/), FP).
 The stakes are self-analytics: Cloudflare runs its own product dashboarding
 and its own operational analytics on the platform. The move to ClickHouse is
 first-party documented and pairs two distinct workloads, which the register
@@ -88,7 +88,7 @@ fashion terms this deployment is unfashionable on purpose: on-prem, done for
 latency and control, serving the flagship product.
 
 Where Cloudflare's pain arrives with writes, Bloomberg's arrives with
-coordination: the register records ZooKeeper stress during MergeTree clone
+coordination: the register records ZooKeeper stress during clone
 operations pushing the team toward disaster-recovery drills and the ClickHouse
 Keeper direction (register C18, VP). The case is vendor-published rather than
 first-party, and the chapter's grading holds that line: the access-pattern
@@ -103,7 +103,7 @@ architectural poetry: detector events are append-only, analysis queries sweep
 a few of the thousand attributes across all events, and nobody ever updates
 last month's collision. The case is press-recorded rather than first-party in
 the corpus, so it functions as the family's breadth proof rather than as an
-operations case study: the same shape serves a 3,000-person physics
+operations case study: the same shape serves a physics
 collaboration that will never read a vendor blog post.
 
 ### Companion: the teaser from Part III (F08)
@@ -127,7 +127,10 @@ post-mortem lives in Chapter 19.
 - **Cloudflare (C17, FP).** Postgres-OLAP pipeline replaced by ClickHouse at
   6M requests per second (T05); logs moved from Elasticsearch to a much
   smaller cluster with inserter CPU and memory reduced by eight times (T06)
-  ([C17: Cloudflare HTTP analytics](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/); [C17: Cloudflare log analytics](https://blog.cloudflare.com/log-analytics-using-clickhouse/)).
+  ([C17: Cloudflare HTTP analytics](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/); [C17: Cloudflare log analytics](https://blog.cloudflare.com/log-analytics-using-clickhouse/));
+  the cutover was completed by a one-time ETL of over 60 billion rows with
+  consistency checks, after which the old pipeline shut down
+  ([C17: Cloudflare HTTP analytics](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/), FP).
 - **Bloomberg (C18, VP).** On-prem ClickHouse for immutable market data,
   sized for thousands of concurrent whole-market sweeps; ZooKeeper stress
   during clones pushed DR drills and the Keeper direction ([C18: ClickHouse
@@ -194,11 +197,14 @@ profiling has never looked.
 ## 6. The pattern
 
 - **P2 - Workload-match the migration.** Split by access pattern, not one
-  flagship product. Face: Cloudflare's T05/T06 pair, two independent
-  workloads moved as two independent projects. Fails-when: semantic
-  translation is assumed free and one "big bang" carries all workloads at
-  once (the register's Amazon C46 savepoint friction is the cautionary
-  template, read fully in Chapter 12).
+  flagship product. Register's recorded face: C46, Amazon's consumer Oracle
+  exit (ledger to DynamoDB, transactional to Aurora, analytics to Redshift).
+  Cloudflare's T05/T06 pair is the same rule in disciplined form: two
+  independent workloads moved as two independent projects (proposed here as
+  a second face for the survey pass). Fails-when: semantic translation, in
+  the register's wording savepoints and PL/SQL, is assumed free; C46's
+  savepoint-timeout friction at 92% done is the cautionary template, read
+  fully in Chapter 12.
 - **FC3 - Migrations regress in the unprofiled layer** (failure-mode class,
   previewed via F08). The billing jobs that slowed shared nothing with the
   migration's own verification surface: hardware metrics looked fine while a
