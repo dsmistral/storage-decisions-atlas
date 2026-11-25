@@ -4,8 +4,8 @@
 document database. In the documented record, the reason that survives scrutiny
 is access-shape, not structure: the data is organized around an *aggregate*
 (a listing, a checkout configuration, a user's profile or game state) that is
-read, cached, and written as one unit, and is rarely joined across units. Three
-companies landed on the family for three different reasons; all three reasons
+read, cached, and written as one unit, and is rarely joined across units. Teams
+landed on the family for three different reasons; all three reasons
 reduce to the same fit test. The family's build case (Espresso) then shows both
 the power and the price of the model, and the quiet returns (T10, T19) show
 what happens when the access shape changes (P2, P15).
@@ -101,8 +101,9 @@ the write and distribution demands had left one node behind. The document
 model was the compromise shape between the two.
 
 The maintenance lesson is P15, and it grades the build a specific way:
-Espresso solved an internal need, was never open-sourced or productized, and
-delivered less than the equivalent 2026 product would, because LinkedIn bears
+Espresso solved an internal need, stayed internal (no open-source release or
+productization on record as of the 2012 post that introduced it), and reads as
+delivering less than the equivalent 2026 product would, because LinkedIn bears
 the full maintenance forever (assessment; P15's build-test dwell continues in
 the Ch. 8 evaluation discussion, alongside Manhattan and Schemaless).
 
@@ -153,8 +154,10 @@ The transition ledger records two exit classes from the family:
 - **T10 (document to key-value, Mixmax).** A small-team exit from self-run
   MongoDB replica sets to managed DynamoDB: "the great migration" paid down
   operational burden, not a data-model mistake ([T10: Mixmax](https://www.mixmax.com/engineering/the-great-migration-from-mongodb-to-dynamodb), FP). The aggregate shape
-  survived the move; the ops wrapper did not (the family lesson of Chapter 9
-  in reverse: self-run document clusters *are* an ops wrapper).
+survived the move (assessment: the post documents the move, not the data
+  model, so the shape-survival reading is the reviewer's inference); the ops
+  burden did not survive (self-running a database cluster is itself an ops
+  burden that the team bought its way out of: the ops-burden driver, Ch. 21).
 - **T19 (document to relational, the "quiet return"): slice (fintech), Infisical, and (R6) Voucherify.** slice moved for ACID over money flows and one unified SQL+JSONB platform ([T19: slice](https://engineering.slice.bank.in/seamlessly-migrating-from-mongodb-to-postgresql-leveraging-data-platform-for-scalable-success-404e2577a47b?gi=dd706d6a831e), FP); Infisical similarly converged on one platform ([T19: Infisical](https://infisical.com/blog/postgresql-migration-technical), FP); Voucherify moved without downtime via side-by-side sync (triggers + AWS DMS in document mode) and cut ~30% of cost, per the author's own cross-post ([T19: Voucherify](https://www.voucherify.io/blog/how-we-moved-from-mongodb-to-postgres-without-downtime), [author cross-post](https://dev.to/msedzielewski/how-we-moved-from-mongodb-to-postgres-without-downtime-and-cut-our-costs-by-30-7fd), FP; the ~30% figure is the author's claim, vendor-adjacent: treat as self-reported).
 
 Two honest boundary conditions on T19, both registered: the returns are
