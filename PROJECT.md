@@ -22,21 +22,19 @@ BOOK-PLAN spec; inputs C01, C02, C03, C47, C37 + R6 counter-weights C56, C61,
 whose SURVEY dossiers (22a/22b) were folded in with 7 new source-notes rows.
 Review passed session 5 with 3 findings fixed (receipts in row 5) and a
 planning gap logged (to-do 5).
-**Chapter 2 AUTHORED + AUTHOR-CHECKED (session 6, 2026-11-25):** manuscript
-master `manuscript/ch02-document.md` ("Document: three reasons, one aggregate";
-C06, C07, C08, C09 + T10/T19 preview; patterns P2/P15; 11/11 figure/quote
-targets in corpus, 9/9 exact URLs in register, live probes passed). Author-check
-= my own battery + probes; the independent Phase 3 review of Ch. 2 is pending.
-**Next unit: Phase 3 adversarial review of Ch. 2** (machine battery + live
-probes, extend-never-rewrite), then Ch. 3 (Key-value: one pattern, three scales).
-Chs. 3+ inputs unchanged from BOOK-PLAN.md.
+**Chapter 2 AUTHORED + AUTHOR-CHECKED (session 6) and REVIEWED (session 7):**
+manuscript master `manuscript/ch02-document.md` ("Document: three reasons, one
+aggregate"; C06, C07, C08, C09 + T10/T19 preview; patterns P2/P15). Review
+passed session 7 with 4 objections resolved (receipts in row 7).
+**Next unit: Ch. 3 (Key-value: one pattern, three scales)**, inputs C11, C12,
+C13, patterns P1/P2/P16, then its Phase 3 review.
 
 **Pause status:** the 2026-10-21 pause was lifted at resume (2026-11-25), session
 4 opened per the repo Cold resume protocol (mirror verified vs repo, HEAD 287f6b3).
 This repo remains self-sufficient for a cold resume from GitHub alone.
 
 ---
-
+\\
 ## Master Pattern Index (P-index)
 
 Each pattern has: the decision rule, the faces (documented cases), and the
@@ -115,7 +113,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 - B. Methodology and the evidence ladder
 - C. Open questions, deferrals, and watch-lists
 
-Status: Ch. 2 AUTHORED + AUTHOR-CHECKED session 6 (adversarial review pending); Chs. 2–23 planned (specs in `manuscript/BOOK-PLAN.md`).
+Status: Ch. 2 REVIEWED session 7 (Phase 3 passed, 4 objections resolved); Chs. 2–23 planned (specs in `manuscript/BOOK-PLAN.md`).
 
 ---
 
@@ -129,7 +127,7 @@ Status: Ch. 2 AUTHORED + AUTHOR-CHECKED session 6 (adversarial review pending); 
 | 4 | 2026-11-25 | Ch. 1: Relational — three ways to stay relational | DONE | Cold resume from GitHub (mirror verified vs repo, HEAD 287f6b3); session-open row pushed (commit 4df2bb2, md5-verified); chapter master `manuscript/ch01-relational.md` (~23 KB): 3 topologies + C56/C61 counter-weights + C37 twin, P4/P6/P7/P8, graded exercises + ◆ diagnostic; SURVEY 22a/22b dossiers + 7 source-notes rows folded; all pushes byte-verified. Phase 3 review pending |
 | 5 | 2026-11-25 | Phase 3 adversarial review of Ch. 1 | DONE | Two-expert review of `manuscript/ch01-relational.md`, fresh machine battery + live-source probes. Findings: O1 fleet-figures cite corrected to the MySQL 8.0 post (live-verified); O2 first-resharding quote misattributed to the Vitess history page: primary found (Percona interview, quote verified live), REGISTER C47 amended, chapter/recanvas fixed; O3 C53→"Chapter 18" cross-pin wrong: un-pinned, planning gap logged (to-do 5); clean: 17/17 exact URLs in register, 14/14 register IDs, 9/9 pattern IDs, 24/24 figure/quote targets in corpus, exercise/grading census ✓, live probes: Craver 2013, OpenAI, Zerodha/FOSS/DungBeetle, Uber MVCC, GitHub 8.0 all hit. Chapter status: REVIEWED. |
 | 6 | 2026-11-25 | Ch. 2: Document — three reasons, one aggregate | DONE | Chapter master `manuscript/ch02-document.md` (~18.6 KB): C06/C07/C08 as three reasons + C09 Espresso build-dwell (P15), fit-test table, T10/T19 exits preview (P2), graded exercises + ◆; battery: 10/10 register IDs, 3/3 pattern IDs, 9/9 exact URLs in register, 11/11 figure/quote targets in corpus, markers ✓; live probes: eBay quote, Stripe 99.999, Espresso claims, Sailthru 40 TB/120 nodes verbatim ✓; Mixmax page fetch thin (register-corroborated); Voucherify ~30% figure is the author cross-post's claim: citation extended (URL from register C65), marked self-reported. Next: Phase 3 review of Ch. 2, then Ch. 3 |
-| 7 | 2026-11-25 | Phase 3 adversarial review of Ch. 2 | IN PROGRESS | Skeptic/prover on ch02-document.md; objects under test: O3 three-companies vs four-orgs; O7 absolute never-open-sourced; O11 unsourced aggregate-survival inference; O12 confused Ch. 9 reverse-pin; fresh battery re-run after fixes |
+| 7 | 2026-11-25 | Phase 3 adversarial review of Ch. 2 | DONE | Fresh reviewer battery re-run green (all register IDs valid, 3/3 pattern IDs, all URLs in register, no placeholders/em-dashes). Four objections resolved: O3 wording "Three companies" corrected to "Teams" (four organizations in three reasons); O7 absolute "never open-sourced or productized" softened to "stayed internal, no release or productization on record as of the 2012 post"; O11 aggregate-survival inference in T10 marked as reviewer assessment; O12 "Chapter 9 in reverse" pin replaced with the ops-burden driver (Ch. 21). Three edit-tool slips during fixing caught and repaired before push. Chapter status: REVIEWED |
 
 ## Standing to-do
 
