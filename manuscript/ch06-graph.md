@@ -51,7 +51,8 @@ product, the relationships inside them. ICIJ's data and research unit built
 an indexing layer (Apache Tika for extraction, Solr-backed search front
 ends) and a Neo4j graph as the shared explorer, with Linkurious chosen as the
 visualization layer: "software that allows you to visualize graphs very
-easily" (same source). Consortium head Mar Cabra's verdict quoted by the
+easily" (same source). ICIJ's Data & Research Unit editor Mar Cabra's
+verdict quoted by the
 press: "Neo4j is a revolutionary discovery tool that has transformed our
 investigative journalism process. This simply would not have been possible
 before on this scale. It's magic." ([C20: Computer Weekly](https://www.computerweekly.com/news/450280758/Panama-Papers-revealed-by-graph-database-visualisation-software), press).
