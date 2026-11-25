@@ -16,18 +16,16 @@ planned, with **primary audience: working engineers / architects** — favor
 technical depth (access patterns, operational detail, failure mechanics) over
 executive framing; decision guidance addresses the engineer who runs the system.
 
-**Next unit:** author Chapter 1 (Relational: three ways to stay relational —
-C01, C02, C03, +C47, C37), one working session, ALWAYS-SYNC. R6 enriched the
-Ch. 1 bench: C61 OpenAI and C56 Zerodha are first-party counter-weights to
-"you must shard" (reads scale by replicas and mastery, writes are the honest
-limit — W5); C55 Notion and C54 Figma are the modern sharding-in-place faces
-for Ch. 13.
+**Chapter 1 AUTHORED (session 4, 2026-11-25):** manuscript master added at
+`manuscript/ch01-relational.md` (markdown canvas rendered for reading); scope per
+BOOK-PLAN spec; inputs C01, C02, C03, C47, C37 + R6 counter-weights C56, C61,
+whose SURVEY dossiers (22a/22b) were folded in with 7 new source-notes rows.
+**Next unit: Phase 3 adversarial review of Ch. 1** (two-expert, machine-verified),
+then Ch. 2 authoring. Chs. 2-10 next inputs unchanged from BOOK-PLAN.md.
 
-**Pause status (2026-10-21):** PAUSED at user request after R6 (session 3);
-the author resumes after finishing another book project. This repo is
-self-sufficient for a cold resume from GitHub alone — see the Cold resume
-protocol in `README.md`. On resume: (1) fold R6 cases into `corpus/SURVEY.md`
-dossiers, (2) author Chapter 1.
+**Pause status:** the 2026-10-21 pause was lifted at resume (2026-11-25), session
+4 opened per the repo Cold resume protocol (mirror verified vs repo, HEAD 287f6b3).
+This repo remains self-sufficient for a cold resume from GitHub alone.
 
 ---
 
@@ -109,7 +107,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 - B. Methodology and the evidence ladder
 - C. Open questions, deferrals, and watch-lists
 
-Status: no chapter authored yet. All 23 chapters planned (specs in `manuscript/BOOK-PLAN.md`).
+Status: Ch. 1 AUTHORED session 4 (review pending); Chs. 2–23 planned (specs in `manuscript/BOOK-PLAN.md`).
 
 ---
 
@@ -120,14 +118,14 @@ Status: no chapter authored yet. All 23 chapters planned (specs in `manuscript/B
 | 1 | 2026-10-20/21 | Bootstrap + Phase 1 gate | DONE | Survey R1–R4 complete; register C/T/F built; P-index P1–P20; 23-chapter map; Knowledge topics created; root staging pruned once → masters kept in Knowledge topic, then pushed to repo; scope APPROVED (4 parts / 23 chapters), audience = working engineers/architects |
 | 2 | 2026-10-21 | R5 freshness pass (user-directed) | DONE | 6 new cases (C48–C53), 2 new transitions (T21–T22); W2 refined, W3 substantially resolved, W4 added; honest negatives D6/D7; Ch. 1 inputs verified current; records pushed (ALWAYS-SYNC) |
 | 3 | 2026-10-21 | R6 verification pass (user-directed: compare a third-party report's case list against the corpus; register the misses) | DONE | 13 new cases (C54–C66), 8 new transitions (T23–T30), T19 extended (Voucherify); D8 (Razorpay/Swiggy negatives), W5 (OpenAI write-scaling); Zerodha's three CH stories verified first-party via z-connect; records pushed (ALWAYS-SYNC) |
-| 4 | 2026-11-25 | Ch. 1: Relational — three ways to stay relational | IN PROGRESS | Cold resume from GitHub (mirror verified vs repo, HEAD 287f6b3); inputs: C01, C02, C03, C47, C37 + R6 counter-weights C61, C56; Ch.1 Dossiers for C61/C56 to fold into SURVEY at authoring time |
+| 4 | 2026-11-25 | Ch. 1: Relational — three ways to stay relational | DONE | Cold resume from GitHub (mirror verified vs repo, HEAD 287f6b3); session-open row pushed (commit 4df2bb2, md5-verified); chapter master `manuscript/ch01-relational.md` (~23 KB): 3 topologies + C56/C61 counter-weights + C37 twin, P4/P6/P7/P8, graded exercises + ◆ diagnostic; SURVEY 22a/22b dossiers + 7 source-notes rows folded; all pushes byte-verified. Phase 3 review pending |
 
 ## Standing to-do
 
 1. ~~Push bootstrap to GitHub repo~~ (done, session 1).
 2. ~~Phase 1 scope gate~~ (PASSED, session 1).
-3. Author Ch. 1 (first unit session — currently paused; resume per README cold-resume protocol).
-4. Fold R6 cases (C54–C66, T23–T30) into `corpus/SURVEY.md` dossiers at authoring time.
+3. ~~Author Ch. 1~~ (DONE, session 4; Phase 3 adversarial review is the next unit).
+4. Fold R6 dossiers into `corpus/SURVEY.md` at authoring time (Ch. 1's C56/C61 done as dossiers 22a/22b; the rest pending as their chapters are authored).
 
 ## Quality checklist (per chapter)
 

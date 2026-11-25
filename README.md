@@ -14,14 +14,14 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-10-21)
+## Status (updated 2026-11-25)
 
-**PAUSED at user request after the R6 verification pass (session 3).** The author
-will resume after finishing another book project (the Everyday-Chemistry Atlas).
-**Next unit on resume: Chapter 1** — "Relational: three ways to stay relational"
-(C01, C02, C03, +C47, C37; R6 counter-weights C61 OpenAI, C56 Zerodha; cautionary
-twin C37 Uber). Pending at resume: fold the R6 cases (C54–C66, T23–T30) into the
-`corpus/SURVEY.md` dossiers at authoring time.
+**Resumed 2026-11-25 (session 4). Chapter 1 ("Relational: three ways to stay
+relational") is AUTHORED as `manuscript/ch01-relational.md`; Phase 3 adversarial
+review of Ch. 1 is the next unit, then Chapter 2.** The R6 fold-in of SURVEY
+dossiers proceeds at authoring time (Ch. 1's C56/C61 done as dossiers 22a/22b).
+The 2026-10-21 pause (after the R6 pass, session 3) is lifted; this repo remains
+self-sufficient for a cold resume from GitHub alone.
 
 ## Cold resume protocol (fresh chat, this repo alone)
 
