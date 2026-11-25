@@ -306,6 +306,26 @@ Covered above; it belongs in this pattern too: "several NoSQL technologies, all 
 
 **Verdict (assessment).** Structurally, this is Shopify's pods, Amazon's per-service Dynamo, and Stack Overflow's scale-up combined and miniaturized: instead of distributing one database, *shard the application* and give each shard an embedded database. It is the strongest current answer to the tenancy problem — the shard boundary is the object (chat room, document, tenant), and consistency comes from the single writer, not from Paxos. Watch its limits: per-object storage ceilings make it a per-tenant store, not a global analytics engine.
 
+### 22a. Zerodha — single-node PostgreSQL at ~trillion-row scale (2023–present) *(R6 fold-in, session 4)*
+
+**Context.** India's largest stock broker runs its own infrastructure and is emphatic about its choice: self-hosted PostgreSQL on bare EC2 instances, "not moving out of PostgreSQL" ([Zerodha tech: Working with PostgreSQL](https://zerodha.tech/blog/working-with-postgresql/)).
+
+**Choice.** One node per database, mastery overbars: connection discipline, hardware tuned to the workload, and an ephemeral result-cache layer (DungBeetle, open-sourced) that creates ~7 million Postgres tables per day on a dedicated hot-cache instance to serve reports queried from a ~trillion-row database ([Zerodha tech: Working with PostgreSQL](https://zerodha.tech/blog/working-with-postgresql/), [DungBeetle](https://github.com/zerodha/dungbeetle), [FOSS United talk abstract](https://platform.fossunited.org/c/indiafoss/indiafoss24/cfp/oqtefvp0pj)).
+
+**What happened.** Scale-up worked far past the point most teams shard. When one 20 TB database finally needed sharding, it was sharded "in two hours with zero schema changes" — the maturity dividend of deep mastery plus the engine's own tooling (FP).
+
+**Verdict (assessment).** Stack Overflow's kin at Indian-fintech scale, made possible by ops discipline instead of headcount. The DungBeetle pattern is the case where scale problems are outgrown by craft; watch whether it converges into a product (R5 watch W4-adjacent).
+
+### 22b. OpenAI — 800M ChatGPT users on unsharded PostgreSQL (Jan 2026) *(R6 fold-in, session 4)*
+
+**Context.** ChatGPT serves 800M users from one Azure PostgreSQL Flexible Server primary plus nearly 50 read replicas across multiple regions, millions of QPS ([OpenAI: Scaling PostgreSQL](https://openai.com/index/scaling-postgresql/), FP; third-party coverage at PR level: [ByteByteGo](https://blog.bytebytego.com/p/how-openai-scaled-to-800-million), [VentureBeat](https://venturebeat.com/data/how-openai-is-scaling-the-postgresql-database-to-800-million-users)).
+
+**Choice.** Reads scale by replication, not sharding; primary load kept low because a single writer cannot scale writes. One SEV-0 PostgreSQL incident in 12 months: the ImageGen launch, a >10× write surge and 100M new users in one week. Remaining write-heavy workloads are being migrated to sharded systems, and third-party coverage reports a "no new tables in PostgreSQL" rule (watch-list W5).
+
+**Verdict (assessment).** The strongest modern "you may not need to shard yet" datapoint, and the only one that names the wall (writes). Read the "no new tables" line as frontier management reported second-hand, not documented policy.
+
+*R6 fold-in note (session 4, Chapter 1 authoring): cases C54–C66 were registered in R6 without dossiers; dossiers are folded in at authoring time. The two above feed Chapter 1 as the modern counter-weights beside dossier 20; the remaining R6 dossiers fold in as their chapters are authored.*
+
 ---
 
 # Cross-case analysis: what actually drives these decisions
@@ -407,246 +427,3 @@ DoorDash moved off Aurora Postgres because a single-primary write bottleneck "wo
 
 ### In-memory: three deployments, one lifecycle
 
-Netflix's EVCache is a product-grade layer: zone-aware, replicated memcached semantics, 2–9 copies per cluster, "most of the requests are served by the cache" ([Netflix EVCache wiki](https://github.com/Netflix/EVCache/wiki)). Facebook's Memcache is the science: the NSDI'13 paper on arguably the world's largest memcached deployment, engineering consistency, replication and load balancing around a soft-state store that "may lose or evict data without notice" ([USENIX NSDI'13](https://www.usenix.org/conference/nsdi13/technical-sessions/presentation/nishtala)). Twitter's Twemcache is the third datapoint: hundreds of cache servers keeping over 20 TB in memory for 30+ services, ~2 trillion queries a day (over 23M QPS) — a hardened fork of memcached, fronted by the Twemproxy connection-multiplexing proxy ([Twitter Engineering](https://blog.x.com/engineering/en_us/a/2012/caching-with-twemcache)).
-
-**Comparison (assessment).** The three deployments trace the same lifecycle: plain memcached → a hardened fork or wrapper (Twemcache, EVCache) → a proxy layer (Twemproxy). Nobody runs vanilla memcached at these scales; the family's real-world unit is "memcached plus your ops wrapper." The deeper split is who owns correctness: Netflix treats the cache as infrastructure with its own redundancy; Facebook's paper made the *application* own invalidation around a best-effort store. The fit test is unchanged: the authoritative store must survive the cache being empty, and the correctness model must survive it being stale.
-
-### Vector: the index-placement question
-
-turbopuffer is the durable, managed pole: object storage with SSD cache made Readwise's shelved feature shippable — vector search at $20k+/month on incumbent architectures became viable at a fraction ([turbopuffer](https://turbopuffer.com/blog/turbopuffer)) — and Cursor's migration cut search costs ~95% ([Latent Space](https://www.latent.space/p/turbopuffer)). Spotify's Voyager is the stateless pole: an in-memory approximate-nearest-neighbor *library* (HNSW), ~10× faster than Annoy at similar recall, "used extensively in production at Spotify... queried hundreds of millions of times per day," deployed statelessly on Kubernetes to avoid maintaining a stateful database cluster ([Spotify Engineering](https://engineering.atspotify.com/2023/10/introducing-voyager-spotifys-new-nearest-neighbor-search-library), [GitHub](https://github.com/spotify/voyager), [InfoQ](https://www.infoq.com/news/2023/11/spotify-ann-voyager/)).
-
-**Comparison (assessment).** The two 2020s answers diverge on exactly one axis: where the index lives. If vectors are a *feature* of a bigger serving system, a library keeps operations near zero; if retrieval is the *product*, with filtering, hybrid search and durability, a vector engine earns its keep. Both companies independently rejected the heavyweight middle ground — which is the convergence thesis of the companion report showing up in production choices. And the unwind flow is now documented in both directions: Confident AI replaced Pinecone with pgvector and measured better accuracy and QPS on the same compute ([Confident AI](https://www.confident-ai.com/blog/why-we-replaced-pinecone-with-pgvector)), while Pinecone's own blog documents users arriving after hitting pgvector's limits ([Pinecone](https://www.pinecone.io/blog/pinecone-vs-pgvector/)) — the family's honest verdict is workload-dependence, not direction.
-
-# The transition matrix: documented moves between families
-
-*Which moves between families have strong public cases, and which don't. "How it went" is sourced; where it is my judgement, it says (assessment).*
-
-| From → To | Case | What triggered it | How it went |
-|---|---|---|---|
-| Relational → key-value | Amazon Financial Ledger: Oracle → DynamoDB (dossier 2) | 120 TB ledger; cost, latency | 70% cost cut, 40% latency cut; savepoint friction in the wider Oracle exit |
-| Relational → wide-column | Netflix: Oracle → Cassandra (dossier 3); Twitter: MySQL → Cassandra for timelines (dossier 12) | the 2008 shipping-stopping outage; timeline write scale | both right for their time; both later left Cassandra-class ops behind |
-| Relational → distributed SQL | DoorDash: Aurora Postgres → CockroachDB | single-primary write bottleneck at weekly peaks; ≤500 GB Postgres table guidance | three cutover attempts; final cutover "lossless"; alert volume fell despite dozens more clusters ([DoorDash](https://careersatdoordash.com/blog/how-we-scaled-new-verticals-fulfillment-backend-with-cockroachdb/), [The New Stack](https://thenewstack.io/how-doordash-migrated-from-aurora-postgres-to-cockroachdb/)) |
-| Sharded relational → distributed SQL | Google: sharded MySQL → F1/Spanner (dossier 10); Pinterest: NoSQL/HBase → TiDB (dossier 9) | "never reshard again"; HBase ops burden | gold standard; and the most honest public re-evaluation |
-| Postgres-based OLAP → columnar | Cloudflare: CitusDB → ClickHouse | analytics at 6M req/s outgrew the Postgres pipeline | exemplary — and still produced the billing regression years later (post-mortem 30) |
-| Search engine → columnar | Cloudflare: Elasticsearch → ClickHouse (logs) | log volume and cost; immutable data fits columnar | "much smaller" cluster ([Cloudflare blog](https://blog.cloudflare.com/log-analytics-using-clickhouse/)) |
-| Wide-column → wide-column | Discord: Cassandra → ScyllaDB (dossier 13) | GC pauses, hot partitions, node count | exemplary: 177 → 72 nodes, 3 months → 9 days |
-| Wide-column → LSM-under-MySQL | Facebook Messenger: HBase → MyRocks | operating the HBase stack | exemplary ([VLDB 2020](https://www.vldb.org/pvldb/vol13/p3217-matsunobu.pdf)) |
-| Wide-column → transactional KV | Apple: Cassandra → FoundationDB (reported) | iCloud/CloudKit scale and transactional needs | press-reported since 2015; Apple still ships Cassandra patches — treat as direction, not completed fact ([The Dulin Report](https://thedulinreport.com/2015/04/23/apple-is-or-was-the-biggest-user-of-apache-cassandra/)) |
-| Document → key-value | Mixmax: MongoDB → DynamoDB | ops burden of self-run replica sets | clean and well-documented at small scale ([Mixmax](https://www.mixmax.com/engineering/the-great-migration-from-mongodb-to-dynamodb)) |
-| RDBMS → RDBMS | Uber: Postgres → MySQL (dossier 14) | write-amplification claims + team skill | outcome fine; the published justification aged badly |
-| Managed object storage → own | Dropbox: S3 → Magic Pocket (dossier 16) | cost at exabyte scale | right at their scale; deliberately reversible |
-| Time-series → back again | NexusTrade: MongoDB → TimescaleDB → MongoDB | "purpose-built" performance assumption | failed within two weeks; reversed, ending cheaper than before (post-mortem 31) |
-| Search/vector → object-storage-first vector | Cursor → turbopuffer; Readwise shelved-then-shipped | vector storage would cost 4× the entire relational bill | ~95% cost cut; feature viability restored ([turbopuffer](https://turbopuffer.com/blog/turbopuffer), [Latent Space](https://www.latent.space/p/turbopuffer)) |
-| Document → wide-column | Discord: MongoDB → Cassandra for messages (dossier 13) | messages needed scalable linear writes | worked for six years until Cassandra's GC pain forced the ScyllaDB move |
-| Engine swap *inside* a wide-column engine | Instagram: "Rocksandra" — RocksDB storage engine inside Cassandra ([The New Stack](https://thenewstack.io/instagram-supercharges-cassandra-pluggable-rocksdb-storage-engine/)) | JVM GC limits at feed scale | same-protocol engine transplant — MyRocks' pattern inside a NoSQL engine |
-| Metrics stack → own time-series platform | Uber: Graphite/Whisper → M3; Netflix: Epic → Atlas | cardinality explosion at scale | both built and open-sourced; both then had to rebuild the query/alert layer (M3's DAG engine; Atlas streaming eval) |
-| ANN library → ANN library | Spotify: Annoy → Voyager (HNSW) ([Spotify Engineering](https://engineering.atspotify.com/2023/10/introducing-voyager-spotifys-new-nearest-neighbor-search-library)) | Annoy's performance no longer adequate; hnswlib bugs; JVM needs | ~10× faster at similar recall; stateless deployments ([InfoQ](https://www.infoq.com/news/2023/11/spotify-ann-voyager/)) |
-| Document → relational (the "quiet return") | slice (fintech): MongoDB → PostgreSQL; Infisical: MongoDB → PostgreSQL | ACID for money flows; one unified SQL+JSONB platform | first-party returns exist — but only from small/mid-size teams; the big-tech reversal remains undocumented ([slice engineering](https://engineering.slice.bank.in/seamlessly-migrating-from-mongodb-to-postgresql-leveraging-data-platform-for-scalable-success-404e2577a47b?gi=dd706d6a831e), [Infisical](https://infisical.com/blog/postgresql-migration-technical)) |
-| Dedicated vector → engine-embedded (pgvector) | Confident AI: Pinecone → pgvector | fragmented data sources; accuracy + QPS on the same compute | outperformed Pinecone on their workload; the reverse flow is also vendor-documented — Pinecone publishes users arriving after hitting pgvector limits, so this move is genuinely workload-dependent ([Confident AI](https://www.confident-ai.com/blog/why-we-replaced-pinecone-with-pgvector), [Pinecone](https://www.pinecone.io/blog/pinecone-vs-pgvector/)) |
-
-**Comparing within the busiest moves (assessment).** Three clusters of cases are worth reading side by side:
-
-- **Relational → distributed SQL, three eras, three answers.** Google *built* (2012: no product existed), Alibaba *built* (2013–19: peak transaction rates nothing procurable could meet), DoorDash and Pinterest *bought* (2022–23: converged products exist). The same requirement set — transactions plus horizontal scale — produced two builds and two purchases purely because the market matured between them. This is the decision framework's "re-check the market before building" rule, demonstrated chronologically.
-- **The engine-swap twins.** Discord (Cassandra→ScyllaDB), Instagram (Rocksandra inside Cassandra), Facebook (InnoDB→MyRocks under MySQL): all three kept the protocol, schema and operations stack, and replaced only storage internals; all three cite the same motivation class — predictable latency, GC pauses, or space/write amplification; all three kept rollback paths. It is the lowest-blast-radius move in the matrix, and its repeated independent invention is the strongest signal that "swap the engine, keep the database" deserves a place in every team's option set.
-- **The build-your-time-series twins.** Uber's M3 and Netflix's Atlas both replaced Graphite/Epic-class systems, both open-sourced, and both then discovered the *second* mountain: the query and alerting layer, which is where M3 built a DAG query engine and Netflix moved alerting to streaming evaluation after the 45-minute-late-alerts incident. Compare with the one small-scale case in the corpus (NexusTrade, post-mortem 31): the same family punishes the buyer who over-scales and the builder who under-scales.
-
-**The gaps (assessment).** Both gaps flagged earlier are now *partially* filled — with honest scale caveats. Document → relational returns are now first-party documented, but only by small and mid-size teams (slice, Infisical): the big-tech reversal remains undocumented, which is itself the finding — the survivors who blog are the ones whose return was cheap enough to survive blogging. The vector unwind is documented in both directions: Confident AI moved Pinecone → pgvector and reports better accuracy and QPS on the same compute ([Confident AI](https://www.confident-ai.com/blog/why-we-replaced-pinecone-with-pgvector)); press reporting cites 40–60% cost reductions for Pinecone → pgvector at 10–100M vectors ([Java Code Geeks](https://www.javacodegeeks.com/2026/05/vector-databases-when-pgvector-beats-pinecone-and-when-it-doesnt.html)); and Pinecone's own engineering blog documents the counter-flow of users arriving *from* pgvector ([Pinecone](https://www.pinecone.io/blog/pinecone-vs-pgvector/)). The honest verdict: this move is genuinely workload-dependent, not directional. What remains missing from the public record: a first-party, large-scale (100M+ vector) unwind of a dedicated vector store back into an embedded engine — watch-list.
-
-# Mistakes and post-mortems: what the failures teach
-
-*The brief said it plainly: we learn from mistakes. Every case below is real and sourced; the categories (wrong choice, wrong transition, wrong implementation, wrong operations) are mine, and each entry ends with the transferable lesson.*
-
-### 23. Foursquare — the shard nobody was watching (2010) — wrong implementation
-
-**What happened.** Foursquare's MongoDB check-ins database went down for 11 hours. One shard had grown far larger than the other, the working set no longer fit in RAM, and — the detail that made the case canonical — adding a third shard did not free memory, because MongoDB's 4 KB pages held ~300-byte check-in documents, so every page fetched from disk carried mostly dead weight ([InfoQ](https://www.infoq.com/news/2010/10/4square_mongodb_outage/), [archived Foursquare blog](https://web.archive.org/web/20131114075609/http://blog.foursquare.com/2010/10/05/so-that-was-a-bummer/), [High Scalability](http://highscalability.com/blog/2010/10/15/troubles-with-sharding-what-can-we-learn-from-the-foursquare.html)). The team's post-mortem thread walks the sequence in detail ([mongodb-user Google Group](https://groups.google.com/g/mongodb-user/c/UoqU8ofp134)).
-
-**Why it matters here.** Foursquare had moved to MongoDB *from* PostgreSQL — their engineering lead's own later account ([Hacker News](https://news.ycombinator.com/item?id=3203006)) — so this is less "wrong engine chosen" than "distribution adopted without the monitoring and capacity discipline distribution requires."
-
-**Lesson.** Shard-level metrics are not optional; the page-size-to-document-size ratio is a storage-design input; and "add a node" is not a capacity plan when the data is unevenly distributed. The engine survived the story; the operational discipline became the industry's.
-
-### 24. GitLab — the backup that never ran (2017) — wrong operations
-
-**What happened.** During a fix for replication lag, an engineer deleted the primary database directory (~300 GB) on the wrong side of the replication pair. The five backup mechanisms then failed one by one: pg_dump backups had been silently failing for weeks (9.2-era binaries against a 9.6 database), and no disk snapshots existed. Six hours of user data (issues, comments) were permanently lost; full service took roughly 18 hours to restore ([GitLab post-mortem](https://about.gitlab.com/blog/gitlab-dot-com-database-incident/), [Availability Digest analysis, PDF](https://www.availabilitydigest.com/public_articles/1204/gitlab.pdf)).
-
-**Lesson.** A backup you have never restored is a hope, not a backup — and one unverified assumption in the chain (here: version-matched backup tooling) invalidates the whole chain. GitLab's response also became the template for post-incident transparency: full timeline, published restoration attempts, blameless process fixes.
-
-### 25. GitHub — 43 seconds of partition, 24 hours of degradation (2018) — wrong failover model
-
-**What happened.** A 43-second network partition between the US East and West coasts triggered MySQL failovers; Orchestrator briefly promoted a new primary on the wrong coast, and the resulting topology routed application traffic across the country. GitHub chose to fail forward — preserving ~30 minutes of West Coast writes — accepting 24h11m of degraded availability ([GitHub post-incident analysis](https://github.blog/news-insights/company-news/oct21-post-incident-analysis/)).
-
-**Lesson.** Failover automation must be tested against partitions, not just dead nodes: split-brain during a *brief* partition is the case the tooling misses. And GitHub's choice is the cleanest public demonstration that consistency vs. availability is a real-time trade with a price on both sides — they paid a day of degraded service to avoid half an hour of data loss, which for a code host is the right call (assessment).
-
-### 26. Danger / T-Mobile Sidekick — no backup at all (2009) — wrong trust
-
-**What happened.** A SAN upgrade corrupted the service's data; roughly 800,000 users lost contacts, calendars and photos. Microsoft's Danger subsidiary had no verified working backup; some data was restored from month-old offsite tapes. The event was called the biggest disaster in the then-young history of cloud computing ([Wikipedia](https://en.wikipedia.org/wiki/2009_Sidekick_data_loss), [Data Center Knowledge](https://www.datacenterknowledge.com/archives/2009/10/10/t-mobile-microsoft-lost-all-the-sidekick-backups)).
-
-**Lesson.** Trusting a platform's or vendor's durability story without a verification path of your own is not a backup strategy. Sidekick is the canonical case that taught consumers that "the cloud" is somebody else's operations.
-
-### 27. Ma.gnolia — the backup was on the same broken stack (2009) — wrong architecture
-
-**What happened.** The social bookmarking service lost all user data when its ~0.5 TB MySQL database corrupted and the backup copies failed with it; the primary and its backups went down together, and user data was never recovered ([WIRED](https://www.wired.com/2009/01/magnolia-suffer/), [Data Center Knowledge](https://www.datacenterknowledge.com/archives/2009/02/19/magnolia-data-is-gone-for-good), [Wikipedia](https://en.wikipedia.org/wiki/Gnolia)).
-
-**Lesson.** Copies on the same engine, same host, or same failure domain are not redundancy. Restore-path diversity — different engine, different site, different failure domain — is the actual deliverable.
-
-### 28. Code Spaces — the backup was inside the blast radius (2014) — wrong security architecture
-
-**What happened.** An attacker gained the AWS console credentials of the code-hosting company and, when staff tried to reclaim control, deleted the EBS snapshots, S3 data and AMIs. The company folded within days. The "backup plan" was real but shared the same single point of compromise as production ([Ars Technica](https://arstechnica.com/information-technology/2014/06/aws-console-breach-leads-to-demise-of-service-with-proven-backup-plan/)).
-
-**Lesson.** Backups must sit outside the compromise domain of production: separate accounts, separate credentials, deletion that requires more than one human or one key. Infrastructure-as-code cuts both ways — automatable creation means automatable destruction.
-
-### 29. AWS S3 — the typo'd runbook (2017) — wrong process controls
-
-**What happened.** A command executed per an established playbook removed far more subsystem servers than intended; the index and placement subsystems fell below safe capacity and S3 in us-east-1 was fully unavailable for roughly four hours, cascading through every service built on it. S&P 500 companies were estimated to have lost ~$150M — and AWS's own status page, hosted on S3, could not update ([AWS post-mortem](https://aws.amazon.com/message/41926/), [NPR](https://www.npr.org/sections/thetwo-way/2017/03/03/518322734/amazon-and-the-150-million-typo)).
-
-**Lesson.** Trusted runbooks are code and need the same guardrails: rate limits, safety interlocks, re-validation after every change. Status pages must live outside the system they monitor — an incident-communication single point of failure compounds every other failure.
-
-### 30. Cloudflare — the migration regression that hid itself (2025) — wrong verification layer
-
-**What happened.** After a ClickHouse migration, the daily aggregation jobs that produce Cloudflare's bills slowed dramatically — while I/O, memory, rows scanned and parts read all looked normal. The bottleneck turned out to be lock contention inside ClickHouse's query planner, invisible in the usual hardware metrics; Cloudflare diagnosed it and contributed fixes upstream ([Cloudflare blog](https://blog.cloudflare.com/clickhouse-query-plan-contention/)).
-
-**Lesson.** Post-migration verification must profile the *new engine's* internals, not just the workload's hardware counters: the bottleneck moves to the layer nobody was watching. The exemplary part is the response — root-cause to the lock, patch upstream, then run the table migration with Merge tables so old and new coexist during the transition.
-
-### 31. NexusTrade — the two-week round trip (2025) — wrong transition
-
-**What happened.** A solo-built trading platform migrated its historical backtest data from MongoDB to TimescaleDB on the assumption that a "purpose-built" time-series database must be faster. Continuous aggregates and columnar compression — the headline features — fought the workload instead, and the author migrated back within two weeks, this time to MongoDB's native time-series collections (which they had not known existed), ending cheaper than before ([NexusTrade](https://nexustrade.io/blog/i-went-through-hell-and-back-migrating-to-timescaledb-i-didnt-last-two-weeks-20251003)).
-
-**Lesson.** "Purpose-built" is marketing until measured on your own queries — and the engine's headline features can be exactly what the workload cannot afford. The recovery was possible only because the old path was kept intact: the same reversibility rule the big migrations obey. The report is unusually honest about a failure most would never publish, which is exactly why it belongs here.
-
-### The pattern across all failures (assessment)
-
-- **Half the catastrophic cases are backup failures, not database failures** (GitLab, Sidekick, Ma.gnolia, Code Spaces). Backup architecture deserves the same rigor as schema design: independent failure domains, restore-tested, deletion-protected.
-- **Distribution creates failure modes that scale-up systems never had.** Unmonitored shard growth (Foursquare) and failover split-brain (GitHub) are *categories*, not one-offs; adopting distribution means adopting its failure model.
-- **Migrations regress in the unprofiled layer** (Cloudflare): budget for post-cutover profiling with the new engine's own tooling, not the old dashboards.
-- **Wrong transitions are survivable only with reversibility preserved** (NexusTrade, plus Dropbox's bidirectional replication, MyRocks' InnoDB rollback replicas, Slack's read-diffing). Every case in this report that kept a way home either used it or was glad it existed.
-- **The mistakes already inside the dossiers are the same species:** Slack's workspace-per-shard key (design), Uber's engine-blaming justification (communication), Pinterest's technologies that "broke catastrophically" (choice), Netflix's 2008 single box (architecture), Amazon's savepoint timeouts (implementation). Storage engineering's failure modes are a small set wearing different logos.
-
-# Open questions
-
-- **Unaudited figures.** Cost reductions (Amazon's "70%", Financial Ledger claims) are vendor-reported; no case publishes a like-for-like TCO.
-- **Post-migration drift.** Several architectures have evolved since their canonical blog post (Netflix's stack today, Twitter post-2022, Uber's current Schemaless status); current-state claims here stop at the cited dates.
-- **Undisclosed motives.** License pressure (Amazon, Alibaba) and vendor rivalry color the public record; the technical record cannot be fully separated from the commercial one.
-- **Survivor gap.** Failed migrations are rarely blogged; the success-shaped sample overstates the ease of e.g. Oracle exits (Amazon's savepoint timeouts are a rare public crack).
-- **The NewSQL wave is young.** Pinterest's TiDB adoption is the largest public "regret the build, buy the product" datapoint; its long-term outcome is not yet written.
-
-# Recommendations / next steps
-
-1. **If choosing today**: default to a converged engine (Postgres/pgvector-class, MySQL/Vitess, or a distributed SQL product if multi-region transactions are real requirements) and reserve NoSQL for genuinely availability-first, query-simple workloads.
-2. **If migrating**: copy the playbook above; budget as much for the diff/verification tooling as for the data move itself — the cases agree this is where migrations die.
-3. **If pressured to build**: require a written ops-cost forecast at 3× current scale (the Twitter/Discord test), an open-source or platform plan (the Vitess/MyRocks test), and an engine-agnostic abstraction layer (the Panda test).
-4. **Deeper reading in order**: the Dynamo paper (still the best statement of availability-first design), the F1/Spanner papers (consistency-first), Discord's trillions-of-messages post (migration craft), and Nick Craver's Stack Overflow series (restraint).
-
----
-
-# Source notes
-
-| Source | Credibility | Last updated |
-|---|---|---|
-| [DeCandia et al., "Dynamo: Amazon's Highly Available Key-value Store" (SOSP 2007 PDF)](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf) | 5/5 | Oct 2007 |
-| [AWS News Blog — Migration Complete: Amazon's final Oracle database](https://aws.amazon.com/blogs/aws/migration-complete-amazons-consumer-business-just-turned-off-its-final-oracle-database/) | 5/5 | Oct 2019 |
-| [CIO Dive — Amazon completes Oracle migration](https://www.ciodive.com/news/amazon-kisses-last-oracle-database-goodbye-completes-years-long-migration/565073/) | 3/5 | Oct 2019 |
-| [InfoWorld — Netflix embraces NoSQL in the cloud](https://www.infoworld.com/article/2171162/big-movies-big-data-netflix-embraces-nosql-in-the-cloud.html) | 3/5 | 2011 |
-| [SlideShare — Migrating Netflix from Datacenter Oracle to Global Cassandra](https://www.slideshare.net/slideshow/migrating-netflix-from-oracle-to-global-cassandra/8600029) | 3/5 | - |
-| [SlideShare — Cassandra from the trenches: migrating Netflix](https://www.slideshare.net/jasedbrown/cassandra-from-the-trenches-migrating-netflix-10586521) | 3/5 | - |
-| [Twitter Engineering — Manhattan, our real-time multi-tenant distributed database](https://blog.x.com/engineering/en_us/a/2014/manhattan-our-real-time-multi-tenant-distributed-database-for-twitter-scale) | 4/5 | 2014 |
-| [Twitter Engineering — Strong consistency in Manhattan](https://blog.x.com/engineering/en_us/a/2016/strong-consistency-in-manhattan) | 4/5 | 2016 |
-| [InfoQ — Twitter's Manhattan](https://www.infoq.com/news/2014/05/twitters-manhattan/) | 4/5 | 2014 |
-| [Yugabyte — The distributed database behind Twitter (2020 summit recap)](https://www.yugabyte.com/blog/recap-the-distributed-database-behind-twitter/) | 3/5 | 2020 |
-| [Vitess docs — History](https://vitess.io/docs/21.0/overview/history/) | 5/5 | - |
-| [Slack Engineering — Scaling datastores at Slack with Vitess](https://slack.engineering/scaling-datastores-at-slack-with-vitess/) | 5/5 | 2020 |
-| [Hacker News — discussion of Slack's Vitess migration ("original sin" comment)](https://news.ycombinator.com/item?id=27199229) | 2/5 | 2021 |
-| [GitHub Blog — Partitioning GitHub's relational databases to handle scale](https://github.blog/engineering/infrastructure/partitioning-githubs-relational-databases-scale/) | 5/5 | 2021 |
-| [GitHub Blog — Upgrading GitHub.com to MySQL 8.0](https://github.blog/engineering/infrastructure/upgrading-github-com-to-mysql-8-0/) | 5/5 | 2023 |
-| [Shopify Engineering — Shard balancing at terabyte scale](https://shopify.engineering/mysql-database-shard-balancing-terabyte-scale) | 5/5 | - |
-| [Instagram Engineering — Sharding & IDs at Instagram](https://instagram-engineering.com/sharding-ids-at-instagram-1cf5a71e5a5c) | 5/5 | Dec 2011 |
-| [Pinterest Engineering — Sharding Pinterest: how we scaled our MySQL fleet](https://medium.com/pinterest-engineering/sharding-pinterest-how-we-scaled-our-mysql-fleet-3f341e96ca6f) | 5/5 | - |
-| [Pinterest Engineering — TiDB adoption at Pinterest](https://medium.com/pinterest-engineering/tidb-adoption-at-pinterest-1130ab787a10) | 5/5 | - |
-| [Google Cloud Blog — Reflecting on the Spanner paper](https://cloud.google.com/blog/products/databases/reflecting-on-spanner-papers-sigops-hall-of-fame-award) | 5/5 | 2022 |
-| [the morning paper — Spanner: Google's globally-distributed database](https://blog.acolyer.org/2015/01/08/spanner-googles-globally-distributed-database/) | 4/5 | 2015 |
-| [Murat Demirbas — F1: a distributed SQL database that scales](http://muratbuffalo.blogspot.com/2023/07/f1-distributed-sql-database-that-scales.html) | 3/5 | Jul 2023 |
-| [Database of Databases — OceanBase](https://dbdb.io/db/oceanbase/revisions/24) | 3/5 | - |
-| [Alibaba Cloud — ApsaraDB for OceanBase case studies](https://www.alibabacloud.com/help/en/apsaradb-for-oceanbase/latest/case-studies) | 4/5 | - |
-| [Uber Engineering — Why Uber Engineering switched from Postgres to MySQL](https://www.uber.com/us/en/blog/postgres-to-mysql-migration/) | 5/5 | 2016 |
-| [Ayende — re: Why Uber Engineering switched from Postgres to MySQL](https://ayende.com/blog/175137/re-why-uber-engineering-switched-from-postgres-to-mysql) | 3/5 | 2016 |
-| [Discord — How Discord stores trillions of messages](https://discord.com/blog/how-discord-stores-trillions-of-messages) | 5/5 | 2023 |
-| [InfoQ — Discord migrates trillions of messages from Cassandra to ScyllaDB](https://www.infoq.com/news/2023/06/discord-cassandra-scylladb/) | 4/5 | Jun 2023 |
-| [Dropbox Tech — Scaling to exabytes and beyond (Magic Pocket)](https://dropbox.tech/infrastructure/magic-pocket-infrastructure) | 5/5 | Mar 2016 |
-| [Dropbox Tech — Inside the Magic Pocket](https://dropbox.tech/infrastructure/inside-the-magic-pocket) | 5/5 | - |
-| [InfoQ — Dropbox develops Magic Pocket, moves away from AWS](https://www.infoq.com/news/2016/03/Dropbox-AWS/) | 4/5 | Mar 2016 |
-| [Data Center Dynamics — How Dropbox pulled off its hybrid cloud transition](https://www.datacenterdynamics.com/en/analysis/how-dropbox-pulled-off-its-hybrid-cloud-transition/) | 3/5 | - |
-| [Dropbox Tech — (Re)Introducing Edgestore](https://dropbox.tech/infrastructure/reintroducing-edgestore) | 5/5 | - |
-| [Dropbox Tech — Future-proofing our metadata stack with Panda](https://dropbox.tech/infrastructure/panda-metadata-stack-petabyte-scale-transactional-key-value-store) | 5/5 | - |
-| [Dropbox Tech — Alki, or how we learned to stop worrying and love cold metadata](https://dropbox.tech/infrastructure/alki--or-how-we-learned-to-stop-worrying-and-love-cold-metadata) | 5/5 | - |
-| [Dropbox Tech — Cross-shard transactions at 10M requests per second](https://dropbox.tech/infrastructure/cross-shard-transactions-at-10-million-requests-per-second) | 5/5 | - |
-| [Meta Engineering — MyRocks: a space- and write-optimized MySQL database](https://engineering.fb.com/2016/08/31/core-infra/myrocks-a-space-and-write-optimized-mysql-database/) | 5/5 | Aug 2016 |
-| [Meta Engineering — Migrating a database from InnoDB to MyRocks](https://engineering.fb.com/2017/09/25/core-infra/migrating-a-database-from-innodb-to-myrocks/) | 5/5 | Sep 2017 |
-| [VLDB 2020 — MyRocks: LSM-tree database storage engine serving Facebook's social graph](https://www.vldb.org/pvldb/vol13/p3217-matsunobu.pdf) | 5/5 | 2020 |
-| [LinkedIn Engineering — Introducing Espresso](https://engineering.linkedin.com/espresso/introducing-espresso-linkedins-hot-new-distributed-document-store) | 5/5 | - |
-| [Nick Craver — What it takes to run Stack Overflow (2013)](https://nickcraver.com/blog/2013/11/22/what-it-takes-to-run-stack-overflow/) | 5/5 | Nov 2013 |
-| [Nick Craver — Stack Overflow: The Architecture, 2016 edition](https://nickcraver.com/blog/2016/02/17/stack-overflow-the-architecture-2016-edition/) | 5/5 | Feb 2016 |
-| [37signals dev — Recordables / delegated types (majestic monolith discussion)](https://dev.37signals.com/the-rails-delegated-type-pattern/) | 4/5 | - |
-| [Cloudflare Blog — Zero-latency SQLite storage in every Durable Object](https://blog.cloudflare.com/sqlite-in-durable-objects/) | 5/5 | - |
-| [Cloudflare Docs — Durable Objects overview](https://developers.cloudflare.com/durable-objects/) | 5/5 | - |
-| [Stripe — How Stripe's document databases supported 99.999% uptime with zero-downtime data migrations](https://stripe.dev/blog/how-stripes-document-databases-supported-99.999-uptime-with-zero-downtime-data-migrations) | 5/5 | - |
-| [Mixmax — The Great Migration: from MongoDB to DynamoDB](https://www.mixmax.com/engineering/the-great-migration-from-mongodb-to-dynamodb) | 4/5 | - |
-| [PlanetScale — Horizontal sharding for MySQL made easy (Vitess adopter context)](https://planetscale.com/blog/horizontal-sharding-for-mysql-made-easy) | 3/5 | 2020 |
-| [InfoQ — Foursquare's 11-hour MongoDB outage](https://www.infoq.com/news/2010/10/4square_mongodb_outage/) | 4/5 | Oct 2010 |
-| [Foursquare blog (archived) — "So that was a bummer"](https://web.archive.org/web/20131114075609/http://blog.foursquare.com/2010/10/05/so-that-was-a-bummer/) | 4/5 | Oct 2010 |
-| [High Scalability — Troubles with sharding: the Foursquare lesson](http://highscalability.com/blog/2010/10/15/troubles-with-sharding-what-can-we-learn-from-the-foursquare.html) | 3/5 | Oct 2010 |
-| [mongodb-user Google Group — Foursquare outage post-mortem thread](https://groups.google.com/g/mongodb-user/c/UoqU8ofp134) | 3/5 | Oct 2010 |
-| [Hacker News — Foursquare engineering lead on the PostgreSQL→MongoDB move](https://news.ycombinator.com/item?id=3203006) | 2/5 | 2012 |
-| [GitLab — post-mortem: the gitlab.com database incident](https://about.gitlab.com/blog/gitlab-dot-com-database-incident/) | 5/5 | Feb 2017 |
-| [Availability Digest — GitLab incident analysis (PDF)](https://www.availabilitydigest.com/public_articles/1204/gitlab.pdf) | 3/5 | 2017 |
-| [GitHub Blog — October 21, 2018 post-incident analysis](https://github.blog/news-insights/company-news/oct21-post-incident-analysis/) | 5/5 | 2018 |
-| [Wikipedia — 2009 Sidekick data loss](https://en.wikipedia.org/wiki/2009_Sidekick_data_loss) | 3/5 | - |
-| [Data Center Knowledge — T-Mobile/Microsoft lost all the Sidekick backups](https://www.datacenterknowledge.com/archives/2009/10/10/t-mobile-microsoft-lost-all-the-sidekick-backups) | 3/5 | Oct 2009 |
-| [WIRED — Ma.gnolia suffers catastrophic data loss](https://www.wired.com/2009/01/magnolia-suffer/) | 3/5 | Jan 2009 |
-| [Data Center Knowledge — Ma.gnolia data is gone for good](https://www.datacenterknowledge.com/archives/2009/02/19/magnolia-data-is-gone-for-good) | 3/5 | Feb 2009 |
-| [Wikipedia — Ma.gnolia](https://en.wikipedia.org/wiki/Gnolia) | 2/5 | - |
-| [Ars Technica — AWS console breach leads to demise of Code Spaces](https://arstechnica.com/information-technology/2014/06/aws-console-breach-leads-to-demise-of-service-with-proven-backup-plan/) | 4/5 | Jun 2014 |
-| [AWS — Summary of the Amazon S3 service disruption (message 41926)](https://aws.amazon.com/message/41926/) | 5/5 | Feb 2017 |
-| [NPR — Amazon and the $150 million typo](https://www.npr.org/sections/thetwo-way/2017/03/03/518322734/amazon-and-the-150-million-typo) | 3/5 | Mar 2017 |
-| [DevPro Journal — Apache Cassandra 4.0 release (largest-deployment figures)](https://www.devprojournal.com/technology-trends/open-source/whats-included-in-the-cassandra-4-0-release-2/) | 3/5 | Jul 2021 |
-| [IT Brief — Cassandra 4.0, used by Apple, Netflix, Amazon and thousands more](https://itbrief.co.nz/story/apache-cassandra-version-4-0-released-used-by-apple-netflix-amazon-and-thousands-more) | 2/5 | Jul 2021 |
-| [Engineers' Codex — How Apple built iCloud to store billions of databases](https://read.engineerscodex.com/p/how-apple-built-icloud-to-store-billions) | 2/5 | - |
-| [The Dulin Report — Apple is (or was) the biggest user of Apache Cassandra](https://thedulinreport.com/2015/04/23/apple-is-or-was-the-biggest-user-of-apache-cassandra/) | 2/5 | Apr 2015 |
-| [DoorDash — How we scaled New Verticals Fulfillment Backend with CockroachDB](https://careersatdoordash.com/blog/how-we-scaled-new-verticals-fulfillment-backend-with-cockroachdb/) | 5/5 | 2024 |
-| [The New Stack — How DoorDash migrated from Aurora Postgres to CockroachDB](https://thenewstack.io/how-doordash-migrated-from-aurora-postgres-to-cockroachdb/) | 3/5 | Dec 2023 |
-| [Cockroach Labs — Why DoorDash migrated from Aurora Postgres to CockroachDB (vendor)](https://www.cockroachlabs.com/blog/aurora-postgres-to-cockroachdb/) | 3/5 | 2023 |
-| [Cloudflare Blog — HTTP Analytics for 6M requests per second using ClickHouse](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/) | 5/5 | 2019 |
-| [Cloudflare Blog — Log analytics using ClickHouse](https://blog.cloudflare.com/log-analytics-using-clickhouse/) | 5/5 | 2020 |
-| [Cloudflare Blog — Our billing pipeline was suddenly slow (ClickHouse query-plan contention)](https://blog.cloudflare.com/clickhouse-query-plan-contention/) | 5/5 | 2025 |
-| [ClickHouse Blog — Cloudflare case: analytics at quadrillion-row scale (vendor)](https://clickhouse.com/blog/cloudflare) | 3/5 | 2025 |
-| [Netflix — EVCache wiki (distributed memcached-based caching)](https://github.com/Netflix/EVCache/wiki) | 4/5 | - |
-| [Computer Weekly — Panama Papers revealed by graph database software](https://www.computerweekly.com/news/450280758/Panama-Papers-revealed-by-graph-database-visualisation-software) | 4/5 | 2016 |
-| [Neo4j Blog — How the ICIJ used Neo4j to unravel the Panama Papers (vendor)](https://neo4j.com/blog/cypher-and-gql/icij-neo4j-unravel-panama-papers/) | 3/5 | 2016 |
-| [Neo4j case study — Zurich Insurance fraud investigation, PDF (vendor)](https://go.neo4j.com/rs/710-RRC-335/images/Neo4j-Case-Study-Zurich-EN-US.pdf) | 3/5 | - |
-| [Uber Engineering — M3: large-scale metrics platform for Prometheus](https://www.uber.com/us/en/blog/m3/) | 5/5 | 2018 |
-| [Uber Engineering — The Billion Data Point Challenge](https://www.uber.com/us/en/blog/billion-data-point-challenge/) | 5/5 | 2019 |
-| [Packt — Uber open-sources its metrics platform M3](https://www.packtpub.com/en-in/learning/tech-news/uber-open-sources-its-large-scale-metrics-platform-m3-for-prometheus) | 2/5 | 2018 |
-| [turbopuffer — Inaugural blog post (Readwise cost case, architecture)](https://turbopuffer.com/blog/turbopuffer) | 4/5 | 2023 |
-| [AI Engineer — turbopuffer profile (customers, scale figures)](https://ai.engineer/orgs/turbopuffer) | 3/5 | 2026 |
-| [Latent Space — turbopuffer: retrieval after RAG (Cursor 95% cost cut)](https://www.latent.space/p/turbopuffer) | 3/5 | 2025 |
-| [MongoDB Blog — eBay: mission-critical multi-data-center applications (vendor)](https://www.mongodb.com/blog/post/ebay-building-mission-critical-multi-data-center-applications-with-mongodb) | 3/5 | - |
-| [NexusTrade — I went through hell and back migrating to TimescaleDB](https://nexustrade.io/blog/i-went-through-hell-and-back-migrating-to-timescaledb-i-didnt-last-two-weeks-20251003) | 2/5 | Oct 2025 |
-| [AWS / YouTube — Duolingo stores 31 billion items on Amazon DynamoDB (Karin Tsai, Duolingo)](https://www.youtube.com/watch?v=fhnAvn2YxZA) | 3/5 | - |
-| [Duolingo Blog — Reducing cloud spending (DynamoDB cost tuning)](https://blog.duolingo.com/reducing-cloud-spending/) | 4/5 | 2024 |
-| [MongoDB — MongoDB at scale (EA, Sailthru; vendor)](https://www.mongodb.com/products/capabilities/mongodb-scale) | 2/5 | - |
-| [ClickHouse Blog — Large-scale financial market analytics with ClickHouse (Bloomberg meetup report)](https://clickhouse.com/blog/nyc-meetup-report-large-scale-financial-market-analytics-with-clickhouse) | 3/5 | Dec 2022 |
-| [Wikipedia — ClickHouse (CERN LHCb deployment)](https://en.wikipedia.org/wiki/ClickHouse) | 3/5 | - |
-| [The New Stack — Instagram supercharges Cassandra with a pluggable RocksDB storage engine](https://thenewstack.io/instagram-supercharges-cassandra-pluggable-rocksdb-storage-engine/) | 3/5 | 2018 |
-| [Netflix TechBlog — Introducing Atlas: Netflix's primary telemetry platform](http://techblog.netflix.com/2014/12/introducing-atlas-netflixs-primary.html) | 5/5 | Dec 2014 |
-| [Netflix TechBlog — Improved alerting with Atlas Streaming Eval](https://netflixtechblog.com/improved-alerting-with-atlas-streaming-eval-e691c60dc61e) | 5/5 | - |
-| [Atlas docs — Overview (Epic history)](https://netflix.github.io/atlas-docs/overview/) | 4/5 | - |
-| [USENIX NSDI '13 — Scaling Memcache at Facebook](https://www.usenix.org/conference/nsdi13/technical-sessions/presentation/nishtala) | 5/5 | 2013 |
-| [Spotify Engineering — Introducing Voyager: Spotify's new nearest-neighbor search library](https://engineering.atspotify.com/2023/10/introducing-voyager-spotifys-new-nearest-neighbor-search-library) | 5/5 | Oct 2023 |
-| [Spotify — Voyager (GitHub: production usage figures)](https://github.com/spotify/voyager) | 5/5 | - |
-| [InfoQ — Spotify open-sources Voyager nearest-neighbor search library](https://www.infoq.com/news/2023/11/spotify-ann-voyager/) | 4/5 | Nov 2023 |
-| [Neo4j Blog — Machine learning on graphs: interview with eBay's Ajinkya Kale (vendor)](https://neo4j.com/blog/knowledge-graph/machine-learning-on-graphs-ajinkya-kale-senior-applied-researcher-ebay/) | 2/5 | - |
-| [Twitter Engineering — Caching with Twemcache](https://blog.x.com/engineering/en_us/a/2012/caching-with-twemcache) | 5/5 | 2012 |
-| [slice engineering — Freaking hard migration from MongoDB to PostgreSQL](https://engineering.slice.bank.in/seamlessly-migrating-from-mongodb-to-postgresql-leveraging-data-platform-for-scalable-success-404e2577a47b?gi=dd706d6a831e) | 4/5 | - |
-| [Infisical — The Great Migration from MongoDB to PostgreSQL](https://infisical.com/blog/postgresql-migration-technical) | 4/5 | - |
-| [Confident AI — Why we replaced Pinecone with PGVector](https://www.confident-ai.com/blog/why-we-replaced-pinecone-with-pgvector) | 3/5 | - |
-| [Pinecone — Pinecone vs. Postgres pgvector (vendor)](https://www.pinecone.io/blog/pinecone-vs-pgvector/) | 2/5 | - |
-| [Java Code Geeks — When pgvector beats Pinecone (and when it doesn't)](https://www.javacodegeeks.com/2026/05/vector-databases-when-pgvector-beats-pinecone-and-when-it-doesnt.html) | 2/5 | May 2026 |
-
-**Conflicts and caveats.** Uber's own post and its critics disagree on whether Postgres's engine or Uber's operational inexperience drove the switch; both are cited and the verdict marks the divergence. Amazon's 2019 claims are the vendor's own; CIO Dive's reporting adds the savepoint-timeout frictions. Pinterest's TiDB post evaluates competitors (Vitess, Spanner) in Pinterest's own terms — a one-sided but first-party source. Cloudflare's Durable Objects docs are the vendor's product documentation. Dates marked "-" were not stated on the page. The vendor-published case studies (eBay/MongoDB, Zurich/Neo4j, DoorDash/Cockroach Labs, Cloudflare/ClickHouse, ICIJ's account on Neo4j's blog, turbopuffer's own posts) are marketing-adjacent by nature; the customer-named facts are vendor-reported. Apple's Cassandra→FoundationDB direction is press-reported, not first-party. The Foursquare and NexusTrade accounts are participant self-reports — the most valuable kind for failure analysis, but single-voiced.
