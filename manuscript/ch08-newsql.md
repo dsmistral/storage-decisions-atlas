@@ -85,7 +85,7 @@ is stored in OceanBase, and credits the engine with "lower costs and
 higher scalability" against Oracle ([C28: Alibaba Cloud case studies](https://www.alibabacloud.com/help/en/apsaradb-for-oceanbase/latest/case-studies),
 FP). The survey's dossier adds an honest assessment: early OceanBase was
 meaningfully slower per query than Oracle, a roughly 10% gap the team took
-on deliberately (SURVEY dossier, graded as assessment). In 2019, "OceanBase
+on deliberately (SURVEY dossier 11, graded as assessment). In 2019, "OceanBase
 beat Oracle and won the first place in TPC-C test" (dbdb.io, same source),
 and from 2017 the database "started to serve for external customers" (same
 source).
@@ -195,9 +195,14 @@ destination had to be built, and both builds later converged into products
 (the register's P15 convergence shape, read from the seller's side); by 2022
 and 2023 DoorDash and Pinterest simply bought it, and their migration
 stories are measured in cutover attempts and reversion tools, not years of
-engineering. That is the destination's proof: the same move that once took
-Google's partnership with the Spanner team became, within a decade, a
-procurement decision with a feature flag.
+few
+years of engineering. That is the destination's proof: the same move that
+once took Google's partnership with the Spanner team became, within a
+decade, a procurement decision with a feature flag. (A sourcing note: the
+convergence claim is register-recorded only for OceanBase, external
+customers from 2017, commercial and open source per dbdb.io; Spanner's
+later path to a managed cloud product is this study's context, marked as
+assessment here.)
 
 ## 5. Verdict (assessment)
 
@@ -240,7 +245,10 @@ procurement decision with a feature flag.
   it.
 - **P15 - Build only what converges (the seller's view).** This chapter is
   the pattern read from the other side of the transaction: the two builds
-  (Spanner, OceanBase) both converged into products, which is why the 2022
+  outgrew their in-house origin (OceanBase: external customers from 2017,
+  catalogued as commercial, open source, dbdb.io, live-verified; Spanner's
+  later path to a managed cloud product is this study's context, marked as
+  assessment), which is why the 2022
   and 2023 buyers could arrive at the destination with a feature flag
   instead of a multi-year program. The registered faces for the buyer's
   contrast (Espresso, Manhattan, Schemaless are the internal-only builds)
@@ -327,6 +335,6 @@ All from the register; URLs copied exactly.
 - C26 InfoQ, Pinterest Uses Event Time Watermarks to Finalize Petabyte Scale Data Partitions (InfoQ, PR, 2026): https://infoq.com/news/2026/10/pinterest-event-time-partition/
 - C27 Google Cloud blog, Reflecting on Spanner paper's SIGOPS Hall of Fame Award (Google, FP): https://cloud.google.com/blog/products/databases/reflecting-on-spanner-papers-sigops-hall-of-fame-award
 - C27 The Morning Paper, Spanner: Google's Globally-Distributed Database (ACM/Alarm Clock, PR): https://blog.acolyer.org/2015/01/08/spanner-googles-globally-distributed-database/
-- C27 Murat Demirbas, F1: Distributed SQL Database that Scales (blog, SR): http://muratbuffalo.blogspot.com/2023/07/f1-distributed-sql-database-that-scales.html
+- C27 Murat Demirbas, F1: Distributed SQL Database that Scales (blog, PR): http://muratbuffalo.blogspot.com/2023/07/f1-distributed-sql-database-that-scales.html
 - C28 dbdb.io, OceanBase database entry, revision 24 (community wiki, PR): https://dbdb.io/db/oceanbase/revisions/24
 - C28 Alibaba Cloud, ApsaraDB for OceanBase case studies (Alibaba Cloud, FP/PR): https://www.alibabacloud.com/help/en/apsaradb-for-oceanbase/latest/case-studies
