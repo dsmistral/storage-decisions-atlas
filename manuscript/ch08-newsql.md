@@ -130,7 +130,7 @@ candidates for our workloads", including both in-house options (Rockstore,
 ShardDB) and every distributed-SQL contender on the market ([C26: Pinterest
 engineering, TiDB adoption](https://medium.com/pinterest-engineering/tidb-adoption-at-pinterest-1130ab787a10),
 FP; the page blocks automated fetches, quotes below are verified in indexed
-excerpts). There were There were fewer
+excerpts). fewer
 options than the era's marketing suggested, and the post records the
 assessments that excluded them: Spanner was "appealing in many
 dimensions but is not open source", and "the migration cost from AWS to GCP
