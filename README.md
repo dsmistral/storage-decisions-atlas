@@ -14,12 +14,13 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-25, session 17)
+## Status (updated 2026-11-25, session 18)
 
-**Chapters 1–7 are AUTHORED + REVIEWED (session 17 closed the Ch. 7
-Time-series review: C23 Uber M3, C24 Netflix Atlas, F09 NexusTrade
-counter-case, T17; P15 + FC5). Next unit: Chapter 8 (NewSQL: three triggers,
-one destination; C25, C26, C27, C28), then its review.**
+**Chapters 1–7 are AUTHORED + REVIEWED; Chapter 8 is AUTHORED (session 18;
+NewSQL: three triggers, one destination; C27 Google F1/Spanner, C28
+OceanBase, C25 DoorDash/CockroachDB, C26 Pinterest/TiDB; T03/T04; P9, P11,
+P15). Next unit: Phase 3 review of Chapter 8, then Chapter 9 (In-memory:
+C29, C30, C31 + C57/C60 Aerospike, R6), then its review.**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
