@@ -170,7 +170,7 @@ the counter-case's most valuable output.
 - **P15 - Build only what converges.** This chapter carries the build-side
   success faces: C23/C24 (M3, Atlas), built at genuine giant scale and
   open-sourced; the register's contrast faces (Espresso, Manhattan,
-  Schemaless) are reads for Chapters 12 and 25 territory. Fails-when: no
+  Schemaless) are reads for Chapter 12 and the Part II transitions. Fails-when: no
   open-source or platform plan, so the team bears full maintenance forever.
 - **FC5 - "Purpose-built" is marketing until measured on your queries.**
   Face: F09 (continuous aggregates and compression fought the workload; back
