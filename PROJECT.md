@@ -120,6 +120,7 @@ Status: no chapter authored yet. All 23 chapters planned (specs in `manuscript/B
 | 1 | 2026-10-20/21 | Bootstrap + Phase 1 gate | DONE | Survey R1–R4 complete; register C/T/F built; P-index P1–P20; 23-chapter map; Knowledge topics created; root staging pruned once → masters kept in Knowledge topic, then pushed to repo; scope APPROVED (4 parts / 23 chapters), audience = working engineers/architects |
 | 2 | 2026-10-21 | R5 freshness pass (user-directed) | DONE | 6 new cases (C48–C53), 2 new transitions (T21–T22); W2 refined, W3 substantially resolved, W4 added; honest negatives D6/D7; Ch. 1 inputs verified current; records pushed (ALWAYS-SYNC) |
 | 3 | 2026-10-21 | R6 verification pass (user-directed: compare a third-party report's case list against the corpus; register the misses) | DONE | 13 new cases (C54–C66), 8 new transitions (T23–T30), T19 extended (Voucherify); D8 (Razorpay/Swiggy negatives), W5 (OpenAI write-scaling); Zerodha's three CH stories verified first-party via z-connect; records pushed (ALWAYS-SYNC) |
+| 4 | 2026-11-25 | Ch. 1: Relational — three ways to stay relational | IN PROGRESS | Cold resume from GitHub (mirror verified vs repo, HEAD 287f6b3); inputs: C01, C02, C03, C47, C37 + R6 counter-weights C61, C56; Ch.1 Dossiers for C61/C56 to fold into SURVEY at authoring time |
 
 ## Standing to-do
 
