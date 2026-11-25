@@ -119,6 +119,7 @@ Status: Ch. 1 AUTHORED session 4 (review pending); Chs. 2–23 planned (specs in
 | 2 | 2026-10-21 | R5 freshness pass (user-directed) | DONE | 6 new cases (C48–C53), 2 new transitions (T21–T22); W2 refined, W3 substantially resolved, W4 added; honest negatives D6/D7; Ch. 1 inputs verified current; records pushed (ALWAYS-SYNC) |
 | 3 | 2026-10-21 | R6 verification pass (user-directed: compare a third-party report's case list against the corpus; register the misses) | DONE | 13 new cases (C54–C66), 8 new transitions (T23–T30), T19 extended (Voucherify); D8 (Razorpay/Swiggy negatives), W5 (OpenAI write-scaling); Zerodha's three CH stories verified first-party via z-connect; records pushed (ALWAYS-SYNC) |
 | 4 | 2026-11-25 | Ch. 1: Relational — three ways to stay relational | DONE | Cold resume from GitHub (mirror verified vs repo, HEAD 287f6b3); session-open row pushed (commit 4df2bb2, md5-verified); chapter master `manuscript/ch01-relational.md` (~23 KB): 3 topologies + C56/C61 counter-weights + C37 twin, P4/P6/P7/P8, graded exercises + ◆ diagnostic; SURVEY 22a/22b dossiers + 7 source-notes rows folded; all pushes byte-verified. Phase 3 review pending |
+| 5 | 2026-11-25 | Phase 3 adversarial review of Ch. 1 | IN PROGRESS | Two-expert review of `manuscript/ch01-relational.md`: machine battery (register-ID census, pattern-ID census, exact-URL census, figure/quote census, exercise grading census) + live-source spot checks of load-bearing quotes |
 
 ## Standing to-do
 
