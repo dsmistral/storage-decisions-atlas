@@ -34,7 +34,7 @@ C13, patterns P1/P2/P16, then its Phase 3 review.
 This repo remains self-sufficient for a cold resume from GitHub alone.
 
 ---
-\\
+
 ## Master Pattern Index (P-index)
 
 Each pattern has: the decision rule, the faces (documented cases), and the
