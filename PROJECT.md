@@ -26,8 +26,12 @@ planning gap logged (to-do 5).
 manuscript master `manuscript/ch02-document.md` ("Document: three reasons, one
 aggregate"; C06, C07, C08, C09 + T10/T19 preview; patterns P2/P15). Review
 passed session 7 with 4 objections resolved (receipts in row 7).
-**Next unit: Ch. 3 (Key-value: one pattern, three scales)**, inputs C11, C12,
-C13, patterns P1/P2/P16, then its Phase 3 review.
+**Chapter 3 AUTHORED (session 8, 2026-11-25):** manuscript master
+`manuscript/ch03-key-value.md` ("Key-value: one pattern, three scales"; C10
+design origin, C11, C12, C13 at giant/product/small scale; patterns P1/P2/P16).
+**Next unit: Phase 3 adversarial review of Ch. 3**, then Ch. 4 (Wide-column:
+three fleets and the JVM cure; C14, C15, C16, + C38 Discord, C36 Twitter;
+patterns P3/P9/P12).
 
 **Pause status:** the 2026-10-21 pause was lifted at resume (2026-11-25), session
 4 opened per the repo Cold resume protocol (mirror verified vs repo, HEAD 287f6b3).
@@ -113,7 +117,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 - B. Methodology and the evidence ladder
 - C. Open questions, deferrals, and watch-lists
 
-Status: Ch. 2 REVIEWED session 7 (Phase 3 passed, 4 objections resolved); Chs. 2–23 planned (specs in `manuscript/BOOK-PLAN.md`).
+Status: Ch. 2 REVIEWED session 7; Ch. 3 AUTHORED session 8; Chs. 4–23 planned (specs in `manuscript/BOOK-PLAN.md`).
 
 ---
 
@@ -128,9 +132,9 @@ Status: Ch. 2 REVIEWED session 7 (Phase 3 passed, 4 objections resolved); Chs. 2
 | 5 | 2026-11-25 | Phase 3 adversarial review of Ch. 1 | DONE | Two-expert review of `manuscript/ch01-relational.md`, fresh machine battery + live-source probes. Findings: O1 fleet-figures cite corrected to the MySQL 8.0 post (live-verified); O2 first-resharding quote misattributed to the Vitess history page: primary found (Percona interview, quote verified live), REGISTER C47 amended, chapter/recanvas fixed; O3 C53→"Chapter 18" cross-pin wrong: un-pinned, planning gap logged (to-do 5); clean: 17/17 exact URLs in register, 14/14 register IDs, 9/9 pattern IDs, 24/24 figure/quote targets in corpus, exercise/grading census ✓, live probes: Craver 2013, OpenAI, Zerodha/FOSS/DungBeetle, Uber MVCC, GitHub 8.0 all hit. Chapter status: REVIEWED. |
 | 6 | 2026-11-25 | Ch. 2: Document — three reasons, one aggregate | DONE | Chapter master `manuscript/ch02-document.md` (~18.6 KB): C06/C07/C08 as three reasons + C09 Espresso build-dwell (P15), fit-test table, T10/T19 exits preview (P2), graded exercises + ◆; battery: 10/10 register IDs, 3/3 pattern IDs, 9/9 exact URLs in register, 11/11 figure/quote targets in corpus, markers ✓; live probes: eBay quote, Stripe 99.999, Espresso claims, Sailthru 40 TB/120 nodes verbatim ✓; Mixmax page fetch thin (register-corroborated); Voucherify ~30% figure is the author cross-post's claim: citation extended (URL from register C65), marked self-reported. Next: Phase 3 review of Ch. 2, then Ch. 3 |
 | 7 | 2026-11-25 | Phase 3 adversarial review of Ch. 2 | DONE | Fresh reviewer battery re-run green (all register IDs valid, 3/3 pattern IDs, all URLs in register, no placeholders/em-dashes). Four objections resolved: O3 wording "Three companies" corrected to "Teams" (four organizations in three reasons); O7 absolute "never open-sourced or productized" softened to "stayed internal, no release or productization on record as of the 2012 post"; O11 aggregate-survival inference in T10 marked as reviewer assessment; O12 "Chapter 9 in reverse" pin replaced with the ops-burden driver (Ch. 21). Three edit-tool slips during fixing caught and repaired before push. Chapter status: REVIEWED |
+| 8 | 2026-11-25 | Ch. 3: Key-value — one pattern, three scales | DONE | Chapter master `manuscript/ch03-key-value.md` (~15.5 KB): C10 Dynamo SOSP 2007 as design origin, C11 Amazon Financial Ledger (giant scale), C12 Duolingo (product scale), C13 Mixmax (small scale); P1/P2/P16 (+C36 uniqueness preview, C46 held for Ch. 12); graded exercises + ◆ diagnostic. Battery green: 6/6 register IDs, 4/4 pattern IDs defined, 5/5 exact URLs in register, markers each =1, zero em-dash, zero placeholders. Live probes: Dynamo PDF phrases ("inefficiencies and limit scale"), AWS Oracle-exit (120 TB, 40%, 70%, Financial Ledger), Duolingo TTL/60 lessons ✓. Quote fix: "too simplistic for any application" converted to sourced paraphrase; no fetch of the SOSP PDF survives past ~5 pages (extraction cap) and the phrase does not occur in the fetched portion, so no verbatim attribution is kept. Next: Phase 3 review of Ch. 3, then Ch. 4 |
 
 ## Standing to-do
-| 8 | 2026-11-25 | Ch. 3: Key-value — one pattern, three scales | IN PROGRESS | Authoring manuscript/ch03-key-value.md: C10 (design origin) + C11/C12/C13 at giant/product/small scale; P1, P2, P16; battery + live probes at close |
 
 1. ~~Push bootstrap to GitHub repo~~ (done, session 1).
 2. ~~Phase 1 scope gate~~ (PASSED, session 1).
