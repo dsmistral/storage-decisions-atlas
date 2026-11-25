@@ -39,7 +39,7 @@ topology each ([C01: GitHub partitioning](https://github.blog/engineering/infras
 
 GitHub began as a Rails monolith on one MySQL database. Fifteen years on, the
 fleet is 1,200+ MySQL hosts, 300+ TB, 5.5M queries/second across 50+ clusters
-([C01: GitHub partitioning](https://github.blog/engineering/infrastructure/partitioning-githubs-relational-databases-scale/); evidence FP).
+([C01: GitHub partitioning](https://github.blog/engineering/infrastructure/partitioning-githubs-relational-databases-scale/); [C01: MySQL 8.0](https://github.blog/engineering/infrastructure/upgrading-github-com-to-mysql-8-0/), FP).
 
 The interesting fact is the *order*: GitHub split by domain first, moving whole
 table groups (repositories, users) into separate databases, and only then
@@ -47,9 +47,7 @@ split rows for the largest domains, with automated linters blocking any query
 that would join across domains ([C01: GitHub partitioning](https://github.blog/engineering/infrastructure/partitioning-githubs-relational-databases-scale/), FP). The tooling underneath is
 Vitess, the routing layer YouTube built in 2010 when its "write traffic became
 too high for the master database to handle" and application-level sharding
-plus replicas stopped being enough ([C47: Vitess history](https://vitess.io/docs/21.0/overview/history/), FP). Vitess's own history records that its creators' first
-resharding "took an entire night of master downtime," which is what later
-motivated online resharding ([C47: Vitess history](https://vitess.io/docs/21.0/overview/history/); [C47: PlanetScale](https://planetscale.com/blog/horizontal-sharding-for-mysql-made-easy), VP).
+plus replicas stopped being enough ([C47: Vitess history](https://vitess.io/docs/21.0/overview/history/), FP). Vitess co-creator Sugu Sougoumarane described the project's first resharding: "It took an entire night of master downtime, but we survived" ([C47: Percona interview](https://www.percona.com/blog/percona-live-featured-talk-with-sugu-sougoumarane-vitess-the-complete-story/), FP; register amended session 5); the pain that later motivated online resharding (assessment; [C47: PlanetScale](https://planetscale.com/blog/horizontal-sharding-for-mysql-made-easy), VP).
 
 Judged against its time: by 2021, GitHub's choice was conservative. The
 horizontal-sharding machinery was 11 years old, battle-tested at YouTube, Slack
@@ -89,7 +87,8 @@ there is only one database. This is deliberate restraint rather than neglect,
 and 37signals itself proved the discipline is conscious: when its Fizzy product
 attempted SQLite-per-customer tenancy in 2026, it reverted to a single MySQL
 database before launch after hitting global-replication edge cases (C53,
-recorded for Chapter 18's P18 fails-when discussion).
+recorded for the P18 fails-when discussion, whose chapter home is a logged
+planning gap from session 5).
 
 ## 3. What happened (sourced outcomes, with evidence levels)
 
@@ -326,6 +325,7 @@ All from the register; URLs copied exactly.
 - C37/C48 Schemaless to Docstore: https://www.uber.com/in/en/blog/schemaless-sql-database/
 - C47 Vitess history: https://vitess.io/docs/21.0/overview/history/
 - C47 PlanetScale (VP): https://planetscale.com/blog/horizontal-sharding-for-mysql-made-easy
+- C47 Percona interview, Sugu Sougoumarane (session 5 register amendment; first-resharding quote): https://www.percona.com/blog/percona-live-featured-talk-with-sugu-sougoumarane-vitess-the-complete-story/
 - C56 Zerodha tech: https://zerodha.tech/blog/working-with-postgresql/
 - C56 FOSS United talk abstract: https://platform.fossunited.org/c/indiafoss/indiafoss24/cfp/oqtefvp0pj
 - C56 DungBeetle: https://github.com/zerodha/dungbeetle
