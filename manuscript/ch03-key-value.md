@@ -182,28 +182,28 @@ the C36 uniqueness retrofit, which is P1's fails-when).
   question in Appendix C); impose the like-for-like TCO test before
   believing a "70%".
 
-# # Exercises
+## Exercises
 
-#*"●●○ (identify the discipline).** A team adopts a managed key-value store
+**●○○ (identify the discipline).** A team adopts a managed key-value store
 for per-user settings; six months later the bill is high and p99 reads are
 slow because each page load makes 25 point reads. Which of the chapter's
 three disciplines does this measure, and what are the two structural options?
 
 *Hint:* the key is right; count what happens per request.
 
-*Porked answer (assessment):* call discipline (P16's lever). Options: widen
+*Worked answer (assessment):* call discipline (P16's lever). Options: widen
 the value (one item per user aggregating the settings, accepting app-side
 merging: P1's stance) or add a tuned cache in front with a deliberate
 staleness budget (Duolingo's TTL lesson). The wrong fix is blaming the engine.
 
-**◇◇◻ (apply the framework).** A payments-adjacent product needs: (a)
+**●●○ (apply the framework).** A payments-adjacent product needs: (a)
 always-available cart updates during regional outages; (b) a guarantee that
 a coupon is consumed exactly once, even under contention; (c) sub-ms reads
 of user profile state. The team wants one managed key-value store for all
 three. Use the chapter's patterns to say what fits, what cannot, and the
 minimum split.
 
-*Porked answer (assessment, judgment):* (a) and (c) fit the family's home
+*Worked answer (assessment, judgment):* (a) and (c) fit the family's home
 turf: always-writable state with app-side merge, and per-key hot reads.
 (b) does not: exactly-once coupon consumption under contention is
 read-modify-write semantics with uniqueness, P1's fails-when shape (C36's
@@ -212,16 +212,16 @@ conditional writes that may themselves fail under contention. The minimum split:
 and a strongly consistent store (relational or a conditional-write design)
 for coupon redemption. This is P2 applied inside one product.
 
-**●●○ (steelman, then weigh).** Amazon published the Financial Ledger's
+**●●● (steelman, then weigh).** Amazon published the Financial Ledger's
 "latency −40%, cost −70%" as part of the Oracle-exit celebration. Write a
 200-400 word assessment that (i) states the strongest case for accepting the
 figures, (ii) applies P16's audit caution (what would a like-for-like TCO
 comparison need to include that the blog does not report?), and (iii)
 compares this with Duolingo's cost post as evidence, and takes a position on
-which claim a work)ng architect should budget against. (i)-(ii) cite the
+which claim a working architect should budget against. (i)-(ii) cite the
 blog and the P16 context; (iii) is Verdict (assessment).
 
-*Suggested answer sketch (assessmenu):* (i) Amazon ran the system itself and
+*Suggested answer sketch (assessment):* (i) Amazon ran the system itself and
 the exit was real, 120 TB is not a pilot; (ii) a like-for-like TCO would need
 the Oracle license costs avoided, engineer-time in both steady states, and
 the C46 friction (savepoint timeouts) priced in; the blog reports none of
@@ -236,9 +236,10 @@ whose values change rarely and are read millions of times a minute; (iii) a
 team that wants "a simple key-value store" and has never written down what
 happens when two regions write the same key at once.
 
-*(Diagnostic answers, assessment: (i) the family's home turn; discipline =
+*(Diagnostic answers, assessment: (i) the family's home turf; discipline =
 conflict policy in the app before launch; (ii) fits, but the discipline is
-call discipline: cache and staleness budget before per-call pricing bites;:ʢiii) the pattern is fine, the discipline at risk is P1's: without a merge
+call discipline: cache and staleness budget before per-call pricing bites;
+(iii) the pattern is fine, the discipline at risk is P1's: without a merge
 policy, this is the C36 retrofit in waiting.)*
 
 ## Sources
@@ -248,5 +249,5 @@ All from the register; URLs copied exactly.
 - C10 Amazon Dynamo (SOSP 2007, FP): https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf
 - C11 Amazon Financial Ledger (AWS blog, FP): https://aws.amazon.com/blogs/aws/migration-complete-amazons-consumer-business-just-turned-off-its-final-oracle-database/
 - C12 Duolingo (AWS/Duolingo talk, VP/FP): https://www.youtube.com/watch?v=fhnAvn2YxZA
-  C12 Duolingo cost post (FP): https://blog.duolingo.com/reducing-cloud-spending/
+- C12 Duolingo cost post (FP): https://blog.duolingo.com/reducing-cloud-spending/
 - C13 Mixmax (FP): https://www.mixmax.com/engineering/the-great-migration-from-mongodb-to-dynamodb
