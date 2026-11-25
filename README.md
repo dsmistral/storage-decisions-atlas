@@ -14,13 +14,14 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-25, session 9)
+## Status (updated 2026-11-25, session 10)
 
-**Chapters 1, 2 and 3 are AUTHORED + REVIEWED (Ch. 3's Phase 3 review passed
-session 9 with 4 objections fixed; receipts in PROJECT row 9). Next unit:
-Chapter 4 (Wide-column: three fleets and the JVM cure; C14 Apple, C15 Netflix,
-C16 Instagram Rocksandra, C38 Discord, C36 Twitter; P3/P9/P12), then its
-review.** The R6 fold-in of SURVEY dossiers proceeds at authoring time
+**Chapters 1–4 are AUTHORED (Chs. 1–3 additionally REVIEWED). Next unit:
+Phase 3 adversarial review of Chapter 4 (Wide-column: three fleets and the
+JVM cure; C14 Apple, C15 Netflix, C16 Instagram Rocksandra, C38 Discord,
+C36 Twitter; P3/P9/P12; receipts in PROJECT row 10), then Chapter 5
+(Columnar: fan-in and fan-out; C17, C18, C19; T05, T06; P2 + F08 preview).**
+The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
 
