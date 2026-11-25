@@ -71,8 +71,8 @@ so we could keep running and keep growing."
 
 The move came in steps the register records as Oracle, then a stop at Amazon's
 managed SimpleDB, then Cassandra in 2010 onward. SimpleDB proved unreliable
-at Netflix's volumes (the register's verdict on the stop) and was itself
-replaced. This is P3's
+at Netflix's volumes (the survey's verdict on the stop, dossier 3) and was
+itself replaced. This is P3's
 canonical face, and it is worth reading precisely: the stop failed
 the way P3 says stops fail, at volume, for a workload the primitive was not
 built to carry. What makes Netflix's case the good version of P3 is what
@@ -96,7 +96,7 @@ pluggable-storage-engine direction ([C16: The New Stack](https://thenewstack.io/
 This is P12's purest face in the family: same data model, same protocol, same
 operational surface, new storage internals. The diagnosis behind it is the
 pattern's enabling condition: Instagram's pain sat in the storage engine
-(write amplification and GC on JVM heaps), not in Cassandra's data model, so
+(read latency traced to GC issues), not in Cassandra's data model, so
 a transplant could address it. That condition matters; it is what separates
 this case from moves that had to leave the family entirely.
 
@@ -129,12 +129,14 @@ data model and protocol, so years of operational knowledge survived the move.
 
 ### Companion: Twitter's Manhattan (C36)
 
-The register's Twitter entry records Manhattan as the built response to
-eventual-consistency limits: built for millions of QPS at low latency, and in
-2016 retrofitted with manageable strong consistency because uniqueness
-semantics were load-bearing ([C36: Manhattan](https://blog.x.com/engineering/en_us/a/2014/manhattan-our-real-time-multi-tenant-distributed-database-for-twitter-scale), [C36: strong consistency](https://blog.x.com/engineering/en_us/a/2016/strong-consistency-in-manhattan), FP).
+The register's Twitter entry records Manhattan as a built store: built for
+millions of QPS at low latency, and in 2016 retrofitted with manageable
+strong consistency because uniqueness semantics were load-bearing
+([C36: Manhattan](https://blog.x.com/engineering/en_us/a/2014/manhattan-our-real-time-multi-tenant-distributed-database-for-twitter-scale), [C36: strong consistency](https://blog.x.com/engineering/en_us/a/2016/strong-consistency-in-manhattan), FP).
+What Manhattan replaced was an availability-first Cassandra era, which the
+survey's dossier 12 records as the ladder MySQL → Cassandra → Manhattan.
 For this chapter the companion's lesson is narrow but sharp: even a company
-that later built its own store first went through the availability-first
+that ended up building its own store first went through the availability-first
 interface and carried its costs; the consistency bought back (P10, the
 2016 retrofit) is the same bill Chapter 3's C36 preview identified. The full
 Manhattan arc lives in Chapter 12.
@@ -151,8 +153,9 @@ Manhattan arc lives in Chapter 12.
 - **Instagram (C16, PR).** Rocksandra engine swap shipped behind the same
   Cassandra surface; the experiment fed the pluggable-engine direction
   ([C16: The New Stack](https://thenewstack.io/instagram-supercharges-cassandra-pluggable-rocksdb-storage-engine/)).
-- **Discord (C38, FP).** Trillions of messages moved Cassandra→ScyllaDB with
-  no downtime; 177 nodes to 72; migrator from three months to nine days
+- **Discord (C38, FP).** Trillions of messages moved Cassandra→ScyllaDB in a
+  staged migration with messages migrated last; 177 nodes to 72; the bespoke
+  migrator went from three months to nine days
   ([C38: Discord blog](https://discord.com/blog/how-discord-stores-trillions-of-messages); [C38: InfoQ](https://www.infoq.com/news/2023/06/discord-cassandra-scylladb/)).
 
 ## 4. The comparison: the cure ladder
