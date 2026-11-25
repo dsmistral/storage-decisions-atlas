@@ -257,7 +257,7 @@ purpose-built engine takes the family's job.
   verify before generalizing. Fails-when: cost is vendor-reported and
   unaudited.
 - **T26 contrast (preview).** The same workload class has two answers in
-  the corpus: PhonePe's self-run on-premis Aerospike versus Freecharge's
+  the corpus: PhonePe's self-run on-premises Aerospike versus Freecharge's
   move to managed DynamoDB (register T26), recorded fully in the returns
   chapter and the ops-burden driver's synthesis (Chapters 16 and 21).
 
