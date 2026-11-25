@@ -91,7 +91,7 @@ placeholders). Live probes: Uber billion + M3 posts verbatim, Atlas docs
 Epic passage verbatim, NexusTrade post verbatim; Netflix TechBlog URLs are
 Medium shells, quotes corroborated via indexed excerpts noted in-chapter.
 Next unit: Phase 3 review of Ch. 7, then Ch. 8 (NewSQL: three triggers, one
-destination; C25, C26, C27, C28), then its review.
+destination; C25, C26, C27, C28; T03, T04; P9, P11, P15), then its review.
 
 **Pause status:** the 2026-10-21 pause was lifted at resume (2026-11-25), session
 4 opened per the repo Cold resume protocol (mirror verified vs repo, HEAD 287f6b3).
