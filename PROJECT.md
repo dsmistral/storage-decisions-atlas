@@ -45,6 +45,25 @@ FoundationDB press-only). Phase 3 review passed session 11 with 4 objections
 fixed (receipts in row 11). Next unit: Ch. 5 (Columnar: fan-in and fan-out;
 C17 Cloudflare, C18 Bloomberg, C19 CERN LHCb on ClickHouse; T05, T06;
 P2 + FC3 preview (F08)).
+**Chapter 5 AUTHORED + AUTHOR-CHECKED (session 12, 2026-11-25):** manuscript master
+`manuscript/ch05-columnar.md` ("Columnar: fan-in and fan-out"; C17 Cloudflare
+fan-in as the T05/T06 pair (P2's disciplined face), C18 Bloomberg fan-out (VP,
+ZooKeeper stress→Keeper, DR drills), C19 CERN LHCb science breadth-line (PR),
+F08 opened as the FC3 teaser, full read Ch. 19; comparison table fan-in vs
+fan-out vs science; graded exercises + ◆ diagnostic). Battery green (8/8
+register/transition/failure IDs, 6/6 exact URLs register-copied, markers each
+=1, zero em-dash, zero placeholders). Live probes: CF HTTP analytics and CF
+logs posts verbatim (6M logs/s, "much smaller", "reduced by eight times"),
+Wikipedia C19 verbatim, F08 "massive lock contention" verbatim; CF billing
+post live-hit; ClickHouse-hosted pages (C17-VP, C18) fetch as ~471-char
+shells, corroborated via search snippets (Bloomberg "hundred million securities
+all at once" verbatim; Cloudflare quadrillion-event scale via news coverage).
+Also this session: session-11's O2 was itself corrected, the Discord blog does
+carry "we need to migrate trillions of messages with no downtime" verbatim
+(earlier probe context truncation hid it); the Ch. 4 C38 bullet now quotes the
+requirement as stated (ch04 commit f648106); register T07 "no downtime" stands
+supported (no emendation needed). Next unit: Phase 3 review of Ch. 5, then
+Ch. 6 (Graph: three jobs; C20, C21, C22).
 
 **Pause status:** the 2026-10-21 pause was lifted at resume (2026-11-25), session
 4 opened per the repo Cold resume protocol (mirror verified vs repo, HEAD 287f6b3).
@@ -99,7 +118,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 - Ch. 2 Document: three reasons, one aggregate — C06, C07, C08, C09 (BOOK-PLAN spec inputs; incl. T10/T19 preview: P2, P15)
 - Ch. 3 Key-value: one pattern, three scales — C10, C11, C12, C13 (BOOK-PLAN spec inputs; C10 is the design origin): P1, P2, P16
 - Ch. 4 Wide-column: three fleets and the JVM cure — C14, C15, C16, C38 (+ C36 Twitter's Cassandra era; BOOK-PLAN spec inputs): P3, P9, P12
-- Ch. 5 Columnar: fan-in and fan-out — C17, C18, C19
+- Ch. 5 Columnar: fan-in and fan-out — C17, C18, C19 (T05, T06 Cloudflare; F08/FC3 preview; BOOK-PLAN spec inputs): P2
 - Ch. 6 Graph: three jobs — C20, C21, C22
 - Ch. 7 Time-series: the family both giants built — C23, C24 (+ F09 counter-case)
 - Ch. 8 NewSQL: three triggers, one destination — C25, C26, C27, C28
@@ -130,7 +149,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 - B. Methodology and the evidence ladder
 - C. Open questions, deferrals, and watch-lists
 
-Status: Ch. 4 REVIEWED session 11 (Chs. 1-4 done: 4 authored, 4 reviewed); Chs. 5–23 planned (specs in `manuscript/BOOK-PLAN.md`).
+Status: Ch. 5 AUTHORED session 12 (Chs. 1-5 done: 5 authored, 4 reviewed); Chs. 6–23 planned (specs in `manuscript/BOOK-PLAN.md`).
 
 ---
 
@@ -149,7 +168,7 @@ Status: Ch. 4 REVIEWED session 11 (Chs. 1-4 done: 4 authored, 4 reviewed); Chs. 
 | 9 | 2026-11-25 | Phase 3 adversarial review of Ch. 3 | DONE | Two-expert review + fresh machine battery green (6/6 register IDs, 4/4 pattern IDs defined, 5/5 exact URLs in register, 9/9 corpus quote/figure targets; live probe: the C36 quote "one email address may get attached to two accounts" verified verbatim on the Manhattan strong-consistency post; Duolingo "31 billion" = register's "31B", corroborated; markers each =1, zero em-dash/placeholders). Four objections fixed: O1 reflow artifact (stranded "the" before the cart sentence) reflowed; O2 "ancestor of Cassandra, DynamoDB, and most eventually consistent stores" trimmed to the register-supported "ancestor of Cassandra and DynamoDB"; O3 "P3-adjacent under the project's reading" misread P3 (Mixmax used the managed primitive as a destination at small scale, where P3's volume caution does not bind) reworded; O4 "the intake lives in the transition chapters" pinned to Chapter 12 (BOOK-PLAN C-home). Chapter map Ch. 12 line matched to BOOK-PLAN (C46 added). One edit-tool slip at session open (stray placeholder written into PROJECT.md) caught and reverted byte-identically before push. Chapter status: REVIEWED |
 | 10 | 2026-11-25 | Ch. 4: Wide-column — three fleets and the JVM cure | DONE | Chapter master `manuscript/ch04-wide-column.md` (~19.9 KB, byte parity with canvas except 6-line front matter): C14 Apple planetary fleet (160,000+/100 PB/1,000+ clusters, PR; FoundationDB thread = D1 press-only), C15 Netflix Oracle→SimpleDB stop→Cassandra (P3 canonical face), C16 Instagram Rocksandra engine transplant (P12 purest face), C38 Discord Mongo→Cassandra→ScyllaDB full-treatment exit (FP; 177→72 nodes, 3 months→9 days migrator), C36 Manhattan companion (P10, full arc Ch. 12); patterns P3/P9/P12; cure-ladder comparison; graded exercises + ◆ diagnostic. Battery green: 5/5 register IDs, 10/10 exact URLs in register, 6 sections, markers each =1, zero em-dash, zero placeholders. Live probes: Discord blog quotes verbatim ("manually reboot and babysit", 177→72, 9 TB vs 4 TB, "improved drastically"); DevPro Journal carries Apache fleet credits verbatim; InfoWorld Netflix quotes verbatim; New Stack Rocksandra page truncated at 32,793-char fetch cap, corroborated via search snippets (planetcassandra P99 25-60ms GC detail; source NOT in register, noted for survey pass). Quote-hygiene fix at authoring: "proved unreliable at their volumes" was survey paraphrase, quote marks removed and reworded. Push verified in-program (fetch-back equal: true, 19,943 bytes; corrupted-transcription avoidance: content read in-sandbox, not transcribed). |
 | 11 | 2026-11-25 | Phase 3 adversarial review of Ch. 4 | DONE | Two-expert review + fresh machine battery green (8/8 register IDs incl. D1/T07/W1, 10/10 exact URLs in register, 9/9 quote/figure targets in chapter, markers each =1, zero em-dash/placeholders; battery whitespace-normalized after line-wrap false negatives). Four objections fixed: O1 Manhattan motive overstated ("built response to eventual-consistency limits" vs register's "built for millions QPS low latency"; 2016 retrofit is where consistency limits surfaced) and the garbled "later built its own store first" sentence, rewritten with the survey dossier 12 ladder MySQL → Cassandra → Manhattan made explicit; O2 Discord "no downtime" claim removed (neither register source carries it; InfoQ and the blog verified live; reworded to "staged migration with messages migrated last", blog-supported); O3 "the register's verdict" on SimpleDB corrected to "the survey's verdict, dossier 3" (register summary carries no unreliability wording); O4 Instagram pain paren "(write amplification and GC on JVM heaps)" narrowed to "(read latency traced to GC issues)" (planetcassandra and the New Stack snippet corroborate the GC/read framing; write amplification is only class-level in the survey's engine-swap synthesis). Pattern census: P3/P9/P12 load-bearing (spec), P10/P19 load-bearing forward pins (Ch. 12/Ch. 15+22), P8 retained (load-bearing in the ●●○ worked answer: operator capacity). Live probes: InfoWorld carries the quotes but not the 2008 outage (chapter already marks it register-recorded); DevPro Netflix "10,000 instances" verbatim; InfoQ confirms nine days/three months. Chapter status: REVIEWED. Chapter commit e24874ad (equal: true). Next: Ch. 5 |
-| 12 | 2026-11-25 | Ch. 5: Columnar — fan-in and fan-out | IN PROGRESS | Authoring manuscript/ch05-columnar.md per BOOK-PLAN ("Columnar's fit is scanning few columns across many rows — why the same engine serves a CDN, a trading terminal, and a particle detector"): C17 Cloudflare (fan-in: 6M req/s HTTP analytics upstream; T05 CitusDB→ClickHouse, T06 Elasticsearch→ClickHouse logs), C18 Bloomberg (fan-out: 100M securities, on-prem, MergeTree clones, ZooKeeper stress→Keeper), C19 CERN LHCb (metadata on 10B events, 1,000+ attributes); P2 + FC3 preview (F08 billing regression opened, full read Ch. 19); T07 register-emendation candidate discovered in pre-read: T07 summary still carries "no downtime", which session 11's live probes could not find on its cited pages |
+| 12 | 2026-11-25 | Ch. 5: Columnar — fan-in and fan-out | DONE | Chapter master `manuscript/ch05-columnar.md` (~17.4 KB, byte parity with canvas except 6-line front matter): per BOOK-PLAN ("why the same engine serves a CDN, a trading terminal, and a particle detector"); C17 Cloudflare fan-in (T05 CitusDB-Postgres→ClickHouse at 6M req/s; T06 Elasticsearch logs→"much smaller" cluster, inserter CPU/mem "reduced by eight times", FP), C18 Bloomberg fan-out (VP; "querying about a hundred million securities all at once"; on-prem immutable; ZooKeeper stress during MergeTree clones→DR drills + Keeper), C19 CERN LHCb (PR; metadata on 10B events, 1000+ attributes), F08 opened as the FC3 teaser ("massive lock contention" in the engine mutex; full read Ch. 19); patterns P2 + FC3 preview; one-engine-three-shapes comparison table; graded exercises + ◆ diagnostic. Battery green: 8/8 register/transition/failure IDs (C17, C18, C19, T05, T06, F08, FC3, P2), 6/6 exact URLs register-copied, markers each =1, zero em-dash, zero placeholders. Live probes: CF HTTP analytics + CF logs posts verbatim; Wikipedia C19 verbatim; F08 verbatim; ClickHouse-hosted pages fetch as ~471-char shells (C17-VP, C18), corroborated via search snippets (Bloomberg quote verbatim in snippet; quadrillion scale via news). Record correction: session-11 O2 was over-turned, the Discord blog carries "we need to migrate trillions of messages with no downtime" verbatim (probe context truncation hid it), Ch. 4 C38 bullet now quotes the requirement as stated (ch04 commit f648106), register T07 "no downtime" stands supported (no emendation needed). Grammar fix after first push (missing period, commit c7c98ecf). Chapter commits: 88486734 (first push), c7c98ecf (final). Next: Phase 3 review of Ch. 5, then Ch. 6 |
 
 ## Standing to-do
 
