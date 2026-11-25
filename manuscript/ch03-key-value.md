@@ -47,8 +47,7 @@ writes, and (the part later histories forget) *application-side conflict
 resolution* pushed to the caller: a storage-level policy, the authors judged,
 would be too simplistic for any application, since Dynamo has no knowledge of
 the internal structure of the values it stores. The paper's running example is
-the
-cart: it must accept writes during a partition or outage, and when two writes
+the cart: it must accept writes during a partition or outage, and when two writes
 conflict, the cart reconciles by taking the union of items.
 
 The reason this matters structurally: availability-first storage gives up
@@ -57,8 +56,7 @@ the interface must also copy the discipline: the application has to own the
 merge policy. When Twitter's Manhattan-era services later needed uniqueness
 guarantees ("one email address may get attached to two accounts"), they had
 to retrofit strong consistency years after adopting the availability-first
-model (C36; P1's fails-when is that case; the intake lives in the transition
-chapters).
+model (C36; P1's fails-when is that case; the intake lives in Chapter 12).
 
 ### Giant scale: the Amazon Financial Ledger (C11)
 
@@ -109,7 +107,7 @@ engineers from on-call).
 ## 3. What happened (sourced outcomes, with evidence levels)
 
 - **Dynamo (C10, FP).** The design became the intellectual ancestor of
-  Cassandra, DynamoDB, and most eventually consistent stores ([C10: Dynamo SOSP 2007](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)).
+  Cassandra and DynamoDB ([C10: Dynamo SOSP 2007](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)).
 - **Financial Ledger (C11, FP).** 120 TB off Oracle; latency −40%, cost −70% ([C11: AWS News Blog](https://aws.amazon.com/blogs/aws/migration-complete-amazons-consumer-business-just-turned-off-its-final-oracle-database/); cost figures vendor-reported, per P16's caution).
 - **Duolingo (C12, VP/FP).** 31B items on DynamoDB; TTL tuning later cut
   inter-service traffic >60% ([C12: Duolingo talk](https://www.youtube.com/watch?v=fhnAvn2YxZA); [C12: Duolingo blog](https://blog.duolingo.com/reducing-cloud-spending/)).
@@ -134,7 +132,8 @@ the application (P1); in the largest migration it is workload matching plus
 the semantic residue of leaving a relational system (P2); in the steady-state
 product it is call and lifecycle discipline (P16); at small scale it is
 mostly the decision not to operate anything (C13's managed-primitive posture,
-P3-adjacent under the project's reading). A reader who takes one lesson from
+taken at a scale where P3's volume caution does not bind). A reader who takes
+one lesson from
 the family should take this: pick the key and the value's lifecycle as
 deliberately as a relational designer picks a schema, because everything the
 schema used to enforce is now the key's shape and the caller's problem.
