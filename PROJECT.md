@@ -16,12 +16,20 @@ planned, with **primary audience: working engineers / architects** — favor
 technical depth (access patterns, operational detail, failure mechanics) over
 executive framing; decision guidance addresses the engineer who runs the system.
 
-**Chapter 1 AUTHORED (session 4, 2026-11-25):** manuscript master added at
+**Chapter 1 AUTHORED + REVIEWED (sessions 4–5, 2026-11-25):** manuscript master
 `manuscript/ch01-relational.md` (markdown canvas rendered for reading); scope per
 BOOK-PLAN spec; inputs C01, C02, C03, C47, C37 + R6 counter-weights C56, C61,
 whose SURVEY dossiers (22a/22b) were folded in with 7 new source-notes rows.
-**Next unit: Phase 3 adversarial review of Ch. 1** (two-expert, machine-verified),
-then Ch. 2 authoring. Chs. 2-10 next inputs unchanged from BOOK-PLAN.md.
+Review passed session 5 with 3 findings fixed (receipts in row 5) and a
+planning gap logged (to-do 5).
+**Chapter 2 AUTHORED + AUTHOR-CHECKED (session 6, 2026-11-25):** manuscript
+master `manuscript/ch02-document.md` ("Document: three reasons, one aggregate";
+C06, C07, C08, C09 + T10/T19 preview; patterns P2/P15; 11/11 figure/quote
+targets in corpus, 9/9 exact URLs in register, live probes passed). Author-check
+= my own battery + probes; the independent Phase 3 review of Ch. 2 is pending.
+**Next unit: Phase 3 adversarial review of Ch. 2** (machine battery + live
+probes, extend-never-rewrite), then Ch. 3 (Key-value: one pattern, three scales).
+Chs. 3+ inputs unchanged from BOOK-PLAN.md.
 
 **Pause status:** the 2026-10-21 pause was lifted at resume (2026-11-25), session
 4 opened per the repo Cold resume protocol (mirror verified vs repo, HEAD 287f6b3).
@@ -73,7 +81,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 
 **Part I — The families: one engine each, several cases each (Ch. 1–10)**
 - Ch. 1 Relational: three ways to stay relational — C01, C02, C03 (+ C61 OpenAI, C56 Zerodha counter-weights, R6)
-- Ch. 2 Document: three reasons, one aggregate — C06, C07, C08 (+ C44/C45 returns preview)
+- Ch. 2 Document: three reasons, one aggregate — C06, C07, C08, C09 (BOOK-PLAN spec inputs; incl. T10/T19 preview: P2, P15)
 - Ch. 3 Key-value: one pattern, three scales — C11, C12, C13
 - Ch. 4 Wide-column: three fleets and the JVM cure — C14, C15, C16
 - Ch. 5 Columnar: fan-in and fan-out — C17, C18, C19
@@ -107,7 +115,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 - B. Methodology and the evidence ladder
 - C. Open questions, deferrals, and watch-lists
 
-Status: Ch. 1 REVIEWED session 5 (3 findings fixed + register amendment); Chs. 2–23 planned (specs in `manuscript/BOOK-PLAN.md`).
+Status: Ch. 2 AUTHORED + AUTHOR-CHECKED session 6 (adversarial review pending); Chs. 2–23 planned (specs in `manuscript/BOOK-PLAN.md`).
 
 ---
 
@@ -120,7 +128,7 @@ Status: Ch. 1 REVIEWED session 5 (3 findings fixed + register amendment); Chs. 2
 | 3 | 2026-10-21 | R6 verification pass (user-directed: compare a third-party report's case list against the corpus; register the misses) | DONE | 13 new cases (C54–C66), 8 new transitions (T23–T30), T19 extended (Voucherify); D8 (Razorpay/Swiggy negatives), W5 (OpenAI write-scaling); Zerodha's three CH stories verified first-party via z-connect; records pushed (ALWAYS-SYNC) |
 | 4 | 2026-11-25 | Ch. 1: Relational — three ways to stay relational | DONE | Cold resume from GitHub (mirror verified vs repo, HEAD 287f6b3); session-open row pushed (commit 4df2bb2, md5-verified); chapter master `manuscript/ch01-relational.md` (~23 KB): 3 topologies + C56/C61 counter-weights + C37 twin, P4/P6/P7/P8, graded exercises + ◆ diagnostic; SURVEY 22a/22b dossiers + 7 source-notes rows folded; all pushes byte-verified. Phase 3 review pending |
 | 5 | 2026-11-25 | Phase 3 adversarial review of Ch. 1 | DONE | Two-expert review of `manuscript/ch01-relational.md`, fresh machine battery + live-source probes. Findings: O1 fleet-figures cite corrected to the MySQL 8.0 post (live-verified); O2 first-resharding quote misattributed to the Vitess history page: primary found (Percona interview, quote verified live), REGISTER C47 amended, chapter/recanvas fixed; O3 C53→"Chapter 18" cross-pin wrong: un-pinned, planning gap logged (to-do 5); clean: 17/17 exact URLs in register, 14/14 register IDs, 9/9 pattern IDs, 24/24 figure/quote targets in corpus, exercise/grading census ✓, live probes: Craver 2013, OpenAI, Zerodha/FOSS/DungBeetle, Uber MVCC, GitHub 8.0 all hit. Chapter status: REVIEWED. |
-| 6 | 2026-11-25 | Ch. 2: Document — three reasons, one aggregate | IN PROGRESS | Authoring `manuscript/ch02-document.md`: inputs C06, C07, C08, C09 + T10/T19 preview; patterns P2, P15; battery + live probes at close |
+| 6 | 2026-11-25 | Ch. 2: Document — three reasons, one aggregate | DONE | Chapter master `manuscript/ch02-document.md` (~18.6 KB): C06/C07/C08 as three reasons + C09 Espresso build-dwell (P15), fit-test table, T10/T19 exits preview (P2), graded exercises + ◆; battery: 10/10 register IDs, 3/3 pattern IDs, 9/9 exact URLs in register, 11/11 figure/quote targets in corpus, markers ✓; live probes: eBay quote, Stripe 99.999, Espresso claims, Sailthru 40 TB/120 nodes verbatim ✓; Mixmax page fetch thin (register-corroborated); Voucherify ~30% figure is the author cross-post's claim: citation extended (URL from register C65), marked self-reported. Next: Phase 3 review of Ch. 2, then Ch. 3 |
 
 ## Standing to-do
 

@@ -14,13 +14,14 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-25, session 5)
+## Status (updated 2026-11-25, session 6)
 
-**Chapter 1 is AUTHORED and REVIEWED (session 5: adversarial review passed; 3
-findings fixed with receipts, register C47 amended with the Percona primary).**
-Next unit: Chapter 2 (Document: three reasons, one aggregate). The R6 fold-in of
-SURVEY dossiers proceeds at authoring time (Ch. 1's C56/C61 done as dossiers
-22a/22b). This repo remains self-sufficient for a cold resume from GitHub alone.
+**Chapter 1 AUTHORED + REVIEWED (sessions 4-5). Chapter 2 ("Document: three
+reasons, one aggregate") is AUTHORED as `manuscript/ch02-document.md` and
+author-checked (my battery + live probes); the independent Phase 3 review of
+Ch. 2 is next, then Chapter 3 (Key-value).** The R6 fold-in of SURVEY dossiers
+proceeds at authoring time (Ch. 1's C56/C61 done as dossiers 22a/22b). This
+repo remains self-sufficient for a cold resume from GitHub alone.
 
 ## Cold resume protocol (fresh chat, this repo alone)
 
