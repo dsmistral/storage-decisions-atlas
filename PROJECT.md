@@ -107,7 +107,7 @@ fails-when condition. Case/transition/failure IDs refer to `corpus/REGISTER.md`.
 - B. Methodology and the evidence ladder
 - C. Open questions, deferrals, and watch-lists
 
-Status: Ch. 1 AUTHORED session 4 (review pending); Chs. 2–23 planned (specs in `manuscript/BOOK-PLAN.md`).
+Status: Ch. 1 REVIEWED session 5 (3 findings fixed + register amendment); Chs. 2–23 planned (specs in `manuscript/BOOK-PLAN.md`).
 
 ---
 
@@ -119,7 +119,7 @@ Status: Ch. 1 AUTHORED session 4 (review pending); Chs. 2–23 planned (specs in
 | 2 | 2026-10-21 | R5 freshness pass (user-directed) | DONE | 6 new cases (C48–C53), 2 new transitions (T21–T22); W2 refined, W3 substantially resolved, W4 added; honest negatives D6/D7; Ch. 1 inputs verified current; records pushed (ALWAYS-SYNC) |
 | 3 | 2026-10-21 | R6 verification pass (user-directed: compare a third-party report's case list against the corpus; register the misses) | DONE | 13 new cases (C54–C66), 8 new transitions (T23–T30), T19 extended (Voucherify); D8 (Razorpay/Swiggy negatives), W5 (OpenAI write-scaling); Zerodha's three CH stories verified first-party via z-connect; records pushed (ALWAYS-SYNC) |
 | 4 | 2026-11-25 | Ch. 1: Relational — three ways to stay relational | DONE | Cold resume from GitHub (mirror verified vs repo, HEAD 287f6b3); session-open row pushed (commit 4df2bb2, md5-verified); chapter master `manuscript/ch01-relational.md` (~23 KB): 3 topologies + C56/C61 counter-weights + C37 twin, P4/P6/P7/P8, graded exercises + ◆ diagnostic; SURVEY 22a/22b dossiers + 7 source-notes rows folded; all pushes byte-verified. Phase 3 review pending |
-| 5 | 2026-11-25 | Phase 3 adversarial review of Ch. 1 | IN PROGRESS | Two-expert review of `manuscript/ch01-relational.md`: machine battery (register-ID census, pattern-ID census, exact-URL census, figure/quote census, exercise grading census) + live-source spot checks of load-bearing quotes |
+| 5 | 2026-11-25 | Phase 3 adversarial review of Ch. 1 | DONE | Two-expert review of `manuscript/ch01-relational.md`, fresh machine battery + live-source probes. Findings: O1 fleet-figures cite corrected to the MySQL 8.0 post (live-verified); O2 first-resharding quote misattributed to the Vitess history page: primary found (Percona interview, quote verified live), REGISTER C47 amended, chapter/recanvas fixed; O3 C53→"Chapter 18" cross-pin wrong: un-pinned, planning gap logged (to-do 5); clean: 17/17 exact URLs in register, 14/14 register IDs, 9/9 pattern IDs, 24/24 figure/quote targets in corpus, exercise/grading census ✓, live probes: Craver 2013, OpenAI, Zerodha/FOSS/DungBeetle, Uber MVCC, GitHub 8.0 all hit. Chapter status: REVIEWED. |
 
 ## Standing to-do
 
@@ -127,6 +127,7 @@ Status: Ch. 1 AUTHORED session 4 (review pending); Chs. 2–23 planned (specs in
 2. ~~Phase 1 scope gate~~ (PASSED, session 1).
 3. ~~Author Ch. 1~~ (DONE, session 4; Phase 3 adversarial review is the next unit).
 4. Fold R6 dossiers into `corpus/SURVEY.md` at authoring time (Ch. 1's C56/C61 done as dossiers 22a/22b; the rest pending as their chapters are authored).
+5. Planning gaps found in review (session 5): C43 (Durable Objects) and C53 (Fizzy SQLite tenancy) have no chapter home in the chapter map (P18's fails-when is scheduled nowhere); SURVEY dossier 4 still cites the Vitess history page for the first-resharding quote (Percona is the primary; register already amended): fix at the next survey-revision pass or when the owning chapter is assigned.
 
 ## Quality checklist (per chapter)
 
