@@ -14,11 +14,13 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-26, session 25)
+## Status (updated 2026-11-26, session 26)
 
 **Chapters 1-11 are AUTHORED + REVIEWED (Part I complete, session 23; Part
-II opened with Ch. 11, The transition matrix: how to read it, reviewed in
-session 25). Next unit: Chapter 12 (Relational exits), then its review.**
+II opened with Ch. 11, reviewed session 25). Chapter 12, Relational exits
+(right for their time), is AUTHORED (session 26; C15, C36, C46; T01, T02;
+P1-P3, P10). Next unit: Chapter 12's Phase 3 review, then Chapter 13
+(Scale-out relational done right).**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
