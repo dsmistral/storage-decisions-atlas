@@ -120,9 +120,9 @@ change was needed because MySQL client protocols and schema definitions were
 the same. (There were actually some minor differences, like Gap Lock, but
 they were relatively easy to address.)" The VLDB paper's abstract says the
 same in one phrase: "The transition was mostly transparent to client
-applications." A swap is not a re-platform: the register's C41 row records
-the components that made that true (same schema, same replication, same
-administration tools), and the post's mechanism list is the receipt: "MyRocks
+applications." A swap is not a re-platform: the survey's dossier 18 verdict
+records the components that made that true ("schema, replication, tooling and
+application stack unchanged"), and the post's mechanism list is the receipt: "MyRocks
 could replicate from InnoDB" and "InnoDB could also replicate from MyRocks".
 
 That bidirectional replication is where this chapter's P20 reading lives, and
@@ -257,7 +257,7 @@ engines speak the same protocol, both can serve the same shadow queries.
 
 **P20 (reversibility is the survival requirement).** The P-index's P20 face
 list includes "C41 (InnoDB rollback replicas)", and ANALYSIS's row groups it
-with "C39, T13/F09 (NexusTrade survived because old path intact)" with its
+with "C39, C41, T13/F09 (NexusTrade survived because old path intact)" with its
 fails-when cell noting "F06: no out-of-domain backup = nothing to return to."
 The C41 mechanism is the pattern's cleanest implementation: the old engine kept
 replicating from the new one so that "This allowed us to demote MyRocks and
@@ -273,7 +273,7 @@ actually run.
 **Spec state.** BOOK-PLAN's row 15 reads "The engine-swap twins | Same
 protocol, new internals: the lowest-blast-radius move, independently invented
 three times | T07, T08, T16; C41, C16, C42 | P12, P19, P20". The chapter
-map's line reads "The engine-swap twins: T07, T08, T16 (P12)". The pattern
+map's line reads "The engine-swap twins" and names the transitions "T07, T08, T16 (P12)". The pattern
 columns differ: the plan carries P19 and P20 alongside P12, the map names
 only P12. This chapter follows the plan (the playbook and reversibility rows
 are load-bearing in the mechanics and patterns sections above) and records the
