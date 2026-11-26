@@ -98,9 +98,11 @@ portfolio itself is Chapter 4's material.
 is the growth clause: a store that "can continue to grow to new heights in
 every metric", chosen "without sacrificing cost effectiveness or ease of
 operations".
-Manhattan did not have in 2012-era eventual consistency was bought back by
+What the store did not have, in 2012-era eventual consistency, was bought
+back by
 2016: the strong-consistency post defines the stakes in one sentence, "Not
-all data needs to be strongly consistent", and then charges the other half in the
+all data needs to be strongly consistent", and then charges the other half
+in the
 uniqueness example: "If we can't guarantee uniqueness of, for example, email
 addresses registered with Twitter accounts, one email address may get
 attached to two accounts. This violates our business logic and we need to
