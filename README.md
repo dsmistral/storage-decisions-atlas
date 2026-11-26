@@ -14,17 +14,16 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-26, session 32)
+## Status (updated 2026-11-26, session 33)
 
-**Chapters 1-14 are complete and all reviewed (Part I complete, session 23;
+**Chapters 1-15 are complete and all reviewed (Part I complete, session 23;
 Part II: Ch. 11 reviewed session 25, Ch. 12 reviewed session 27, Ch. 13
-reviewed session 29, Ch. 14 reviewed session 31), and Ch. 15 The engine-swap
-twins AUTHORED + AUTHOR-CHECKED session 32 (T07, T08, T16; C41, C16, C42;
-P12, P19, P20; battery 6/6 URLs register-copied, 26/26 live source spans
-verbatim, 19/19 corpus fragments byte-verified; chapter stands at 95567c07).
-Next unit: Phase 3 adversarial review of Ch. 15, then Chapter 16 (Returns
-and round trips; T10, T11, T13, T19, T20 + T23-T27 R6 outflows; P8, P20,
-FC5).**
+reviewed session 29, Ch. 14 reviewed session 31, Ch. 15 The engine-swap
+twins REVIEWED session 33 with 3 findings fixed, headlined by the
+components-list re-attribution to SURVEY dossier 18 and the ANALYSIS P20
+face cell restored to full verbatim; the manuscript stands at f56056b4).
+Next unit: Chapter 16 (Returns and round trips; T10, T11, T13, T19, T20 +
+T23-T27 R6 outflows; P8, P20, FC5), then its review.**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
