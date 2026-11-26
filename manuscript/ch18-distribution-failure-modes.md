@@ -37,11 +37,12 @@ re-chosen without a second migration.
 |---|---|---|---|---|---|
 | F01 | Foursquare | 2010 | uneven shard growth outran RAM; the fix (a third shard) freed none, 11h outage | unmonitored growth + page-size physics on shared-nothing MongoDB | FP |
 | F03 | GitHub | 2018 | a 43s network partition triggered Orchestrator split-brain; 24h11m degraded | an untested failover topology mis-aligned with the application | FP |
-| F10 | Slack | 2013-2021 | whole-workspace-per-shard key became immovable hotspots; Vitess re-shard by channel (Ch. 13) | a coarse tenant key: distribution inherited the wrong unit | SR/FP |
+| F10 | Slack | 2017-2020 (3-year correction) | whole-workspace-per-shard key became immovable hotspots; Vitess re-shard by channel (Ch. 13) | a coarse tenant key: distribution inherited the wrong unit | SR/FP |
 
 The evidence column is strong this time: F01 has the first-party blog plus the
-friendliest post-mortem thread of the corpus (press-carried, a 10gen engineer
-quoted directly); F03 is a first-party post-incident analysis that names its
+friendliest post-mortem thread of the corpus (press-carried by InfoQ; the
+thread's post-mortem itself posted by 10gen's Eliot Horowitz with Foursquare's
+permission, quoted directly); F03 is a first-party post-incident analysis that names its
 own automation and its own decision; F10 is self-reported and first-party at
 once, the HN comment by the Chief Architect and the engineering post that
 executed the correction. Chapter 13 already read F10's correction whole ("the
@@ -72,9 +73,10 @@ register's row preserves. High Scalability's reading of the team's thread: "Four
 checkins are small, 300 bytes, MongoDB uses 4K pages, so when you move a
 checkin the 4K page will still be allocated, the result is no memory actually
 freed. Memory will only really be freed when all data is moved off a page."
-The mongodb-user thread (the team's own post-mortem, carried in the register)
-spells the capacity rule the incident taught: "In some cases you need all your
-indexes in ram, in other cases it can just be a small working set." The survey's
+The mongodb-user thread (the post-mortem 10gen's Eliot Horowitz posted with
+Foursquare's permission, carried in the register) spells the capacity rule the
+incident taught: "In some cases you need all your indexes in ram, in other
+cases it can just be a small working set." The survey's
 dossier 23 sets the boundary this chapter keeps: so this is less "wrong engine
 chosen" than "distribution adopted without the monitoring and capacity
 discipline distribution requires." The blog's closer is the afterlife: "we
