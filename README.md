@@ -14,12 +14,14 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-26, session 27)
+## Status (updated 2026-11-26, session 28)
 
 **Chapters 1-12 are AUTHORED + REVIEWED (Part I complete, session 23;
-Part II: Ch. 11 reviewed session 25, Ch. 12 Relational exits reviewed
-session 27; C15, C36, C46; T01, T02; P1-P3, P10). Next unit: Chapter 13
-authoring (Scale-out relational done right), then its review.**
+Part II: Ch. 11 reviewed session 25, Ch. 12 reviewed session 27, Ch. 13
+Scale-out relational done right AUTHORED + AUTHOR-CHECKED session 28; C01,
+C04, C05, C26-precursor, C54, C55; F10; P4-P7 + P19 preview). Next unit:
+Phase 3 adversarial review of Ch. 13, then Chapter 14 (The NewSQL
+absorptions).**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
