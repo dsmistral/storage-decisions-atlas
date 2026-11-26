@@ -31,9 +31,11 @@ finding borrowed from the matrix chapter.
 An absorption, for this chapter's purposes, is a move into distributed SQL
 whose pitch is semantic: unlike the exits of Chapter 12, the absorptions
 claim to preserve what the origin gave the application. The claim comes in
-gradations. Migrating Aurora Postgres tables to CockroachDB preserves the
-SQL surface but changes the wire protocol and the operational model.
-Migrating sharded MySQL to F1 preserves SQL and the application's mental
+gradations. Migrating Aurora Postgres tables to CockroachDB preserves much
+of the SQL surface while moving the operational model: the DoorDash post
+records running the database behind a facade service and a deliberate
+schema redesign "so that we can better leverage the underlying database
+strengths". Migrating sharded MySQL to F1 preserves SQL and the application's mental
 model while dissolving the shard map entirely. Migrating HBase to TiDB
 preserves horizontal scale while restoring SQL, the thing wide-column never
 promised. In each case the absorbed workload is supposed to come out the
@@ -58,7 +60,7 @@ read without their timestamps, look like laws for all time.
 | Move | Window | Origin | Destination | Trigger | Build or buy | Evidence |
 |---|---|---|---|---|---|---|
 | T04, flow 1 (C27) | by 2012 | Sharded MySQL (AdWords) | F1 on Spanner (built) | Resharding as a recurring human project | Build | FP |
-| T04, flow 2 (C26) | announced 2022 | HBase (wide-column), deprecated | TiDB | HBase end of life; unify on SQL | Buy | FP (dead-fetch source, indexed excerpts) |
+| T04, flow 2 (C26) | evaluation 2022 (register row) | HBase (wide-column), deprecated | TiDB | HBase end of life; unify on SQL | Buy | FP (dead-fetch source, indexed excerpts) |
 | T03 (C25) | vendor write-up Nov 2023 | Aurora Postgres (relational, single primary) | CockroachDB | Single-writer ceiling; weekly-peak outages | Buy | FP (+ vendor VP) |
 | T25 (Zomato billing) | 2024 (register date label) | TiDB (distributed SQL), self-managed | DynamoDB (managed KV) | TCO of overprovisioning; self-managed ops bill | Reverse | FP (blog plus AWS co-authored post) |
 
@@ -106,9 +108,9 @@ application was not supposed to notice the topology change underneath it.
 "By 2012, when we published the Spanner paper, we had just completed the
 migration of AdWords frontend traffic to the new Spanner backend" (same
 source). The price is register-recorded: TrueTime's global transactions and
-the per-operation latency accepted for them (register C27; the survey's
-assessment is that async application patterns hid the latency, and Chapter
-8 carries the sourcing note).
+the per-operation latency accepted for them (register C27; ANALYSIS's P11
+row records the latency "hidden by async app patterns", and Chapter 8
+carries the session-19 sourcing notes).
 
 **T04, flow 2: Pinterest absorbs its wide-column estate (C26).** The
 trigger is deprecation: HBase end of life, and with it the question of what
@@ -121,8 +123,8 @@ exclusions are as instructive as its winner. Spanner was "appealing in many
 dimensions but is not open source", and "the migration cost from AWS to GCP
 could be prohibitively high at our scale"; Vitess's "cross shard queries may
 not be optimized" (same source, indexed excerpts; Chapter 8 carries the
-truncation caution). TiDB won among finalists including TiDB, YugabyteDB,
-and DB-X. The current-state anchor is freshness-grade: as of October 2026,
+truncation caution). The finalists "were TiDB, YugabyteDB, and DB-X" (same
+source, indexed excerpt), and TiDB won. The current-state anchor is freshness-grade: as of October 2026,
 Pinterest's ingestion framework still moves "database changes from MySQL,
 TiDB and KVStore into analytical tables" at "petabyte-scale data and
 thousands of pipelines" (C26: InfoQ, FP; live-verified). The absorption has
@@ -195,7 +197,9 @@ TiDB→DynamoDB) and T27 (Bhoos DynamoDB→PG) show neither distributed SQL nor
 managed KV is a terminal state" and "both reverse flows now first-party".
 What made the
 departure rational was not a failure of distributed SQL's semantics; Zomato
-gave TiDB three years of production billing. It was the mismatch between
+ran production billing on TiDB for years before the departure (the post's
+own framing: "Over the years, the scale at which Zomato operates has grown
+tremendously"). It was the mismatch between
 the store's operating model and the workload's economics: peak-shaped
 traffic, overprovisioned capacity, self-managed infrastructure. The
 departure price was semantic (joins denormalized into an adjacency list),
@@ -212,9 +216,10 @@ conventional note (the arrows are the ANALYSIS text). The 2022 evaluation is
 the re-check rule in loop form: a team that had been through the NoSQL era
 and an intermediate in-house stop ran a fresh, documented, multi-candidate
 evaluation rather than defaulting to either its own history or the era's
-marketing. P9's fails-when ("The honest re-evaluation step is skipped")
-is the counter-face the ANALYSIS names: internal builds that never re-ran
-the evaluation.
+marketing. The P-index's P9 fails-when ("The honest re-evaluation step is
+skipped") is the general caution; the counter-face is ANALYSIS's P9 row's
+own cell, "C09/C36: internal-only builds that never re-ran the evaluation"
+(quoted from the ANALYSIS pattern table).
 
 **P11, latency as the price of correctness, on the build era.** ANALYSIS's
 P11 row reads: "C27: F1 accepted higher per-op latency, hidden by
@@ -222,8 +227,8 @@ async app patterns; C28: ~10% per-query gap accepted" (the ANALYSIS
 pattern table's P11 cells, quoted; the sourcing split for the ~10% figure
 is Chapter 8's, pinned to SURVEY dossier 11). Both builds paid the same
 bill, correctness purchased with latency, and paid it deliberately. The
-fails-when ("The workload can't hide the latency") is precisely what T25's
-traffic profile shows on the cost side: Zomato's billing could not hide a
+P-index's P11 fails-when ("The workload can't hide the latency") is
+precisely what T25's traffic profile shows on the cost side: Zomato's billing could not hide a
 latency-above-capacity event on peak days, and its answer was architectural
 pay-per-use rather than transactional renegotiation.
 
@@ -231,7 +236,8 @@ pay-per-use rather than transactional renegotiation.
 lens explains the title of this chapter's story: across the book, the
 builds that paid off became platforms or open source, and the ones that
 did not stayed internal. Of this chapter's two builds, OceanBase's record
-is the register-sourced face of convergence: "From 2017, OceanBase started
+is the register-sourced evidence of that convergence (supporting evidence,
+not one of P15's registered faces): "From 2017, OceanBase started
 to serve for external customers" (C28: dbdb.io, FP; live-verified), plus
 the 2019 TPC-C result in the same source. Spanner's product path is
 handled as the study's context per Chapter 8's review discipline, not
@@ -272,8 +278,8 @@ only by T25's Zomato flow.
 that the SQL family's center of gravity moved, in one decade, from
 something teams built when they outgrew sharding to something teams buy
 with a documented evaluation. The chronology also warns the other way: T25
-recorded, three years after the buyer era opened, that the absorber's
-operating model is itself a decision with a price. The central
+recorded, while the buyer era it joined was still current, that the
+absorber's operating model is itself a decision with a price. The central
 nomenclature discipline this chapter leaves the reader: distributed SQL is
 a routing decision, not a destination.
 
