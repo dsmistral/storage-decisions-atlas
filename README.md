@@ -14,14 +14,16 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-26, session 28)
+## Status (updated 2026-11-26, session 29)
 
-**Chapters 1-12 are AUTHORED + REVIEWED (Part I complete, session 23;
-Part II: Ch. 11 reviewed session 25, Ch. 12 reviewed session 27, Ch. 13
-Scale-out relational done right AUTHORED + AUTHOR-CHECKED session 28; C01,
-C04, C05, C26-precursor, C54, C55; F10; P4-P7 + P19 preview). Next unit:
-Phase 3 adversarial review of Ch. 13, then Chapter 14 (The NewSQL
-absorptions).**
+**Chapters 1-13 are complete: Chs. 1-12 AUTHORED + REVIEWED (Part I complete,
+session 23; Part II: Ch. 11 reviewed session 25, Ch. 12 reviewed session 27),
+and Ch. 13 Scale-out relational done right REVIEWED session 29 (Phase 3 review
+passed with 7 findings fixed, headlined by the ANALYSIS-vs-P-index attribution
+realignment, the Shopify em-dash quote split, the §1 early-readings
+correction, and the F10 byline upgraded to the HN page's own record; chapter
+stands at 059d9d30). Next unit: Chapter 14 (The NewSQL absorptions; T03, T04;
+C25, C26, C27, C28; P9, P11, P15; + T25 Zomato reverse flow, R6).**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
