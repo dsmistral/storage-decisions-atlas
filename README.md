@@ -14,19 +14,21 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-26, session 34)
+## Status (updated 2026-11-26, session 35)
 
-**Chapters 1-15 are complete and all reviewed (Part I complete, session 23;
-Part II: Ch. 11 reviewed session 25, Ch. 12 reviewed session 27, Ch. 13
+**Chapters 1-16 are complete and all reviewed (Part I complete, session 23;
+Part II complete: Ch. 11 reviewed session 25, Ch. 12 reviewed session 27, Ch. 13
 reviewed session 29, Ch. 14 reviewed session 31, Ch. 15 reviewed session 33;
-Ch. 16 Returns and round trips AUTHORED + AUTHOR-CHECKED session 34, closing
-Part II's transition reading: the quiet document→relational returns (T19),
+Ch. 16 Returns and round trips AUTHORED session 34 (fdee66ec) and REVIEWED
+session 35 with 3 minor findings fixed, closing Part II's transition reading:
+the quiet document→relational returns (T19),
 Mixmax's key-value return (T10), the two-week TimescaleDB round trip (T13/F09),
 Uber's RDBMS→RDBMS pair with Yelp's honest-mirror T23, the T23-T27 outflow
 cluster, and the vector unwind both ways (T20); the manuscript stands at
-fdee66ec with 14/14 URLs register-copied and the 68-target quote battery green).
-Next unit: Phase 3 adversarial review of Ch. 16, then Chapter 17 (Backup
-failures: the class that kills; F02, F04, F05, F06; FC1, opens Part III).**
+a4827b70 with the full battery re-run green on re-fetched sources).
+Next unit: Chapter 17 (Backup
+failures: the class that kills; F02, F04, F05, F06; FC1, opens Part III), then
+its review.**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
