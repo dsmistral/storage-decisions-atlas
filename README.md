@@ -14,21 +14,18 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-26, session 35)
+## Status (updated 2026-11-26, session 36)
 
 **Chapters 1-16 are complete and all reviewed (Part I complete, session 23;
 Part II complete: Ch. 11 reviewed session 25, Ch. 12 reviewed session 27, Ch. 13
-reviewed session 29, Ch. 14 reviewed session 31, Ch. 15 reviewed session 33;
-Ch. 16 Returns and round trips AUTHORED session 34 (fdee66ec) and REVIEWED
-session 35 with 3 minor findings fixed, closing Part II's transition reading:
-the quiet document→relational returns (T19),
-Mixmax's key-value return (T10), the two-week TimescaleDB round trip (T13/F09),
-Uber's RDBMS→RDBMS pair with Yelp's honest-mirror T23, the T23-T27 outflow
-cluster, and the vector unwind both ways (T20); the manuscript stands at
-a4827b70 with the full battery re-run green on re-fetched sources).
-Next unit: Chapter 17 (Backup
-failures: the class that kills; F02, F04, F05, F06; FC1, opens Part III), then
-its review.**
+reviewed session 29, Ch. 14 reviewed session 31, Ch. 15 reviewed session 33, Ch. 16
+reviewed session 35). Part III is open: Ch. 17 Backup failures: the class that
+kills AUTHORED + AUTHOR-CHECKED session 36 (24cffa11; F02, F04, F05, F06; FC1;
+GitLab's five-channel collapse, Sidekick's no verified backup, Ma.gnolia's
+co-located backups, Code Spaces' in-blast-radius copies; restore-path diversity
+as the deliverable; plan and chapter map agree exactly).
+Next unit: Phase 3 review of Ch. 17, then Ch. 18 (F01, F03; FC2, plus F10 per
+BOOK-PLAN's row, the session-29-flagged divergence).**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
