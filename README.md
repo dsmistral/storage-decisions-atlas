@@ -14,14 +14,12 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-26, session 23)
+## Status (updated 2026-11-26, session 24)
 
-**Chapters 1-10 are AUTHORED + REVIEWED (Part I complete: the ten family
-chapters all closed by session 23's review of Ch. 10, Vector: where the
-index lives; C32 turbopuffer, C33 Spotify Voyager, C34 Confident AI
-Pinecone→pgvector, C35 Pinecone counter-flow; T14, T18, T20; P16, W1
-watch open). Next unit: Chapter 11 (the transition matrix, T01-T30),
-which opens Part II, then its review.**
+**Chapters 1-10 are AUTHORED + REVIEWED (Part I complete, session 23), and
+Chapter 11, The transition matrix: how to read it (T01-T30 survey; P19, P20)
+is AUTHORED (session 24; Part II opens). Next unit: Chapter 11's Phase 3
+review, then Chapter 12 (Relational exits).**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
