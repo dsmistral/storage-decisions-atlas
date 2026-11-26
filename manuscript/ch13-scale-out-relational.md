@@ -89,8 +89,9 @@ workspace, and the post's own section heading states it as a decision:
 version: the key is not stored in a column but encoded into the 64-bit ID
 itself, generated per shard inside Postgres (the register records the
 PL/pgSQL generation; the Medium account is search-snippet-corroborated in
-this chapter, with the title's "With more than 25 photos and 90 likes every
-second" marking the scale at which the design was chosen). Notion's post
+this chapter, with the post's opening sentence, "With more than 25 photos
+and 90 likes every second", marking the scale at which the design was
+chosen). Notion's post
 also records the road not taken, which is this chapter's family boundary in
 one line: "switching to another database system such as DynamoDB (deemed
 too risky for our use case)". Pinterest's
