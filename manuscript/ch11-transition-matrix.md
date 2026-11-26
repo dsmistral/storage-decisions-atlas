@@ -48,7 +48,7 @@ in play.
 
 | Destination | Rows | Named movers | The short version |
 |---|---|---|---|
-| Columnar (ClickHouse-class) | T05, T06, T21, T28, T29, T30 | Cloudflare, Cloudflare logs, Langfuse, Uber, Zerodha, Zerodha | Six rows point at one engine class; the densest destination in the corpus |
+| Columnar (ClickHouse-class) | T05, T06, T21, T28, T29, T30 | Cloudflare, Cloudflare logs, Langfuse, Uber + Zerodha, Zerodha, Zerodha | Six rows point at one engine class; the densest destination in the corpus |
 | Key-value (including managed) | T01, T10, T24, T26 | Amazon ledger, Mixmax, Deliveroo, Freecharge | DynamoDB appears in all four |
 | Distributed SQL | T03, T04, T22 | DoorDash, Google, Pinterest, Uber Docstore | Three eras of the same destination |
 | Wide-column (family internal or into) | T02, T15, T07, T08, T16 | Netflix, Twitter, Discord, Facebook Messages, Instagram | Five rows, three of them engine swaps |
@@ -71,7 +71,7 @@ what that means.
 ## 3. What the dense cells say
 
 **The columnar inflow (T05, T06, T21, T28, T29, T30).** Six of thirty rows
-land in ClickHouse-class engines, and five of the six were added or rewritten
+land in ClickHouse-class engines, and four of the six were added
 in R5 and R6, which means the direction was getting more common, or better
 documented, as the corpus closed. The origins fan out: a Postgres OLAP
 extension (Cloudflare's CitusDB, T05), a search engine (Cloudflare's logs,
@@ -234,7 +234,7 @@ NewSQL absorptions; T07, T08, and T16 are Chapter 15's engine-swap twins;
 and T10, T11, T13, T19, T20, plus the R6 flows T23 through T27, are
 Chapter 16's returns and round trips. Watch states condition three cells:
 W1 (vector, open, no first-party large-scale move either way), W2 (Pinterest
-TiDB long-term outcome, the inverse of T25's Zomato flow), and W5 (OpenAI's
+TiDB long-term outcome, still pending; a TiDB exit is otherwise documented only by T25's Zomato flow), and W5 (OpenAI's
 write-scaling trajectory, the corpus's live test of the unsharded
 counter-case).
 
