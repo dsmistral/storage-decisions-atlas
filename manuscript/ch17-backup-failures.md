@@ -13,7 +13,7 @@ warrant: the post-mortem set, from GitLab's silently failing backups through
 Sidekick's and Ma.gnolia's missing backups to Code Spaces' shared blast radius,
 "shows that storage failures are overwhelmingly operations failures: backups,
 failover, monitoring, and verification, not engine selection"
-([corpus/SURVEY.md](#sources), principles, line 19).
+([corpus/SURVEY.md](#sources), Executive summary, principle 10, line 19).
 
 The corpus formalizes the class as FC1. The P-index's row reads "Backups are
 the failure class: unverified, co-located, or in-blast-radius copies are not
@@ -32,15 +32,15 @@ old path survive the cutover. ANALYSIS's P20 cell stresses the boundary case:
 treated the surviving old path as a planning input; this chapter reads what
 happens when there is no such input, in production, at the worst moment. Two
 of the four rows (F02, F06) also carry the P20 pattern's migration lesson in
-their DNA: a wiped directory on the wrong host, and a recovery that shared its
-credentials with the attacker.
+their DNA: a directory removal on the wrong host, and a recovery that shared
+its credentials with the attacker.
 
 ## 2. The four rows
 
 | Failure | Service | Year | The failure in one line | Restore that existed | Evidence |
 |---|---|---|---|---|---|
-| F02 | GitLab.com | 2017 | wrong-host deletion of the primary (~300 GB); all five backup channels unusable | a 6-hour-old staging backup, restored over ~18 hours | FP |
-| F04 | Sidekick / Danger | 2009 | SAN work corrupted main and backup databases; ~800k users' data unreachable | month-old offsite tapes, partially, after ~2 weeks | PR |
+| F02 | GitLab.com | 2017 | wrong-host deletion of the primary (~300 GB); all five backup channels unusable | a 6-hour-old staging backup (register row: 6h data lost, 18h recovery) | FP |
+| F04 | Sidekick / Danger | 2009 | SAN work corrupted main and backup databases; ~800k users' data unreachable | month-old offsite tapes, partially (survey dossier 26) | PR |
 | F05 | Ma.gnolia | 2009 | ~0.5 TB MySQL corrupted; primary and backups failed together | none; community web caches recovered fragments | PR |
 | F06 | Code Spaces | 2014 | attacker deleted data, snapshots and offsite backups from the console | none; every path sat in the compromise domain | PR |
 
@@ -60,12 +60,14 @@ begins with the loss line: "We lost six hours of database data (issues, merge
 requests, users, comments, snippets, etc.) for GitLab.com". The proximate chain
 is a textbook escalation of small decisions. Spam pressure came first:
 "spammers were hammering the database by creating snippets, making it
-unstable". Replication lagged, troubleshooting escalated, and during the
-repair someone wiped the secondary's data directory to force a clean re-sync: a
-planned step on the wrong side of a lagging pair. Then the wrong-host deletion:
-the command meant for the now-empty secondary landed on the primary, and "After
+unstable". Replication lagged, troubleshooting escalated, and in the repair's
+third incident the acting engineer judged that `pg_basebackup` was refusing to
+work "due to the PostgreSQL data directory being present (despite being
+empty)", and decided to remove it; the command meant for the empty secondary
+landed on the primary, and "After
 a second or two he notices he ran it on `db1.cluster.gitlab.com`, instead of
-`db2.cluster.gitlab.com`". The Availability Digest's third-party summary
+`db2.cluster.gitlab.com`". The termination came too late: "Of around 300 GB
+only about 4.5 GB is left". The Availability Digest's third-party summary
 registers the scale: "a technician accidentally deleted 300 GB of data from a
 production database" ("GitLab Suffers Massive Backup Failure Due to a Fat
 Finger", April 2017).
@@ -95,12 +97,13 @@ other words, out of five backup/replication techniques deployed none are
 working reliably or set up in the first place. We ended up restoring a
 six-hour-old backup". The restore that worked was a staging database's backup,
 outside the production stack: "We're working on recovering right now by using a
-backup of the database from a staging database". Recovery took the
-Digest-reported "roughly 18 hours" of the survey's dossier ("full service took
-roughly 18 hours to restore"), and the Digest's arithmetic on the whole event
-is "GitLab was down for about 36 hours before it was able to recover its
-database". The survey's lesson line has become the chapter's shorthand: "A
-backup you have never restored is a hope, not a backup".
+backup of the database from a staging database". The restore duration is the
+survey dossier's arithmetic, not the Digest's ("full service took roughly 18
+hours to restore", dossier 24; the register's F02 row carries it as 18h
+recovery; the Digest instead times the whole event: "GitLab was down for about
+36 hours before it was able to recover its database"). The survey's lesson
+line has become the chapter's shorthand: "A backup you have never restored is
+a hope, not a backup".
 
 ### Sidekick: the trust that failed upward (F04)
 
@@ -151,12 +154,17 @@ restored.
 
 Code Spaces is the row where the backups were real and still useless. The
 company had claimed resilience in its marketing; eSecurity Planet's report
-preserves the cached site's own words, with the source's ellipsis kept: "Backing
+preserves the cached site's own words, quoted in fragments split at the
+source's ellipsis: "Backing
 up data is one thing, but it is meaningless without a recovery plan", and the
-claim's continuation, "one that is well-practiced and proven to work". In June
-2014 attackers gained the AWS console credentials, and when staff tried to
-reclaim the account, the attacker, per the company's own statement preserved in
-the report, "proceeded to randomly delete artifacts from the panel". The
+claim's continuation, "one that is well-practiced and proven to work". On June
+17, 2014 the service was hit by a DDoS attack, and the attacker had also
+gained access to Code Spaces' Amazon EC2 control panel (the register's F06 row
+records AWS console access); when the company changed its panel password, the
+attacker had, per the company's own statement preserved in the report,
+"already created several backup logins", and "upon seeing us make the
+attempted recovery of the account he proceeded to randomly delete artifacts
+from the panel". The
 deletion inventory: "he had removed all EBS snapshots, S3 buckets, all AMIs,
 some EBS instances and several machine instances", and the company's summary:
 "In summary, most of our data, backups, machine configurations and offsite
