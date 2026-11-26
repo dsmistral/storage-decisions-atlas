@@ -75,8 +75,8 @@ the HN thread) all fetched live while writing this chapter.
 ## 3. The four properties, with figures
 
 **Property 1: the shard key must be natural to the workload (P4).** The
-register's P4 row lists its faces as "C01 (domain), C04 (shop_id), C05
-(user id in ID), C26 (app-managed ID-to-shard)", and the R6 verification
+ANALYSIS's pattern table lists P4's faces as C01 (domain), C04 (shop_id), C05
+(user id in ID), and C26 (app-managed ID-to-shard), and the R6 verification
 pass added C55 to that list as its Postgres-at-product-scale member. The
 range of what counts as natural is worth reading closely, because it is
 wider than "pick a customer column". Shopify's key is the shop: "each pod
@@ -94,12 +94,13 @@ one line: "switching to another database system such as DynamoDB (deemed
 too risky for our use case)". Pinterest's
 app-managed ID-to-shard mapping is the same idea maintained at a fleet that
 later outgrew its own shards, which is exactly why it anchors Chapter 14.
-The P-index's fails-when for P4 points at what all of these avoided: the
+ANALYSIS's fails-when for P4 points at what all of these avoided: the
 tenant exists but was chosen coarse.
 
-**Property 2: vertical partitioning before horizontal (P6).** The register's
-P6 face is C01: "domain table moves before row splitting; linters prevent
-cross-domain joins". GitHub's own words are the mechanism: "we group
+**Property 2: vertical partitioning before horizontal (P6).** ANALYSIS's
+pattern table records P6's face as C01: "domain table moves before row
+splitting; linters prevent cross-domain joins". GitHub's own words are the
+mechanism: "we group
 database tables that belong together into schema domains and enforce
 boundaries between the domains with SQL linters. This allows us to safely
 partition data later without ending up with queries and transactions that
@@ -132,8 +133,9 @@ is carried onto the router rather than rebuilt.
 
 **Property 3: tenants must keep moving after the split (P7).** The register's
 P7 face is C04, and the post's own framing is the property: Shopify balances
-"our MySQL shards by migrating shops across shards, entirely online and with
-virtually zero consumer-facing downtime". The pod architecture is what makes
+"our MySQL shards by migrating shops across shards", with the moves
+"entirely online and with virtually zero consumer-facing downtime". The pod
+architecture is what makes
 the moves routine: a pod carries its own MySQL, Redis, and Memcached, and
 the shop is the identifying entity, so moving one is a bounded data move,
 not a re-schema. Notion's re-shard is the macro version of the same
@@ -164,10 +166,12 @@ caused user-visible outages."
 
 ## 4. The seductive wrong key
 
-P5's registered face is F10, and the register quotes it from Slack's own
-people: the "original sin of early Slack infrastructure". The full sentence,
-written on the migration thread by Keith Adams, Slack's chief architect from
-2016 to 2020, is the cleanest statement of the trap in the corpus: "The
+P5's registered face is F10, and ANALYSIS's pattern table quotes it from
+Slack's own people: the "original sin of early Slack infrastructure". The
+full sentence, written on the migration thread by Keith Adams, posting as
+HN user "kmavm" on May 18, 2021, who states the role himself ("I was
+Chief Architect at Slack from 2016 to 2020"), is the cleanest statement
+of the trap in the corpus: "The
 assumption that tenants are perfectly isolated is actually the original sin
 of early Slack infrastructure that we adopted Vitess to migrate away from."
 
@@ -195,11 +199,11 @@ post-mortem instead.
 
 - **P4 (natural tenant key)**: faces C01 (domain), C04 (shop_id), C05 (user
 id in ID), C26 (app-managed ID-to-shard), plus the R6 addition C55
-(workspace ID). Fails-when: the tenant exists but chosen coarse, taught not
-by a P4 case but by F10 below.
+(workspace ID). ANALYSIS's fails-when for P4 (the tenant chosen coarse)
+is taught not by a P4 case but by F10 below.
 - **P5 (seductive wrong key)**: face F10, the workspace-per-shard assumption.
-The P-index's fails-when column for P5 is itself the failure: "F10 + Slack's
-own 3-year correction (P19 discipline applied)". A pattern whose teaching
+ANALYSIS's fails-when for P5 is itself the failure: "F10 + Slack's own
+3-year correction (P19 discipline applied)". A pattern whose teaching
 evidence is a decade of drag on an engineering organization.
 - **P6 (vertical first)**: faces C01 (schema domains + Vitess vertical
 shards) and C54 (the dozen vertically partitioned databases built 2020-22
@@ -233,7 +237,11 @@ appears here only as C01's and C66's chosen tool), and it predates the R6
 additions of C54 and C55. The pattern cells agree except for P19, which the
 chapter carries as the Property 4 preview and a forward pin rather than a
 registered family pattern. The same flag convention as Chapters 6 and 11
-applies: recorded here, to be folded into the next planning pass.
+applies: recorded here, to be folded into the next planning pass. One more
+divergence for the same pass: BOOK-PLAN's Ch. 18 row schedules F10 (with
+patterns "FC2, P5") while the chapter map's Ch. 18 line lists only F01 and
+F03, F10 appearing there only in Ch. 20; the chapter's F10 pin follows the
+plan.
 
 What the chapter hands forward: to Chapter 14, the observation that some of
 these fleets are precisely the ones that later re-evaluated the market
@@ -244,9 +252,9 @@ the reminder that sharding is not the only scale move: the engine-swap
 twins kept a fixed topology and changed the storage engine under it. To
 Chapter 22, the playbook: this chapter's Property 4 cases are its
 verification face. And to Chapter 21, the driver synthesis: none of the six
-fleets cites "the database is slow" alone; the recorded drivers are load and
-ops burden, and the choice to stay relational shows cost and skill doing
-the deciding.
+register rows records a raw "the database is slow" driver; the recorded
+drivers are load and ops burden, and the choice to stay relational shows
+cost and skill doing the deciding.
 
 Verdict (assessment): the counter-program is the more instructive half of
 the relational story. The exits of Chapter 12 prove leaving is possible;
