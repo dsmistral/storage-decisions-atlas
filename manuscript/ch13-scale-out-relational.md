@@ -33,11 +33,13 @@ here are the falsification of that blunter lesson. None of them left the
 relational family. All of them changed the topology instead, and the
 fascinating part is how much agreement there is in how they did it.
 
-Two of the six were also read in Chapter 1, and the reading there was
-deliberately different. Chapter 1 used C01 and C47 as topology evidence: the
-same database family kept, under three different shapes. This chapter reads
-the same cases as migration programs: not what the final shape was, but how
-the fleet got there with the business running on it. The distinction matters
+Two of the six were also read in earlier chapters, and the readings there
+were deliberately different. Chapter 1 used C01 (alongside C47, the Vitess
+build history) as topology evidence: the same database family kept, under
+three different shapes. Chapter 8 used C26 as one of its 2022-era NewSQL
+buyers. This chapter reads the same cases as migration programs: not what
+the final shape was, but how the fleet got there with the business running
+on it. The distinction matters
 because the register's successful migrations do not succeed at the schema
 level; they succeed at the sequencing level, and the sequencing is what
 this chapter teaches.
@@ -74,7 +76,7 @@ the HN thread) all fetched live while writing this chapter.
 
 ## 3. The four properties, with figures
 
-**Property 1: the shard key must be natural to the workload (P4).** The
+**Property 1: the shard key must be natural to the workload (P4).**
 ANALYSIS's pattern table lists P4's faces as C01 (domain), C04 (shop_id), C05
 (user id in ID), and C26 (app-managed ID-to-shard), and the R6 verification
 pass added C55 to that list as its Postgres-at-product-scale member. The
@@ -131,8 +133,9 @@ shards live as Postgres views grouped per key (the register's summary row
 calls the groupings "colos"), so the colocation the application already had
 is carried onto the router rather than rebuilt.
 
-**Property 3: tenants must keep moving after the split (P7).** The register's
-P7 face is C04, and the post's own framing is the property: Shopify balances
+**Property 3: tenants must keep moving after the split (P7).** The
+P-index's pattern row records P7's face as C04, and the post's own framing
+is the property: Shopify balances
 "our MySQL shards by migrating shops across shards", with the moves
 "entirely online and with virtually zero consumer-facing downtime". The pod
 architecture is what makes
@@ -186,8 +189,8 @@ re-sharding by channel on Vitess, took years and is the register-recorded
 P19 face at Slack (a three-year double-write and read-diffing program;
 C66/F10; the failure chapters return to it in Chapters 18
 and 20 with the fuller mechanics). The point for this chapter's four
-properties: P4's fails-when, "the tenant exists but chosen coarse", is not
-an edge case. It is the default mistake of a team that lets the product
+properties: ANALYSIS's fails-when for P4, "the tenant exists but chosen
+coarse", is not an edge case. It is the default mistake of a team that lets the product
 taxonomy pick the shard key.
 
 ## 5. Reading the moves with the patterns
