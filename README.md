@@ -14,18 +14,17 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-26, session 38)
+## Status (updated 2026-11-26, session 39)
 
-**Chapters 1-17 are complete and all reviewed (Part I complete, session 23;
-Part II complete: Ch. 11 reviewed session 25, Ch. 12 reviewed session 27, Ch. 13
-reviewed session 29, Ch. 14 reviewed session 31, Ch. 15 reviewed session 33, Ch. 16
-reviewed session 35, Ch. 17 reviewed session 37). Part III is open: Ch. 18
-Distribution's own failure modes AUTHORED + AUTHOR-CHECKED session 38 (e03f7ce7;
-F01, F03; F10 per the plan, the session-29-flagged divergence; FC2, P5; battery
-28/28 verbatim, 16/16 corpus fragments, census green, 7/7 register URLs, parity
-b98d597d).
-Next unit: Phase 3 review of Ch. 18, then Ch. 19 (Wrong choice: F07, F08; FC3,
-FC4), then its review.**
+**Chapters 1-17 are complete and all reviewed; Ch. 18 Distribution's own failure
+modes now REVIEWED too (session 39): review passed with 2 findings fixed (the
+F10 Year cell rebuilt on verbatim anchors as "2017-2020 (3-year correction)";
+the mongodb-user thread characterized per its own record: the post-mortem
+posted by 10gen's Eliot Horowitz with Foursquare's permission). Fresh battery
+on src_r39_* snapshots (byte-identical to src_r38): 29/29 quote targets
+verbatim, 16/16 corpus fragments, census green, 7/7 register URLs byte-exact.
+Chapter commits e03f7ce7 -> 365590a2, parity md5 22e8f4f6.
+Next unit: Ch. 19 (Wrong choice: F07, F08; FC3, FC4), then its review.**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
