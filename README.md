@@ -14,14 +14,15 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-25, session 20)
+## Status (updated 2026-11-26, session 22)
 
-**Chapters 1–8 are AUTHORED + REVIEWED; Chapter 9 is AUTHORED (session 20;
-In-memory: memcached plus your ops wrapper; C29 EVCache, C30 Facebook
-Memcache, C31 Twemcache + the R6 extension C57 PhonePe and C60 Flipkart on
-on-prem Aerospike; P1, P8 + P16 caution; T26 preview). Next unit: Phase 3
-review of Chapter 9, then Chapter 10 (Vector: where the index lives; C32,
-C33, C34, C35; T14, T18, T20; P16, W1), then its review.**
+**Chapters 1–9 are AUTHORED + REVIEWED (Ch. 9's review closed in session 21;
+its first close pushes failed to land and were redone with full
+verification). Chapter 10 authoring is IN PROGRESS (session 22; Vector:
+where the index lives; C32 turbopuffer, C33 Spotify Voyager, C34 Confident
+AI Pinecone→pgvector, C35 Pinecone counter-flow; T14, T18, T20; P16, W1).
+Next unit: finish Chapter 10, then its Phase 3 review, then Chapter 11
+(the transition matrix).**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
