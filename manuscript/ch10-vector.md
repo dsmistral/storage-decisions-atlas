@@ -240,14 +240,16 @@ not directional (register T20; survey comparison, graded as assessment).
 
 - **turbopuffer (C32):** the cost-architecture bet, and the family's
   cleanest narrative arc: a feature killed by an infrastructure bill, then
-  revived by a change in where the index lives. The trillion-document
+  revived by a change in where the index lives. The four-trillion-document
   scale and named customers, if they hold, make it the engine pole's
   production proof; but the two headline figures (the 95% Cursor cut and
   the revenue run rate) are vendor-reported and third-party estimated
   respectively, and P16's caution binds on both.
 - **Spotify (C33):** the placement discipline case. The team's explicit
   goal was operating cost and statelessness, and it accepted a library's
-  ceilings (no cross-service filtering story, an in-memory working set) to
+  working-set ceiling (nearest-neighbor search in memory is the post's own
+  framing; what the library does not bring, a stateful cluster's serving
+  guarantees around the index, is exactly the ops the placement refuses) to
   get them. Replacing Annoy with Voyager after ten years, rather than
   adopting a database, is the placement question answered the same way
   twice, which is the strongest behavioral evidence in the corpus for the
