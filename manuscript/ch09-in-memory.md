@@ -47,7 +47,7 @@ because the engine now owns it.
 
 ### Netflix's EVCache: the wrapper as product (C29)
 
-Netflix's EVCache wiki opens with the family's value statement: caching
+Netflix's EVCache wiki carries the family's value statement: caching
 "reduces the number of servers needed to handle the requests as most of the
 requests are served by the cache" ([C29: Netflix EVCache
 wiki](https://github.com/Netflix/EVCache/wiki), FP). What EVCache adds to
@@ -56,32 +56,41 @@ replicated cache with a simple memcached-semantics" surface (same source),
 data "sharded across the cluster based on Ketama consistent hashing", and a
 multi-zone deployment with zone affinity, where a cluster's nodes can sit
 "in the same availability zone or spread out across multiple availability
-zones" (same source). The register records the replication posture that
-makes the wrapper load-bearing for availability: 2 to 9 replicas per
-cluster (register C29). The wiki describes zone-aware replication and
-cross-zone propagation as the reason the cache survives the loss of an
-entire zone; correctness against staleness is handled by the cache's own
-replication and invalidation paths, which is the infrastructure-owns-it
-side of the split.
+zones" (same source). On the copies count the wiki
+is concrete: "Any number of copies of data are supported (some clusters
+run with 2, others with 9)" (same source), which the register summarizes
+as 2 to 9 replicas per cluster (register C29). On zones, the wiki's
+multi-zone deployment with zone affinity sends a client's reads to its
+local zone while "the writes are done on both the zones", so "data is
+replicated across both the zones thus increasing its availability"; when
+instance failure or eviction costs data, zone fallback can fetch it from
+the other zone, at higher latency (same source). Note the split's shape
+here: EVCache's replication owns redundancy, not correctness against
+staleness; nothing in the wiki claims the cache handles staleness, and per
+the governing test it need not, because in the memcached lineage the app
+pays that tax (Section 3).
 
 ### Facebook's Memcache: the science of app-owned correctness (C30)
 
 Facebook's NSDI 2013 paper is the family's scientific record, and its
-abstract states the contract with unusual directness: "Memcached may lose
-or evict data without notice. Replication and cache invalidation are not
-transactional, providing no consistency guarantees." ([C30: USENIX NSDI'13, Scaling
+abstract gives the scale with unusual directness: the system "handles
+billions of requests per second and holds trillions of items" for "the
+world's largest social network" ([C30: USENIX NSDI'13, Scaling
 Memcache at Facebook](https://www.usenix.org/conference/nsdi13/technical-sessions/presentation/nishtala),
-FP). The stakes it reports are the family's outer limit: the system
-"handles billions of requests per second and holds trillions of items" for
-"the world's largest social network" (same source). The register's summary
-records the design consequence: app-owned invalidation, with the survey's
-comparison noting that "Facebook's paper made the application own
-invalidation around a best-effort store" (SURVEY comparison, graded
-assessment). Where Netflix wrapped memcached with infrastructure
-redundancy, Facebook pushed correctness up into the application and
-accepted the paper's own framing: "the semantics of the system as a whole
-are difficult to state precisely" (same source; the abstract asks whether
-such an imprecise system can be operated at all).
+FP). The contract statement is on the same conference page but outside the
+authors' abstract: it comes from the page's Public Summary, by Michael
+Piatek, which reads "Memcached may lose or evict data without notice.
+Replication and cache invalidation are not transactional, providing no
+consistency guarantees." before asking outright: "Won't such an imprecise
+system be incomprehensible to developers and impossible to operate?" (same
+source). The register's summary records the design consequence: app-owned
+invalidation, with the survey's comparison noting that "Facebook's paper
+made the application own invalidation around a best-effort store" (SURVEY
+comparison, graded assessment). Where Netflix wrapped memcached with
+infrastructure redundancy, Facebook pushed correctness up into the
+application, running a system the public summary itself concedes: "the
+semantics of the system as a whole are difficult to state precisely" (same
+source).
 
 ### Twitter's Twemcache: the fork and the proxy (C31)
 
@@ -119,7 +128,7 @@ PhonePe tech, fraud model](https://tech.phonepe.com/building-phonepes-real-time-
 FP), with the model's measured outcomes: "Fraud rate was reduced by 40% on
 consumer to consumer transactions" and the "Number of daily fraud
 complaints reduced by 38% overall (50% in the specific segment of
-high-value transactions)" (same source). Note what the engine is doing
+high-value transactions that we are targeting)" (same source). Note what the engine is doing
 here: real-time fraud checks against payment flows are a correctness job,
 not a staleness-tolerant one, which is why the correctness split inverts.
 
@@ -156,6 +165,7 @@ Aerospike-hosted pages live-verified here.
   best-effort store whose "may lose or evict data without notice" contract
   was compensated by app-owned invalidation
   ([C30: USENIX NSDI'13](https://www.usenix.org/conference/nsdi13/technical-sessions/presentation/nishtala);
+  the quoted wording is the page's Public Summary, by Michael Piatek;
   app-ownership per the register's record and the survey's comparison).
 - **Twitter (C31, FP).** A hardened fork (Twemcache) for engine
   manageability plus Twemproxy for connection multiplexing; 20+ TB in
@@ -182,7 +192,7 @@ Aerospike-hosted pages live-verified here.
 | Test | Netflix EVCache (C29) | Facebook Memcache (C30) | Twitter Twemcache (C31) | PhonePe (C57) | Flipkart (C60) |
 |---|---|---|---|---|---|
 | Engine | memcached + EVCache wrapper | memcached, best-effort | Twemcache hardened fork | Aerospike | Aerospike |
-| Who owns correctness | the infrastructure (replication, zones) | the application (invalidation) | the fork + proxy ops | the engine (in-transaction checks) | the engine, ops by the small team |
+| Who owns correctness | the infrastructure for redundancy, the app for staleness | the application (invalidation) | the fork + proxy ops | the engine (real-time fraud checks) | the engine, ops by the small team |
 | The wrapper | zone-aware replication, 2-9 replicas | leases, invalidation scheme | fork + Twemproxy | on-prem fleet, 3 DCs | Kubernetes Operator, service layer |
 | Scale reported | most requests served by cache | billions of req/s, trillions of items | 23M+ QPS, 20+ TB | 100M+ txns daily, 2.5B/month | 90M QPS, 95M TPS peak |
 | Evidence level | FP | FP | FP | VP/FP | VP |
@@ -191,8 +201,8 @@ Aerospike-hosted pages live-verified here.
 one family and two answers. In the memcached lineage, the engine is
 deliberately imperfect and the engineering money goes into the wrapper:
 Netflix bought redundancy with zones and replicas, Facebook bought
-correctness with application-owned invalidation over a store that states
-its own imprecision, Twitter bought manageability with a fork and a proxy.
+correctness with application-owned invalidation over a best-effort store,
+Twitter bought manageability with a fork and a proxy.
 The wrapper is the architecture. The Aerospike pair inverts the
 arrangement for the money-flow workloads: correctness moves inside the
 engine, the staleness contract disappears, and what remains for the
@@ -212,10 +222,11 @@ purpose-built engine takes the family's job.
   7's Atlas decision: the same company drew the cache line and the
   metrics line in the same decade, both times wrapping a simple core.
 - **Facebook (C30):** the family's scientific record, and the most honest
-  contract in the corpus: a paper that opens by conceding its own system's
-  semantics are hard to state. The app-owned invalidation decision is the
-  reason the design scales; it is also an app-side tax (P1's registered
-  discipline reading) every imitator must be able to pay.
+  contract in the corpus, with the paper's conference page conceding, in
+  its Public Summary's own voice, that the system's semantics are hard to
+  state. The app-owned invalidation decision is the reason the design
+  scales; it is also an app-side tax (a discipline reading of P1; P1's
+  registered face is C10) every imitator must be able to pay.
 - **Twitter (C31):** the fork-and-proxy datapoint, with an unusually good
   publishing culture: the next-day self-correction narrows its own claim,
   which is precisely the evidence hygiene the corpus rewards.
@@ -226,7 +237,7 @@ purpose-built engine takes the family's job.
 - **Flipkart (C60):** the organizational proof that the extension can be
   operated by a team smaller than the traffic suggests, provided the
   platform work (the unified service layer) is done. The <10 team is the
-  strongest datapoint in the corpus for P8's rule inverted: the right
+  strongest datapoint in the corpus for P8's rule at strong scale: the right
   engine, run as a platform, replaces headcount.
 - **The family's rule:** pick your correctness owner deliberately (app or
   infrastructure or engine), and then pick the smallest wrapper that makes
@@ -269,10 +280,11 @@ vendor's product defaults. Which registered pattern's fails-when are they
 standing in, and which two of this chapter's deployments are the
 alternative shapes?
 
-*Hint:* the pattern is about who the app must be; the alternatives are the
+*Hint:* the pattern is about what the app must own; the alternatives are the
 two wrappers plus proxy and the engine-side answer.
 
-*Worked answer (assessment):* the pattern is P1, whose fails-when is
+*Worked answer (assessment):* under this chapter's discipline reading, the
+pattern is P1, whose fails-when is
 exactly this: the availability-first trade needs the app-side discipline,
 and delegating invalidation to defaults is not ownership. The alternative
 shapes are infrastructure ownership (Netflix's EVCache, C29: replication
@@ -300,8 +312,8 @@ business case.
 
 **●●● (steelman, then weigh).** Write the strongest case that the
 memcached wrapper era was a mistake: teams spent years on forks, proxies,
-and invalidation machinery around an engine that states its own
-imprecision, and the purpose-built engines that existed later removed the
+and invalidation machinery around a best-effort engine, and the
+purpose-built engines that existed later removed the
 need. Then weigh it against the register's record, and end with the
 transferable rule.
 
