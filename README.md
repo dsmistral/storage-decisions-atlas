@@ -14,7 +14,7 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-26, session 22)
+## Status (updated 2026-11-26, session 23)
 
 **Chapters 1-10 are AUTHORED + REVIEWED (Part I complete: the ten family
 chapters all closed by session 23's review of Ch. 10, Vector: where the
