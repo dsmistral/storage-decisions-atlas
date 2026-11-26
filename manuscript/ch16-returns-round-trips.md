@@ -26,8 +26,10 @@ exits, not fashion exits", graded as assessment there, and this chapter pays
 that preview off.
 
 The chapter reads ten transition rows: T10, T11, T13, T19, T20, T23, T24, T25,
-T26, T27. Four are returns in the strict sense, a move back into the relational
-family the mover had left (T19's three movers, T13, T27); T20 documents the
+T26, T27. Four moves are returns in the strict sense, a move back into the
+relational family the mover (or a mover like it) had left: T19's three movers
+and T27. T13 is the round trip: out of MongoDB into a purpose-built engine and
+back into MongoDB two weeks later. T20 documents the
 vector unwind in both directions, so it is a round trip class rather than a row
 with one arrow; T11 and T23 stay relational and carry this chapter's hardest
 lesson about a published story; and the outflow cluster the R6 verification pass
@@ -149,8 +151,8 @@ read from DynamoDB and eventually decommissioned the MongoDB setup", and a
 performance surprise the post splits across its own em dash: "reads in Dynamo not
 only didn't get slower", "it got faster". The register's verdict supports both
 halves, and the same D3 honesty that keeps the returns small keeps this row's
-finding small: at a scale where any of three answers would have worked, the team
-picked the one whose ops story fit it.
+finding small: at a scale where any of several answers would have worked, the team
+picked the one whose ops story fit it (assessment).
 
 ### The RDBMS→RDBMS pair: the outcome and the mirror (T11, F11, T23)
 
@@ -346,7 +348,7 @@ round trip is the face: NexusTrade survived, per ANALYSIS's P20 row, "because ol
 path intact"; Yelp's months-long read overlap is the same discipline at
 migration scale; Bhoos's lazy per-user move keeps the old store in place until
 each user's next connect proves the new one. T20's both-ways record is
-reversibility as mattress: the vector index's home stays a decision precisely
+reversibility as a standing option: the vector index's home stays a decision precisely
 because nobody burned the bridge behind the unwind.
 
 **FC5, purpose-built is marketing until measured.** The failure-class table's
