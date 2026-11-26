@@ -89,10 +89,10 @@ transparency posture Ch. 17 found in GitLab's post-mortem.
 ### GitHub: 43 seconds of partition, 24 hours of degradation (F03)
 
 GitHub's post-incident analysis (published October 30, 2018, on the October 21
-incident) opens with the arithmetic
-gap that gives this chapter its spine: "Connectivity between these locations
-was restored in 43 seconds, but this brief outage triggered a chain of events
-that led to 24 hours and 11 minutes of service degradation". The automation is
+incident) opens with the arithmetic gap that gives this chapter its spine:
+"Connectivity between these locations was restored in 43 seconds, but this
+brief outage triggered a chain of events that led to 24 hours and 11 minutes
+of service degradation". The automation is
 named first-party: "We use Orchestrator to manage our MySQL cluster topologies
 and handle automated failover", built "on top of Raft for consensus", with the
 design caveat the incident then executed: "It's possible for Orchestrator to
@@ -250,7 +250,7 @@ All URLs byte-copied from `corpus/REGISTER.md`:
 - F01 InfoQ report (PR): https://www.infoq.com/news/2010/10/4square_mongodb_outage/
 - F01 Foursquare blog (FP, archived): https://web.archive.org/web/20131114075609/http://blog.foursquare.com/2010/10/05/so-that-was-a-bummer/
 - F01 High Scalability analysis (PR): http://highscalability.com/blog/2010/10/15/troubles-with-sharding-what-can-we-learn-from-the-foursquare.html
-- F01 mongodb-user thread (FP team post-mortem): https://groups.google.com/g/mongodb-user/c/UoqU8ofp134
+- F01 mongodb-user thread (FP thread post-mortem, Horowitz/10gen): https://groups.google.com/g/mongodb-user/c/UoqU8ofp134
 - F03 GitHub post-incident analysis (FP): https://github.blog/news-insights/company-news/oct21-post-incident-analysis/
 - F10 HN comment by kmavm (SR): https://news.ycombinator.com/item?id=27199229
 - F10 Slack Engineering Vitess post (FP): https://slack.engineering/scaling-datastores-at-slack-with-vitess/
