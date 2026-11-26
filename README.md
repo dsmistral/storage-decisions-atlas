@@ -14,16 +14,16 @@ The corpus covers ten database families: 66 documented cases (C01–C66), 30
 documented inter-family transitions (T01–T30), and 12 failure post-mortems
 (F01–F12), with multiple compared cases per topic.
 
-## Status (updated 2026-11-26, session 30)
+## Status (updated 2026-11-26, session 31)
 
-**Chapters 1-14 are complete: Chs. 1-13 AUTHORED + REVIEWED (Part I complete,
-session 23; Part II: Ch. 11 reviewed session 25, Ch. 12 reviewed session 27,
-Ch. 13 reviewed session 29), and Ch. 14 The NewSQL absorptions AUTHORED +
-AUTHOR-CHECKED session 30 (T03, T04; C25, C26, C27, C28; + the R6 T25 Zomato
-reverse flow; P9, P11, P15; battery 10/10 URLs register-copied, 26/26 live
-source spans verbatim, 14/14 corpus fragments; chapter stands at 5a87137b).
-Next unit: Phase 3 adversarial review of Ch. 14, then Chapter 15 (The
-engine-swap twins; T07, T08, T16; P12).**
+**Chapters 1-14 are complete and all reviewed: Part I complete (session 23);
+Part II complete (Ch. 11 reviewed session 25, Ch. 12 reviewed session 27,
+Ch. 13 reviewed session 29, Ch. 14 The NewSQL absorptions REVIEWED session 31
+with 7 findings fixed - the P9 attribution conflation realigned, two
+unverifiable duration claims removed, the unsupported wire-protocol claim
+replaced with sourced DoorDash spans; the manuscript stands at 33621773).
+Next unit: Chapter 15 (The engine-swap twins; T07, T08, T16; C41, C16, C42;
+P12, P19, P20 per BOOK-PLAN), then its review.**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
