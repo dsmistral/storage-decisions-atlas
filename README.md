@@ -16,11 +16,12 @@ documented inter-family transitions (T01–T30), and 12 failure post-mortems
 
 ## Status (updated 2026-11-26, session 22)
 
-**Chapters 1-10 are AUTHORED (Chs. 1-9 all reviewed; Ch. 10 authored in
-session 22: Vector, where the index lives; C32 turbopuffer, C33 Spotify
-Voyager, C34 Confident AI Pinecone→pgvector, C35 Pinecone counter-flow;
-T14, T18, T20; P16, W1). Next unit: Chapter 10's Phase 3 review, then
-Chapter 11 (the transition matrix).**
+**Chapters 1-10 are AUTHORED + REVIEWED (Part I complete: the ten family
+chapters all closed by session 23's review of Ch. 10, Vector: where the
+index lives; C32 turbopuffer, C33 Spotify Voyager, C34 Confident AI
+Pinecone→pgvector, C35 Pinecone counter-flow; T14, T18, T20; P16, W1
+watch open). Next unit: Chapter 11 (the transition matrix, T01-T30),
+which opens Part II, then its review.**
 The R6 fold-in of SURVEY dossiers proceeds at authoring time
 (Ch. 1's C56/C61 done as dossiers 22a/22b). This repo remains self-sufficient
 for a cold resume from GitHub alone.
